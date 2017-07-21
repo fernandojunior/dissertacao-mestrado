@@ -12,11 +12,14 @@
 \usepackage[portuges,english]{babel}
 \usepackage{copin,mestre,epsfig}
 \usepackage{times}
+\usepackage[utf8x]{inputenc}
 
+\usepackage{booktabs} % For formal tables
+\usepackage[inline]{enumitem}
 %-------------------------- Para usar acentuacaoo em sistemas ISO8859-1 ------------------------------------
 % Se estiver usando o Microsoft Windows ou linux com essa codificacao, descomente essa linhas abaixo
 % e comente as linhas referentes ao UTF8
-\usepackage[latin1]{inputenc} % Usar acentuacao em sistemas ISO8859-1, comentar a linha com  \usepackage[utf8x]{inputenc}
+% \usepackage[latin1]{inputenc} % Usar acentuacao em sistemas ISO8859-1, comentar a linha com  \usepackage[utf8x]{inputenc}
 %-----------------------------------------------------------------------------------------------------
 
 %-------------------------- Para usar acentuacao em sistemas UTF8 ------------------------------------
@@ -27,12 +30,10 @@
 \usepackage[T1]{fontenc}
 %-----------------------------------------------------------------------------------------------------
 
-
 \usepackage{fancyheadings}
 \usepackage{graphicx}
 \usepackage{longtable} %tabelas longas, para tabelas que ultrapassam uma pagina
 %\input{psfig.sty}
-
 
 % ----------------- Para inserir codigo fonte de linguagens de programacao no documento -------------
 \usepackage{listings}
@@ -61,12 +62,12 @@ showstringspaces=false
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\Titulo{Título de sua Dissertação}
-\Autor{Nome do Aluno}
+\Titulo{Caracterização de Perfis de Comportamento de Equipes Bem-sucedidas em League of Legends}
+\Autor{Fernando Felix do Nascimento Junior}
 \Data{01/06/2007}
 \Area{Ciência da Computação}
-\Pesquisa{Linha de Pesquisa}
-\Orientadores{Nome do Orientador  \\
+\Pesquisa{Mineração de Dados}
+\Orientadores{Leandro Balby Marinho  \\
 	 (Orientador)}
 
 \newpage
