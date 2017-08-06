@@ -4,9 +4,9 @@ A indústria de jogos eletrônicos é um dos segmentos de entretenimento mais re
 
 Um segmento de jogo muito popular atualmente é o esporte eletrônico, mais conhecido como \textit{eSport} \cite{forbes1}. Conforme \cite{newzoo2}, o mercado de \textit{eSport} alcançou 493 milhões de doláres e uma audiência global de 191 milhões de entusiastas em 2016. O \textit{eSport} mais popular e rentável do mundo hoje é o League of Legends (LoL)  \cite{superdata1}, desenvolvido pela Riot Games, com cerca de 67 milhões de jogadores ativos e um pico diário de mais de 7,5 milhões de jogadores \textit{online} simultâneos \cite{riot1}.
 
-LoL é um jogo de arena de batalha \textit{online} para vários jogadores (\textit{Multiplayer Online Battle Arena} - MOBA), um subgênero de jogos eletrônicos de estratégia em tempo real (\textit{Real-time Strategy} - RTS). Uma partida em um MOBA consiste em um cenário em que duas equipes lutam entre si, a fim de destruir a base do oponente como o principal objetivo, sem limite de tempo. Em geral, uma equipe tem cinco jogadores e cada um seleciona e controla um personagem com atributos e habilidades distintas. Além disso, as equipes também contam com a assistência de estruturas de defesa e unidades controladas por inteligência artificial para vencer a partida. Ao longo de uma partida, os personagens ganham ouro - que é usado para comprar itens para melhorar seus atributos e habilidades - e experiência de várias maneiras, como matar unidades ou personagens e destruir estruturas da equipe inimiga \cite{league1}.
+LoL é um jogo de arena de batalha \textit{online} para vários jogadores (\textit{Multiplayer Online Battle Arena} - MOBA), um subgênero de jogos eletrônicos de estratégia em tempo real (\textit{Real-time Strategy} - RTS). Uma partida em um MOBA consiste em um cenário (mapa) em que duas equipes lutam entre si, a fim de destruir a base do oponente como o principal objetivo, sem limite de tempo. Um mapa simples contém três estradas principais (rotas) que conectam a base de cada equipe. Em geral, uma equipe tem cinco jogadores e cada um seleciona e controla um personagem, conhecidos como campeões ou heróis, com atributos e habilidades distintas. Além disso, as equipes também contam com a assistência de estruturas de defesa e unidades controladas por inteligência artificial (IA), conhecidos como \textit{minions} ou \textit{creeps}, para vencer a partida. Ao longo de uma partida, os personagens ganham ouro - que é usado para comprar itens que melhoraram seus atributos e habilidades - e pontos de experiência de várias maneiras, como matar unidades ou personagens e destruir estruturas da equipe inimiga \cite{league1}.
 
-A grande diversidade e dinamidade das ações dos personagens nas partidas \cite{drachen2014skill}, bem como seus desempenhos individuais (ou seja, ouro ganho, campeões derrotados, dano causado, cura recebida, etc.) tornam os MOBAs jogos muito competitivos. Em LoL, esta competitividade é ampliada devido à sua popularidade e torneios que fazem com que muitos jogadores se comportem como desportistas profissionais \cite{rioult2014mining}.
+A grande diversidade e dinamicidade das ações dos personagens nas partidas \cite{drachen2014skill}, bem como seus desempenhos individuais (ou seja, ouro ganho, campeões derrotados, dano causado, cura recebida, etc.) tornam os MOBAs jogos muito competitivos. Em LoL, esta competitividade é ampliada devido à sua popularidade e torneios que fazem com que muitos jogadores se comportem como desportistas profissionais \cite{rioult2014mining}.
 
 Dominar LoL é muito desafiador e requer um investimento substancial de tempo \cite{drachen2014skill}, principalmente para equipes inexperientes que não sabem inicialmente como elaborar ou melhorar sua estratégia. Nesse sentido, uma alternativa que poderia ajudar essas equipes é fornecer informações que levem a melhores decisões no jogo, como por exemplo, métricas de desempenho baseadas no comportamento de equipes bem-sucedidas. Isso levanta várias questões de pesquisa, como por exemplo:
 
@@ -18,16 +18,117 @@ Dominar LoL é muito desafiador e requer um investimento substancial de tempo \c
 
 Até onde sabemos, ainda existe uma escassez de trabalhos acadêmicos que exploram esse assunto em \textit{eSports} \cite{drachen2014skill} \cite{ong2015player}, especialmente sobre comportamento de equipes de LoL.
 
-Portanto, apresentamos e discutimos nesta dissertação os resultados de uma abordagem baseada em dados para identificar e caracterizar padrões de comportamento de equipes no contexto de LoL, o que nos leva a definir perfis de equipes bem-sucedidas e malsucedidas e suas métricas de desempenho. Primeiro, coletamos partidas do site de histórico de partidas de LoL. Em seguida, modelamos um conjunto de dados de equipes extraindo e resumindo fatores a partir de estatísticas sumarizadas de desempenho individual dos jogadores nas partidas. Depois, realizamos outras tarefas de engenharia de fatores, tais como limpeza de dados, remoção de fatores com baixa variância, detecção de \textit{outliers}, transformação de dados, normalização e análise de redundância. Para descobrir padrões de comportamento, aplicamos um método de aprendizado de máquina (K-means) no conjunto de dados de equipes para descobrir um número ótimo de grupos e, assim, agrupar equipes similares. Finalmente, caracterizamos cada grupo por meio de análise exploratória de dados e análise de relevância. Os resultados implicam que alguns grupos são mais propensos a ganhar do que outros e a influência dos fatores é distinta para cada um, o que nos permitiu definir perfis de equipe e métricas de desempenho.
+Portanto, apresentamos e discutimos nesta dissertação os resultados de uma abordagem baseada em dados para identificar e caracterizar padrões de comportamento de equipes no contexto de LoL, o que nos leva a definir perfis de equipes bem-sucedidas e malsucedidas e suas métricas de desempenho. Primeiro, coletamos partidas do site oficial de histórico de partidas de LoL. Em seguida, modelamos um conjunto de dados de equipes extraindo características a partir de estatísticas sumarizadas de desempenho individual dos jogadores nas partidas. Depois, realizamos outras tarefas relacionadas a engenharia de fatores, tais como limpeza de dados, remoção de características com baixa variância, detecção de \textit{outliers}, transformação de dados, normalização de dados e análise de redundância de características. Para descobrir padrões de comportamento, aplicamos um método de aprendizado de máquina (K-means) no conjunto de dados de equipes para descobrir um número ótimo de grupos e, assim, agrupar equipes similares. Finalmente, caracterizamos cada grupo por meio de análise exploratória de dados e análise de relevância. Os resultados implicam que alguns grupos são mais propensos a ganhar do que outros e a influência dos fatores é distinta para cada um, o que nos permitiu definir perfis de equipe e métricas de desempenho.
 
 \section{Objetivos}
 \section{Contribuições}
+
+Narrowing the focus to behavioral game telemetry, i.e. telemetry data about how people play games (Chap. 2 ), there are a wide variety of ways that this kind of game telemetry data can be employed to assist a variety of stakeholders (as discussed in Chap. 3 ), during and following the development process, e.g., informing game designers about the effectiveness of their design via user modeling, behavior analysis, matchmaking and playtesting, something that is evident from the range of publications and presentations across academia and industry \cite{el2016game}.
+
+
+Applied right, game telemetry can be a very powerful tool for game development (Kim et al. 2008 ; Isbister and Schaffer 2008 ; King and Chen 2009). Not only for analyzing and tuning games, QA, testing and monitoring infrastructure (Mellon 2009) , figuring out and correcting problems and generally learning about effective game design, but also to guide marketing, strategic decision making, technical development, customer support, etc. However, it is generally far from obvious how to employ the analysis (Kim et al. 2008 ; Mellon 2009 ): what data should we record, how can we analyze it, and how should it be presented to facilitate effect transformation of raw data to knowledge that if fully integrated into the organization?
+
+
 \section{Estrutura da Dissertação}
 
 \chapter{Fundamentação Teórica}
+
 \section{MOBA}
+Os jogos MOBA tem suas origens nos jogos do gênero RTS, muito populares em meados dos anos 90 e início dos anos 2000. Suas características herdam traços que estão presentes em ambos os gêneros, sendo que os primeiros MOBAs foram criados utilizando as próprias ferramentas de criação de mapas personalizados RTS disponibilizados pelas desenvolvedoras. Para que se possa entender melhor as origens e características dos jogos MOBA, apresenta-se nesta seção um breve histórico de evolução do gênero.
+
+Assim, com a popularidade dos jogos de estratégia, houve grande interesse por parte dos jogadores em criar modos de jogo e mapas personalizados para estes, denominados de \textit{mods}. Esses jogadores se tornaram, portanto, modificadores do conteúdo dos jogos ou \textit{modders}. Os \textit{modders} eram responsáveis pelo desenvolvimento de mapas alternativos, e muitos destes tendiam para o estilo de jogo de um MOBA. Desde o início do desenvolvimento do gênero, a jogabilidade consistia em controlar um personagem denominado "herói" ou "campeão", escolher entre três rotas para avançar suas tropas e conquistar a estrutura principal inimiga.
+
+\subsection{Aeon of Strife}
+Um dos primeiros MOBAs de sucesso teve origem no jogo RTS da Blizzard, Starcraft. Em 1998, um \textit{modder} conhecido como Aeon64 criou o Aeon of Strife, um mapa alternativo para o Starcraft. Nele, os jogadores controlavam um único herói cada e lutavam em uma equipe contra outra controlada por IA em três rotas do mapa. Essas rotas conectavam as bases das duas equipes. O objetivo era destruir a base da outra equipe.
+
+Embora \textit{Aeon of Strife} tenha estabelecido os fundamentos para o gênero MOBA, existiam algumas diferenças notáveis do que se espera de um MOBA atualmente. As equipes tinham quatro jogadores cada, em vez de cinco. Além disso, Aeon of Strife não era um jogo competitivo. Em vez disso, uma equipe de personagens controlados por jogadores combatiam contra uma equipe de personagens controladas por IA. Os personagens também não subiam de nível enquanto o jogo progredia, e não existia também uma selva no mapa com monstros e trilhas extras entre as três rotas.
+
+\subsection{Defense of the Ancients}
+Após o sucesso de AeoN of Strife, houve outro jogo que chamou a atenção da comunidade \textit{modder}: o também RTS da Blizzard, Warcraft III. Este jogo era essencialmente parecido com Starcraft, porém tinha raças diferentes, gráficos tridimensionais melhores, uma série de cenários novos e ambiente de personalização mais poderoso com suporte a uma linguagem de programação.
+
+Em 2002, a Blizzard lançou seu próximo jogo RTS, o Warcraft III. Este jogo era essencialmente parecido com Starcraft, porém tinha raças diferentes de personagens e monstros, gráficos tridimensionais melhores, uma gama de cenários novos e ambiente de personalização mais poderoso, atrelado inclusive a uma linguagem de programação. Em 2003, um \textit{modder} conhecido como Eul criou um \textit{mod} inspirado no Aeon of Strife chamado Defense of the Ancients. Em breve, outros jogadores criariam sua própria versão de Defense of the Ancients, frequentemente chamado de Dota, cada um adicionando seus próprios heróis, itens e outras diferenças.
+
+Assim como Aeon of Strife, Dota permitiu que os jogadores controlassem uma poderosa unidade de heróis e combatessem uma equipe inimiga em três rotas que ligavam a base de cada equipe. No entanto, Dota fez com que duas equipes de personagens controlados por jogadores competissem uns contra os outros, cada equipe tinha cinco jogadores, os heróis subiam de nível à medida que ganhavam experiência e existia uma selva no mapa cheia de monstros entre as trilhas das rotas. Na prática, é exatamente o que se espera de um MOBA hoje.
+
+Em 2004, um modder conhecido como Guinsoo criou o \textit{mod} Dota Allstars (DotA). Esta versão combinou elementos de múltiplas variações do Dota, e rapidamente se tornou a versão mais popular do mapa. Em 2005, Guinsoo anunciou sua saída do desenvolvimento do \textit{mod}, deixando o desenvolvimento nas mãos de outro \textit{modder} conhecido como IceFrog.
+
+Sob a direção de IceFrog, DotA continuou a crescer em popularidade, pois tornou as partidas do \textit{mod} mais equilibradas. As produtoras inclusive passaram a investir em campeonatos e competições específicas para o DotA. O sucesso foi tamanho que houve a criação de plataformas competitivas, como a Garena, que passaram a dar suporte específico para partidas de DotA.
+
 \subsection{League of Legends}
+Dota Allstars ainda era um \textit{mod} para o Warcraft III. Isso significa que ele dependia de todos os recursos desse jogo, de modo que nunca poderia apresentar um personagem que usasse um modelo completamente novo, nem poderia dar a nenhum dos criadores que trabalhavam nisso um lucro monetário.
+
+Devido ao sucesso de DotA, algumas desenvolvedoras resolveram apostar no estilo de jogo. Em 2009, a desenvolvedora Riot Games lançou o League of Legends. LoL é semelhante ao mapa de Warcraft III em estilo e \textit{design}, mas sua estética é um pouco mais cartunesca e a mecânica um pouco mais fácil de entender. Este é o jogo mais jogado do mundo até os dias atuais, tendo superado o jogo World of Warcraft em meados de 2012. Até então o termo MOBA era inexistente e os jogos eram simplesmente denominados \textit{Aeon like}, \textit{DotA like} e \textit{Action Real-Time Strategy}. A Riot Games foi considerada a responsável por cunhar o termo MOBA.
+
+Um ponto importante a notar no LoL é a estrutura de preços. LoL é livre para jogar, o que significa que qualquer um pode fazer o \textit{download} e experimentar o jogo imediatamente, usando uma seleção rotativa de personagens grátis semanal para jogar uma partida. No entanto, se algum jogador quiser um personagem específico para controlar a qualquer momento em um partida, ele tem que comprar. Esse modelo de negócios foi um enorme sucesso quando o jogo foi lançado. As pessoas que nunca fariam o \textit{download} de um \textit{mod} para um antigo jogo de PC como Warcraft III estavam experimentando curiosamente o novo MOBA.
+
+\subsection{Outros}
+Além da Riot Games, a Valve resolveu apostar no mercado MOBA, lançando em 2013 uma nova versão do jogo Dota, o Dota2. Neste, os mesmos personagens e jogabilidades de DotA foram mantidos, porém recriados em uma plataforma dedicada e com gráficos melhorados. Outros jogos originados de DotA também ganharam forma, como o Heroes of Newerth (2010), da S2 Games, onde a jogabilidade de DotA foi reproduzida com personagens diferentes. Outros jogos de destaque na atualidade do gênero MOBA são: Smite (2014), da Hi-Rez Studios; Strife (2015), da S2 Games; e Heroes of the Storm (2015), da Blizzard.
+
 \section{Mineração de Dados}
+A mineração de dados é o estudo da coleta, limpeza, processamento, análise e obtenção de informações úteis a partir de dados. Existe uma grande variação em relação ao domínio dos problemas, aplicações, formulações e representações de dados. Portanto, "mineração de dados" é um termo abrangente que é usado para descrever diferentes aspectos do processamento de dados\cite{aggarwal2015data}.
+
+Atualmente, devido aos avanços tecnológicos e da informatização de todos os aspectos da vida moderna, praticamente todos os sistemas automatizados geram e armazenam alguma forma de dados, tanto para fins de diagnóstico como de análise. Isso resultou em um crescimento excessivamente rápido do volume de dados, que atingiu a ordem de petabytes ou exabytes \cite{aggarwal2015data}.
+
+Esse crescimento excessivo do volume de dados vem emergindo em diversas áreas da indústria e pesquisa, como bioinformática, análise de redes sociais, visão computacional e jogos eletrônicos \cite{el2016game}.
+
+Aggarwal2015data
+- The Data Mining Process
+- The Basic Data Types
+  - Nondependency-Oriented Data
+    - Quantitative Multidimensional Data
+- The Major Building Blocks: A Bird’s Eye View (major tasks)
+  - Data Clustering
+  - Outlier Detection
+  - Data Classification
+
+O crescimento excessivo do volume de dados é resultado direto dos avanços tecnológicos e da informatização de todos os aspectos da vida moderna. Portanto, é natural examinar se é possível extrair informações concisas e, possivelmente, acionáveis a partir dos dados disponíveis para apoiar a tomada de decisão. É aí que entra a tarefa de mineração de dados. Os dados brutos podem ser arbitrários, não estruturados ou mesmo em um formato que não é imediatamente apropriado para processamento automatizado. Por exemplo, os dados coletados manualmente podem ser extraídos de fontes heterogêneas em diferentes formatos e, de alguma forma, precisam ser processados por uma aplicação de computador automatizada para obter informações úteis.
+
+Para resolver este problema, os analistas de mineração de dados usam um canal (\textit{pipeline}) de processamento, onde os dados brutos são coletados, limpos e transformados em um formato padronizado. Em seguida, os dados podem ser armazenados e, finalmente, processados para extrair informações com o uso de algoritmos analíticos. Geralmente, mineração de dados lembra a noção de algoritmos analíticos, mas a realidade é que a maior parte do processo está relacionada à preparação de dados. Esse \textit{pipeline} de processamento é conceitualmente análogo ao de um processo de mineração real, onde de um minério mineral é obtido o produto final refinado.
+
+Do ponto de vista analítico, a mineração de dados é desafiadora devido à grande diversidade nos problemas e tipos de dados encontrados. Por exemplo, um problema de recomendação de produtos comerciais é muito diferente de um de detecção de intrusão, mesmo no nível de formato de dados de entrada ou definição do problema. Mesmo considerando classes relacionadas de problemas, as diferenças são bastante significativas. Por exemplo, um problema de recomendação de produtos em uma base de dados multidimensional é muito diferente de um problema de recomendação social devido às diferenças no tipo de dados subjacentes. No entanto, apesar dessas diferenças, as aplicações de mineração de dados são muitas vezes classificadas em um dos quatro principais problemas de mineração de dados: regras de associação, agrupamento, classificação e detecção de \textit{outliers}. Esses problemas são tão importantes pois eles são usados como blocos de implementação na maioria das aplicações de alguma forma. Esta é uma abstração útil porque nos ajuda a conceituar e estruturar o campo da mineração de dados de forma mais eficaz.
+
+Os dados podem ter diferentes tipos ou formatos. O tipo pode ser quantitativo (por exemplo, idade), categórico (por exemplo, sexo), texto, espacial, temporal ou gráfico. Embora a forma mais comum de dados seja multidimensional, uma proporção crescente pertence a tipos de dados mais complexos. Embora exista uma portabilidade conceitual de algoritmos entre muitos tipos de dados em um nível muito alto, esse não é o caso de uma perspectiva prática. A realidade é que o tipo de dados correto pode afetar significativamente o comportamento de um algoritmo particular.
+
+
+
+
+
+A premissa básica de algoritmos de associação é achar todas as associações em que a presença de um conjunto de itens em uma transação implica em outros itens. Algoritmos de classificação ou geração de perfis desenvolvem perfis de diferentes grupos. Algoritmos de padrões seqüenciais identificam tipos de padrões seqüenciais em restrições mínimas especificadas pelo usuário. Algoritmos de agrupamento segmentam o banco de dados em subconjuntos ou grupos.
+http://www.din.uem.br/ia/mineracao/tecnologia/index.html
+
+
+
+This chapter is organized as follows. Section 1.2 discusses the data mining process with particular attention paid to the data preprocessing phase in this section. Different data types and their formal definition are discussed in Sect. 1.3. The major problems in data mining are discussed in Sect. 1.4 at a very high level.
+
+Data mining is a complex and multistage process. These different stages are data collection, preprocessing, and analysis. The data preprocessing phase is highly application-specific because the different formats of the data require different algorithms to be applied to them. The processing phase may include data integration, cleaning, and feature extraction. In some cases, feature selection may also be used to sharpen the data representation. After the data have been converted to a convenient format, a variety of analytical algorithms can be used.
+
+A number of data mining building blocks are often used repeatedly in a wide variety of application scenarios. These correspond to the frequent pattern mining, clustering, outlier analysis, and classification problems, respectively. The final design of a solution for a particular data mining problem is dependent on the skill of the analyst in mapping the application to the different building blocks, or in using novel algorithms for a specific application. This book will introduce the fundamentals required for gaining such analytical skills.
+
+Consider a multidimensional database D with n records, and d attributes. Such a database D may be represented as an n × d matrix D, in which each row corresponds to one record and each column corresponds to a dimension. We generally refer to this matrix as the data matrix. This book will use the notation of a data matrix D, and a database D interchangeably.
+
+
+El2016game
+
+p204
+
+Modern digital games range from simple applications to incredibly sophisticated information systems, but common for all of them is that need to keep track of the actions of players and calculate a response to them. In recent years, the tracking and logging of this information, as well as data on technical performance of the game engines and applications themselves, has become widespread in the digital entertainment industry, leading to a wealth of incredibly detailed information about the behavior of – in the case of major commercial titles – millions of players and installed clients.
+
+
+There is a wealth of information hidden in good game telemetry data, but not all of it is readily available, and some very hard to discover without the proper expert knowledge (or even with it). This has led to much game telemetry data being tracked, logged and stored, but not analyzed and employed. The challenge faced by the game industry to take advantage of game telemetry data mirrors the general challenge of working with large-scale data. Simply retrieving information from databases – irrespective of the field of application – is not enough to guide decision-making. Instead, new methods have emerged to assist analysts and decision makers to obtain the information they need to make better decisions. These include: automatic summarization of data, the extraction of the essence of the stored information, and the discovery of patterns in raw data. When datasets become very large (we consider any dataset that does not fit into the memory of a high-end PC as large-scale, i.e. several
+GB and beyond) and complex, many traditional methodologies and algorithms used on smaller datasets break down. In fact, any algorithm that scales quadratically with the number of samples is not feasible to use on large data. Instead, methods designed for large datasets must be employed. These methods are collectively referred to as data mining . Data revolutions call for novel analysis methods that scale to massive data sizes and allow for effective, rapid analysis, as well as results that are intuitively accessible to non-experts (Han et al. 2005 ; Larose 2004).
+
+On a practical note, the first half of this chapter (Sects. 12.1 and 12.2 ) is written for the general audience and does not require previous knowledge of data mining. The second half (Sects. 12.3 and 12.4 ), which focus on case examples of different data mining methods, use however data mining terminology, includes some use of formulas, and some sub-sections may require knowledge of statistics and dimensionality reduction methods. Section 12.5 takes a specific look at online games, including Free-to-Play (F2P), as these have received particular attention with respect to data mining.
+
+\section{Game Telemetry}
+
+p17
+
+Game telemetry is the term we use to denote any source of raw units of data obtained over distance, which pertain to game development or game research. There are many popular applications of telemetry in games, including remote monitoring and analysis of game servers, mobile devices, user behavior and production. The source of user telemetry is data on the behavior of users (players), for example on their interaction with games, purchasing behavior, physical movement, or their interaction with other users. In user behavior data, code embedded in the game client transmits data to a collection server; or the data is collected from game servers (as used in e.g. online multi-player games).
+
+In order to work with telemetry data, the attribute data needs to be operationalized, which means having to decide a way to express the attribute data. For example, deciding that the locational data tracked from player characters should be organized as a number describing the sum of movement in meters. Operationalizing attribute data in this way turns them into variables or features – the term varies depending on the scientific field. In Experimental Psychology the term variable is usually used, and thus this is the term that is generally seen in articles and conference presentations on telemetry used in game user research. In Computer Science the term feature is often used, and thus this is the term used in data mining articles. This is just a general guideline – naming conventions vary considerably because game analytics is not a domain with established standards, so care must be taken when consulting the literature on game analytics (such as it is). Finally, variables/features have a specific domain. The domain is the set of all possible values – defining the domain is essentially what operationalizing attribute data is all about. For example, a binary domain allows only two values (e.g. 0 or 1).
+
+Raw telemetry data can be stored in various database formats (see Chaps. 6 , 7 or 12), which are ordered in such a way that makes it possible to transform the data into various interpretable measures, such as average completion time as a function of individual game levels, average weekly bug fix rate, revenue per day, number of daily active users, and so forth (see Chaps. 4 and 12). These are called game metrics. Game metrics are, in essence, interpretable measures of something. They present the same potential advantages as other sources of BI, i.e. support for decision-making in companies. Metrics can be variables/features and vice versa, or more complex aggregates or calculated values, for example the sum of multiple variables/features. To take an example: telemetry data from a shooter like Quake could include data on the location of the player avatar in the virtual environment, the weapons used, and information on whether every shot hits or misses, etc. These are different attributes, and they can be converted into variables/features such as “number of hits” or “number of misses” with a domain from 0 to 1,000 (with 1,000 being the biggest number of hits scored for a specific level). In turn, these simple variables/features can form the basis for analysis, e.g. calculating the hit/miss ratio for each level or map in Quake (e.g. “hit/miss ratio is 1.2 on average for the “Albatross” map”). An alternative is to use the variables/features “playerID”, “session length” and “points scored” to calculate the metric “points scored per minute” for each player. These kinds of measures, which are based on calculations involving several variables/features, are usually referred to as game metrics. However, here is no standard terminology widely accepted in game analytics, so be prepared for variations.
+
 \subsection{Aprendizado supervisionado}
 \subsection{Aprendizado não supervisionado}
 \subsection{Seleção e extração de fatores}
@@ -44,119 +145,352 @@ Kim et al. \cite{kim2015efficiently} propõem um método baseado em dados multim
 
 Shim et al. \cite{shim2014decision} propõem um esquema de suporte à decisão de jogador automático com base em dados da antiga plataforma de denúncia do LoL (O Tribunal) para encontrar jogadores com mau comportamento (tóxico), como abusos e ataques maliciosos contra outros jogadores. Kwak e Blackburn \cite{kwak2014linguistic} realizam uma série de análises linguísticas para caracterizar o comportamento linguístico de jogadores tóxicos em League of Legends usando dados de contribuição colaborativa (\textit{crowdsourcing}) de jogadores acusados como tóxicos. Blackburn e Kwak \cite{blackburn2014stfu} exploram o uso do desempenho no jogo, relatórios de vítimas de comportamentos tóxicos e características linguísticas de mensagens de jogadores tóxicos em LoL para treinar classificadores para detectar a presença e gravidade de toxicidade. Shores et al. \cite{shores2014identification} examinam a natureza e os efeitos do comportamento tóxico em League of Legends para desenvolver uma métrica chamada índice de toxicidade e investigar os efeitos da interação de outros jogadores com jogadores tóxicos, incluindo taxa de retenção de jogadores.
 
-Pobiedina et al. \cite{pobiedina2013ranking} analisam padrões de comportamento social de trabalho em equipe usando dados de comunidades virtuais de Dota 2. Park e Kim \cite{park2014social} analisam a rede social de jogadores de LoL para encontrar conhecimento relevante que ajude, por exemplo, a entender como os jogadores formam equipes. Drachen et al. \cite{drachen2014skill} apresentam um método para investigar como o comportamento das equipes em Dota 2 varia dependendo do nível de habilidade dos jogadores, analisando seus movimentos e a distância entre eles ao longo da partida. Claypool et al. \cite{claypool2015surrender} analisam dados quantitativos e qualitativos de partidas de LoL, como duração da partida e contentamento do jogador, para investigar se partidas criadas automaticamente (\textit{matchmaking}) são equilibradas ou não. Neidhardt et al. \cite{neidhardt2015team} investigam os impactos de três categorias de fatores de equipe (habilidades dos jogadores, relações de colaboração e parcerias com jogadores em equipes anteriores) em relação ao desempenho das equpes e duração das partidas de Dota 2. Leavitt et al. \cite{leavitt2016ping} analisam jogadores em partidas da League of Legends para investigar o impacto do sistema de comunicação não-verbal (\textit{ping}) no desempenho das equipes. Buchan e Taylor \cite{buchan2016qualitative} exploram o jogo em equipe analisando as experiências subjetivas dos participantes (tais como comunicação, papel, estado psicológico e nível de habilidade de jogo) ao jogar MOBAs e, assim, criar um modelo conceitual baseado em processos de grupo tradicionais (papéis de equipe, desenvolvimento de grupo e percepções e comportamento durante o estado de desvinculação). Kim et al. \cite{kim2017makes} examinam quais fatores individuais e de grupo estão associados à inteligência colaborativa em equipes de LoL e se ela é preditiva para o desempenho dessas equipes, com base em conjuntos de dados que compreendem métricas no jogo, resultados laboratoriais e questionários de equipes.
+Pobiedina et al. \cite{pobiedina2013ranking} analisam padrões de comportamento social de trabalho em equipe usando dados de comunidades virtuais de Dota 2. Park e Kim \cite{park2014social} analisam a rede social de jogadores de LoL para encontrar conhecimento relevante que ajude, por exemplo, a entender como os jogadores formam equipes. Drachen et al. \cite{drachen2014skill} apresentam um método para investigar como o comportamento das equipes em Dota 2 varia dependendo do nível de habilidade dos jogadores, analisando seus movimentos e a distância entre eles ao longo da partida. Claypool et al. \cite{claypool2015surrender} analisam dados quantitativos e qualitativos de partidas de LoL, como duração da partida e contentamento do jogador, para investigar se partidas criadas automaticamente (\textit{matchmaking}) são equilibradas ou não. Neidhardt et al. \cite{neidhardt2015team} investigam os impactos de três categorias de fatores de equipe (habilidades dos jogadores, relações de colaboração e parcerias com jogadores em equipes anteriores) em relação ao desempenho das equipes e duração das partidas de Dota 2. Leavitt et al. \cite{leavitt2016ping} analisam jogadores em partidas de League of Legends para investigar o impacto do sistema de comunicação não-verbal (\textit{ping}) no desempenho das equipes. Buchan e Taylor \cite{buchan2016qualitative} exploram o jogo em equipe analisando as experiências subjetivas dos participantes (tais como comunicação, papel, estado psicológico e nível de habilidade de jogo) ao jogar MOBAs e, assim, criar um modelo conceitual baseado em processos de grupo tradicionais (papéis de equipe, desenvolvimento de grupo e percepções e comportamento durante o estado de desvinculação). Kim et al. \cite{kim2017makes} examinam quais fatores individuais e de grupo estão associados à inteligência colaborativa em equipes de LoL e se ela é preditiva para o desempenho dessas equipes, com base em conjuntos de dados que compreendem métricas no jogo, resultados laboratoriais e questionários de equipes.
 
-Embora estes estudos desempenhem um papel essencial na literatura, nenhum deles se propôs a modelar perfis de equipe em LoL com base no comportamento de desempenho das equipes nas partidas, bem como, fornecer métricas de desempenho bem-sucedidas de equipes que possa apoiar a tomada de decisão.
+TODO: TABELA COMPARATIVA
+REFERENCE: https://arxiv.org/pdf/1509.05176.pdf
+
+Embora estes estudos desempenhem um papel essencial na literatura, nenhum deles se propôs a modelar perfis de equipe em LoL com base no comportamento de desempenho das equipes nas partidas, bem como, fornecer métricas de desempenho bem-sucedidas e malsucedidas de equipes que possam apoiar a tomada de decisão.
 
 \chapter{Preparação dos Dados}
-Para preparar o conjunto de dados de equipes, foram realizadas as seguintes tarefas: coleta de dados, limpeza de dados; remoção de fatores com baixa variância; detecção de \textit{outliers}; transformação de dados; normalização de dados; e análise de redundância de fatores.
+Para preparar o conjunto de dados de desempenho de equipes, foram realizadas as seguintes tarefas: coleta de dados; extração de características; limpeza de dados; remoção de características com baixa variância; detecção de \textit{outliers}; transformação de dados; normalização de dados; análise de redundância de características.
 
-\subsection{Coleta de Dados}
-LoL developer, Riot Games, provides a web-based Application Public Interface (API) to access match histories in JSON format \cite{riot1}. A match history contains data such as game mode\footnote{The classic mode is the most chosen by the players and a match must have 10 participants dueling each other for two different teams.}, queue type\footnote{A player needs to enter the queuing system to participate in a match, and there are several types of queues.}, match duration, winner/loser team and identification number. It also contains data from each player participating in the match as character choice and summarized performance statistics. These statistics indicate, for example, total damage dealt/taken, gold earned/spent, damage dealt/spent and healing received. Table ~\ref{tab:features-desc} shows the descriptions of the statistics. We randomly collected over 110,000 match histories from February to December 2016 (10,000 for each month), considering the following filters: \textit{Region} Brazil; \textit{Season} 2016; \textit{Match mode} Classic; \textit{Queue type} Ranked solo; \textit{Total players in each team} 5; \textit{Match version} 6.x.x.
-
-Then we extracted the features to model our teams' dataset from collected matches. Let $M=\{m_1,...,m_{110000}\}$ be a set of matches, $T=\{t_1, ..., t_n | n=110000 * 2\}$ a set of teams, $P=\{p_1, ..., p_{|P|}\}$ a dimensional $d=38$ set of players' total performance statistics. A match consists of two distinct teams $m=\{t_a,t_b\}$ and a team consists of 5 distinct players $t=\{p_k |  p_k \in P^t; P^t \supset P; 1 \geq k \leq 5\}$. We selected the players' total performance statistics in matches and summarized each one $P_j \in P$ by team in order to form our teams' dataset features $X_j \in X_{220000, 38}$ as follows: $X_j= \sum_{t \in T}{} P_{j}^{t}$.
-
-Finally, to guarantee data atomicity, we subtracted \textit{physicalDamageDealt} from \textit{physicalDamageDealtToChampions} to compute \textit{physicalDamageDealtToMonsters} and \textit{magicDamageDealt} from \textit{magicDamageDealtToChampions} to compute \textit{magicDamageDealtToMonsters}. We also removed compounded features to avoid redundancy, for example, \textit{totalDamageDealt} which is the sum of \textit{physicalDamageDealt} and \textit{magicDamageDealt}. Table ~\ref{tab:features-desc} also shows the compounded features marked with (*) we removed.
+\section{Coleta de Dados}
+A Riot Games, desenvolvedora do LoL, fornece uma Interface de Programação de Aplicação (\textit{Application Programming Interface} - API) baseada na Web para acessar os históricos das partidas em formato JSON \cite{riot1}. Um histórico de partida contém dados como modo de jogo \footnote{O modo clássico é o mais escolhido pelos jogadores e uma partida desse modo deve ter 10 participantes duelando uns aos outros em duas equipes diferentes.}, tipo de fila \footnote{Um jogador precisa entrar no sistema de filas para encontrar e participar de uma partida; existem vários tipos de filas em LoL}, duração da partida, time vencedor/perdedor e número de identificação única. Um histórico contém também dados de cada jogador que participa da partida, como escolha de personagem e estatísticas sumarizadas de desempenho do jogador em toda a partida. Essas estatísticas indicam, por exemplo, dano total causado/recebido, ouro total recebido/gasto, dano total causado/sofrido e cura total recebida na partida. A Tabela ~\ref{tab:features-desc} apresenta as descrições de todas as 37 estatísticas de desempenho fornecidas pela API.
 
 \begin{table}
-  \tiny
+  \scriptsize
   \caption{Descriptions of players' performance statistics.}
   \label{tab:features-desc}
-  \begin{tabular}{p{0.13\textwidth}p{0.29\textwidth}}
+  \begin{tabular}{p{0.30\textwidth}p{0.65\textwidth}}
     \toprule
     Feature & Description \\
     \midrule
-assists & Number of assists\\
-deaths & Number of deaths\\
-doubleKills & Number of double kills\\
-goldEarned & Gold earned\\
-goldSpent & Gold spent\\
-inhibitorKills & Number of inhibitor kills\\
-killingSprees & Number of killing sprees\\
-kills & Number of kills\\
-largestCriticalStrike & Largest critical strike\\
-largestKillingSpree & Largest killing spree\\
-largestMultiKill & Largest multi kill\\
+assists & Número de assistências em abates\\
+deaths & Número de mortes sofridas \\
+doubleKills & Número de abates duplos seguidos efetuados\\
+goldEarned & Quantidade de ouro ganho\\
+goldSpent & Quantidade de ouro gasto\\
+inhibitorKills & Número de inibidores \footnote{Inibidores são estruturas que bloqueiam a formação de \textit{Super Minions} da equipe inimiga.} destruidos\\
+killingSprees & Número de matanças (abastes $\geq 3$ seguidos) sem que o campeão morra \\
+kills & Número de abates efetuados\\
+largestCriticalStrike & Maior ataque crítico\\
+largestKillingSpree & Matança com maior número de abates\\
+largestMultiKill & Maior abates múltiplos seguidos\\
 magicDamageDealt* & magicDamageDealtToChampions +  magicDamageDealtToMonsters\\
-magicDamageDealtToChampions & Magical damage dealt to champions\\
-magicDamageTaken & Magic damage taken\\
-minionsKilled & Minions killed\\
+magicDamageDealtToChampions & Dano mágico total causado a campeões\\
+magicDamageTaken & Dano mágico total recebido\\
+minionsKilled & Quantidade de \textit{minions} abatidos\\
  neutralMinionsKilled* & neutralMinionsKilledEnemyJungle + neutralMinionsKilledTeamJungle\\
-neutralMinionsKilledEnemyJungle & Neutral jungle minions killed in the enemy team' jungle\\
-neutralMinionsKilledTeamJungle & Neutral jungle minions killed in your team's jungle\\
-pentaKills & Number of penta kills\\
+neutralMinionsKilledEnemyJungle & \textit{Minions} neutros abatidos na selva da equipe inimiga
+\\
+neutralMinionsKilledTeamJungle & \textit{Minions} neutros abatidos na selva da equipe\\
+pentaKills & Número de abastes quíntuplos seguidos\\
 physicalDamageDealt* & physicalDamageDealtToChampions + physicalDamageDealtToMonsters\\
-physicalDamageDealtToChampions & Physical damage dealt to champions\\
-physicalDamageTaken & Physical damage taken\\
-quadraKills & Number of quadra kills\\
-sightWardsBoughtInGame & Sight wards purchased\\
-totalHeal & Total heal amount\\
-totalTimeCrowdControlDealt & Total dealt crowd control time\\
-totalUnitsHealed & Total units healed\\
-towerKills & Number of towers the team destroyed\\
-tripleKills & Number of triple kills\\
+physicalDamageDealtToChampions & Dano físico total causado a campeões\\
+physicalDamageTaken & Dano físico total recebido\\
+quadraKills & Número de abates quádruplos seguidos\\
+sightWardsBoughtInGame & Quantidade de itens \textit{sight wards} comprados\\
+totalHeal & Quantidade de cura total efetuada\\
+totalTimeCrowdControlDealt & Tempo total de controle da equipe inimiga\\
+totalUnitsHealed & Total de unidades curadas\\
+towerKills & Número de torres destruídas pela equipe\\
+tripleKills & Número de abastes triplos seguidos\\
 totalDamageDealt* & physicalDamageDealt + magicDamageDealt \\
 totalDamageDealtToChampions* & physicalDamageDealtToChampions + magicDamageDealtToChampions \\
  trueDamageDealt* & trueDamageDealtToChampions + trueDamageDealtToMonsters\\
-trueDamageDealtToChampions & True damage dealt to champions\\
-trueDamageTaken & True damage taken\\
-visionWardsBoughtInGame & Vision wards purchased\\
-wardsKilled & Number of wards killed\\
-wardsPlaced & Number of wards placed\\
+trueDamageDealtToChampions & Dano verdadeiro causado a campeões\\
+trueDamageTaken & Dano verdadeiro recebido\\
+visionWardsBoughtInGame & Quantidade de itens \textit{vision wards} comprados\\
+wardsKilled & Número de itens \textit{wards} destruidos\\
+wardsPlaced & Número de itens \textit{wards} usados\\
   \bottomrule
 \end{tabular}
 \end{table}
 
-\subsection{Análise Descritiva}
-\subsection{Extração de Fatores}
-\subsection{Limpeza de Dados}
-\subsection{Remoção de Fatores com Baixa Variância}
-\subsection{Detecção de Outliers}
-\subsection{Transformação de Dados}
-\subsection{Normalização}
-\subsection{Análise de Redundância}
+Coletamos aleatoriamente da API 110.000 históricos de partidas a partir de fevereiro de 2016 até dezembro de 2016. Para cada mês, coletamos 10.000 históricos. Consideramos os seguintes filtros para a coleta: 
 
-\section{Se\c{c}\~{a}o 1 do Capítulo 1}
-\subsection{Subseção}
-\subsubsection{Subsubseção}
+\begin{itemize}
+  \item Região: Brasil
+  \item Temporada: 2016
+  \item Modo de jogo: Clássico
+  \item Tipo de fila: Competitivo (\textit{ranked}) \textit{solo};
+  \item Quantidade de jogadores em cada equipe: 5
+  \item Versão da partida: v6.x.x
+\end{itemize}
 
-A Figura \ref{fig:sistemaProposto}. A Tabela \ref{tab:tabelaTeste}. A Equacao (\ref{eq1}). O trabalho de fulano ~\cite{ref1}. O Codigo Fonte \ref{cod1}.
+\section{Extração de Características}
 
-\begin{figure}[htbp]	
-\begin{center}
-		\fbox{\includegraphics[scale=1]{sistemaProposto.eps}}
-	\end{center}
-	\caption{Sistema proposto}
-	\label{fig:sistemaProposto}
-\end{figure}
+Em seguida, extraímos características das partidas coletadas para modelar nosso conjunto de dados de desempenho de equipes. Seja $M=\{m_1,...,m_{110000}\}$ um conjunto de histórico de partidas, $T=\{t_1, ..., t_n | n=110000 * 2=220000\}$ um conjunto de equipes, $P=\{p_1, ..., p_{|P|}\}$ um conjunto dimensional $d=38$ de estatísticas sumarizadas do desempenho total dos jogadores nas partidas. Uma partida consiste de duas equipes distintas $m=\{t_a,t_b\}$ e uma equipe é composta pelo desempenho de 5 jogadores distintos $t=\{p_k |  p_k \in P^t; P^t \supset P; 1 \geq k \leq 5\}$. Selecionamos as estatísticas de desempenho dos jogadores nas partidas e somamos cada estatística $P_j \in P$ por equipe para formar cada característica (ou estatística) $X_j \in X_{220000, 38}$ do nosso conjunto de desempenho de equipes, de modo que $X = \{ x_{i} = \sum_{k=1}^{5} p_{k}^{i} | t_{i} \in T; p_{k}^{i} \in P \}$.
 
-\begin{table}[htpb]
-\begin{center}
-\begin{tabular}{|c|c|c|}
-\hline
-coluna 1 & coluna 2 & coluna 3 \\
-\hline
-valor 1,1 & valor 1,2 & valor 1,3 \\
-valor 2,1 & valor 2,2 & valor 2,3 \\
-\hline
+Finalmente, para garantir a atomicidade no conjunto de dados $X$, decompomos algumas características, por exemplo, subtraimos \textit{physicalDamageDealt} de \textit{physicalDamageDealtToChampions} para computar \textit{physicalDamageDealtToMonsters} e subtraimos \textit{magicDamageDealt} de \textit{magicDamageDealtToChampions} para computar \textit{magicDamageDealtToMonsters}. Para evitar redundância nos dados, removemos também características compostas, por exemplo, características que são soma de outras:
+
+\begin{itemize}
+  \item \textit{totalDamageDealt = physicalDamageDealt + magicDamageDealt}
+  \item \textit{totalDamageDealtToChampions = physicalDamageDealtToChampions + magicDamageDealtToChampions}
+  \item \textit{totalDamageTaken = physicalDamageTaken + magicDamageTaken}
+  \item \textit{neutralMinionsKilled = neutralMinionsKilledEnemyJungle + neutralMinionsKilledTeamJungle}
+  \item \textit{trueDamageDealt = trueDamageDealtToChampions + trueDamageDealtToMonsters}
+  \item \textit{physicalDamageDealt = physicalDamageDealtToChampions + physicalDamageDealtToMonsters}
+  \item \textit{magicDamageDealt = magicDamageDealtToChampions + magicDamageDealtToMonsters}
+\end{itemize}
+
+A Tabela ~\ref{tab:features-desc} indica com (*) as características compostas removidas.
+
+\section{Limpeza de Dados}
+Para evitar conclusões falsas, realizamos a limpeza de dados para detectar e remover inconsistências no conjunto de desempenho das equipes. Em nossa análise, removemos partidas com as seguintes condições:
+
+\begin{itemize}
+\item Partidas rendidas: dependendo se uma partida está extremamente desequilibrada, geralmente a equipe que está perdendo pode solicitar a rendição a equipe inimiga a qualquer momento após 20 minutos do início da partida.
+\item Partidas que contêm jogadores que abandonam: Como as partidas de LoL são jogadas \textit{online}, os jogadores podem sair das partidas a qualquer momento. Alguns motivos incluem perda de conexão, desistência ou outro motivo desconhecido. Esses abandonos podem causar também um desequilíbrio nas partidas.
+\end{itemize}
+
+\section{Remoção de Fatores com Baixa Variância}
+Às vezes, os valores de algumas características têm variância zero ou próxima de zero, o que implica que essas características são também não informativas e podem causar ruído ao executar uma determinada tarefa de mineração de dados. Portanto, realizamos uma estatística descritiva no conjunto de dados para identificar e remover características de variância zero ou próxima de zero. Após a análise, removemos as seguintes características: \textit{doubleKills}, \textit{inhibitorKills}, \textit {largestMultiKill}, \textit{pentaKills}, \textit {quadraKills}, \textit {sightWardsBoughtInGame} e \textit{tripleKills}.
+
+\section{Detecção de Outliers}
+Utilizamos um Intervalo Interquartil ($fator = 1,5 $) para encontrar valores anômalos em cada característica no conjunto de dados. Equipes com alguma característica anômala foram removidas dos dados. Em seguida, realizamos uma análise para remover características com baixa variância novamente. Após a análise, as seguintes características foram removidas: \textit{totalUnitsHelead} e \textit{visionWardsBoughtInGame}.
+
+\section{Transformação de Dados}
+O conjunto de dados $X$ é apenas um reflexo do desempenho das equipes durante a partida, ou seja, estatísticas sumarizadas. Como a duração de uma partida não tem limite de tempo, é necessário transformar os dados para tornar o desempenho das equipes comparáveis entre si, independentemente da duração das partidas. Assim, para lidar com o problema de capturar o desempenho das equipes em diferentes durações de partidas, calculamos a divisão de desempenho de cada equipe $x \in X$ pela duração $duration$ da partida $m$ em que a equipe participou:
+
+\begin{displaymath}
+  \frac{x}{m^{duration}}
+\end{displaymath}
+
+\section{Normalização de Dados}
+Realizamos uma análise de \textit{boxplot} no conjunto de dados transformados e descobrimos que o intervalo de valores varia amplamente entre as características. Portanto, aplicamos a normalização de de dados \cite{zaki2014data} nas características para que cada uma contribua proporcionalmente em uma mesma escala na relização de uma determinada tarefa de mineração de dados. Seja $X$ um conjunto de dados e $x_1, ..., x_n $ uma amostra aleatória tirada de $X$, aplicamos a normalização baseada nos valores \textit{mínimo} e \textit{máximo} para escalar a característica pelo intervalo $r$ da amostra de $X$:
+
+\begin{displaymath}
+  x'=\frac{x_i - min(X)}{r}=\frac{x_i - min(X)}{max(X)-min(X)}
+\end{displaymath}
+
+Após a normalização, o conjunto de dados $X$ assumiu valores na faixa $[0, 1]$.
+
+\section{Análise de Redundância}
+
+Para identificar e remover característica redundantes no conjunto de dados, realizamos uma análise de correlação. Com base no teste de correlação de Spearman \cite{xiao2015using}, consideramos que um par de características de alta ou altíssima correlação são redundantes. A Figura ~\ref{fig:correlations} ilustra o gráfico de correlação entre as $d=24$ características do conjunto de dados $X$. De acordo com o gráfico, podemos observar que existem várias características redundantes.
+
+\begin{figure*}
+  \centering
+  \includegraphics[width=1.0\textwidth]{correlations}%
+  \caption{Correlation plot for teams' dataset features.}
+  \label{fig:correlations}
+\end{figure*}
+
+Desse modo, para cada par de características $(X_a, X_b); a, b=\{1, ..., d\};a \neq b$ com alta ou altíssima correlação $r_{ab} >= 0.65$, removemos de $X$ a característica que tem a maior correlação no par, ou seja, a característica do par em que a soma de todas as suas correlações com as demais características de $X$ tem o maior valor:
+
+\begin{displaymath}
+  max \big\{ \sum_{i=1}^{d} r_{ai} ,  \sum_{i=1}^{d} r_{bi} \big\}; a \neq i; b \neq i
+\end{displaymath}
+
+Portanto, removemos as seguintes características: \textit{assists}; \textit{goldEarned}; \textit{goldSpent}; \textit{kills}; \textit{largestKillingSpree}; \textit{magicDamageDealtToChampions}; \textit{physicalDamageDealtToChampions}; \textit{towerKills}.
+
+\chapter{Análise de Agrupamento de Desempenho de Equipes}
+
+O problema de encontrar perfis de equipe é equivalente a identificar um conjunto de \textit{clusters} (grupos) de equipes com comportamento semelhante. Para abordar esse problema, usamos o método de mineração de dados \textit{K-means clustering} \cite{zaki2014data}. Dado um conjunto dimensional de observações \(x_1, ..., x_n \), o \textit{K-means clustering} visa particionar as $n$ observações em $k (\leq n)$ \textit{clusters} distintos, denotados por $ C = \{c_1, ... , c_k \} $, de modo a minimizar a Soma dos Quadrados do Erro Dentro dos \textit{Clusters} (SQED); ou seja, seu objetivo é encontrar o minimizador $C*$ da função da Soma dos Quadrados do Erro (SQE):
+
+\begin{displaymath}
+  SQE(C) = \sum_{i=1}^{k} \sum_{x_j \in c_i}{} || x_j - \mu _i ||^2
+\end{displaymath}
+
+Onde $\mu_j$ é a média das observações em $c_i$, e indica também o \textit{i}-ésimo centroide de $C$.
+
+Conforme Zaki et al. \cite{zaki2014data}, o \textit{K-means} usa uma abordagem iterativa gananciosa (\textit{iterative greedy}) para encontrar um \textit{cluster} que minimize a função objetivo $SSE$ e, como tal, pode convergir para um ótimo local em vez de um \textit{cluster} ótimo global.
+
+Em nosso conjunto de dados $X$ usamos o algoritmo de Lloyd \cite{ong2015player}, uma heurística que consiste em escolher aleatoriamente observações como centroides dos $k$ \textit{clusters} de  $C$ e atribuir iterativamente cada observação $x \in X$ ao centroide mais próximo e depois atualizar os centroides com a média de seus respectivos \textit{clusters}.
+
+Para encontrar o número ótimo $k$ de \textit{clusters} usamos um método que encontra o "\textit{joelho}" da curva de erro. Este método tenta descobrir um número apropriado de \textit{clusters} analisando a curva de um gráfico gerado a partir de um teste realizado para cada número possível de \textit{clusters} \cite{salvador2004determining}. No nosso caso, o teste foi baseado na função objetivo $SQE$.
+
+\section{Discussão}
+
+A Figura ~\ref{fig:k-means-curve} ilustra o gráfico de SQE para cada número possível de \textit{clusters} $k = \{1, ..., 120\}$. Como podemos observar, o conjunto de dados $X$ pode ser particionado em $k=7$ \textit{clusters} distintos. Ao atribuir cada $x \in X$ em um \textit{cluster} $c \in C$, conseguimos diminuir a variabilidade dos dados em aproximadamente $78\%$, ou seja, obtivemos uma proporção entre a Soma dos Quadrados do Erro Entre os Clusters (SQEE) e a Soma dos Quadrados do Erro Total (SQET) de $SQEE/SQET = 78 \%$.
+
+\begin{figure*}
+  \centering
+  \includegraphics[width=1.0\textwidth]{k-means-curve}%
+  \caption{K-means SSE curve: $BBSSE(k)/TSSE$   for each  $k \in {1:120}$}
+  \label{fig:k-means-curve}
+\end{figure*}
+
+\chapter{Caracterização de perfis de equipes}
+
+Neste capítulo, caracterizamos e definimos rótulos para os \textit{clusters} do conjunto de desempenho de equipes de modo a colocar em perspectiva suas principais características ou estatísticas de desempenho. A fim de compreender os \textit{clusters} encontrados, analisamos:
+
+\begin{enumerate}[label=(\roman*)]
+ \item Como os \textit{clusters} diferem entre si em termos de quantidade de equipes e taxa de vitória/derrota;
+ \item Os centroides que sumarizam as características dos \textit{clusters};
+ \item Em que medida as características têm influência ou relevância nos \textit{clusters}.
+\end{enumerate}
+
+A Figura ~\ref{fig:win-table} e a Figura ~\ref{fig:win-plot} ilustram como os \textit{clusters} diferem entre si em termos de quantidade de equipes e taxa de vitória/derrota.
+
+A Figura ~\ref{fig:relevance} ilustra o mapa de calor de relevância das características com base no cálculo do ganho de informação para indicar como eles influenciam cada \textit{cluster}.
+
+A Tabela ~\ref{tab:centers} apresenta o conjunto transposto de centróides $t(A)$ que sumarizam as característica dos \textit{clusters} e denota como eles se diferem em termos de desempenho. Dado que $A$ é o conjunto de centroídes dos \textit{clusters}, cada $a \in A$ indica os centróides das características de um \textit{cluster}, e cada $A_j \in A$ indica o vetor de centroídes de uma determinada característica através dos \textit{clusters}.
+
+A Figura ~\ref{fig:radars} ilustra os gráficos de radar dos \textit{clusters}, onde cada gráfico de radar representa as métricas de desempenho de um \textit{cluster}, cada eixo representa uma métrica de desempenho e o comprimento do eixo indica qual a pontuação do \textit{cluster} em uma métrica de desempenho específica. As métricas de desempenho $M$ usadas para modelar os gráficos de radar são baseadas nos centroides dos \textit{clusters} normalizados por característica $M_j = normalization(A_j)$, de modo que o comprimento de um eixo seja proporcional em todos os centroides dos \textit{clusters} e assuma um valor entre [0, 1].
+
+Ao observar os resultados, dividimos os \textit{clusters} em quatro níveis em termos de taxa de vitória: muito baixo, moderado, alto e muito alto. Nos parágrafos seguintes, elaboramos esses resultados ao caracterizar os \textit{clusters} de desempenho das equipes para cada nível de taxa de vitória.
+
+\begin{figure*}
+  \centering
+  \includegraphics[width=0.5\textwidth]{win-rate-table}%
+  \caption{Number of teams by winners and losers.}
+  \label{fig:win-table}
+\end{figure*}
+
+\begin{figure*}
+  \centering
+  \includegraphics[width=0.7\textwidth]{win-rate-plot}%
+  \caption{Win rate plot of clusters.}
+  \label{fig:win-plot}
+\end{figure*}
+
+\begin{figure*}
+\includegraphics[width=1\textwidth,height=\textheight,keepaspectratio]{relevance}
+\caption{Relevance of features of teams' dataset based on information gain}
+\label{fig:relevance}
+\end{figure*}
+
+\begin{table*}
+  \tiny
+  \caption{Centroids of the features (per minute) for each cluster}
+  \label{tab:centers}
+  \begin{tabular}{lp{0.08\textwidth}p{0.07\textwidth}p{0.08\textwidth}p{0.08\textwidth}p{0.08\textwidth}p{0.08\textwidth}p{0.09\textwidth}p{0.05\textwidth}}
+  \toprule
+Features (per min)&                   Cluster 1&      Cluster 2&      Cluster 3&      Cluster 4&      Cluster 5&      Cluster 6&        Cluster 7&     All\\
+  \midrule
+deaths&                             1.17&    0.85&    $0.73^{(min)}$&    $1.22^{(max)}$&    0.87&    0.79&     0.74&    0.92\\ \hline
+killingSprees&                      0.14&    0.22&    $0.26^{(max)}$&    $0.12^{(min)}$&    0.22&    0.23&     $0.26^{(max)}$&    0.21\\ \hline
+largestCriticalStrike&             $22.85^{(min)}$&   31.63&   40.80&   26.11&   35.52&   30.65&    $46.64^{(max)}$&   33.10\\ \hline
+magicDamageDealtToMonsters&      4805.31& 5077.61& 5621.34& $2662.17^{(min)}$& 3043.93& $7716.26^{(max)}$&  3174.08& 4462.33\\ \hline
+magicDamageTaken&                1187.75& 1118.98& $1108.49^{(min)}$& 1157.09& $1095.07^{(max)}$& 1145.94&  1087.15& 1127.58\\ \hline
+minionsKilled&                     15.55&   17.73&   19.39&   $15.03^{(min)}$&   17.57&   18.69&    $19.45^{(max)}$&   17.52\\ \hline
+neutralMinionsKilledEnemyJungle&    0.20&    0.48&    0.77&    $0.18^{(min)}$&    0.49&    0.58&     $0.81^{(max)}$&    0.48\\ \hline
+neutralMinionsKilledTeamJungle&     1.93&    2.10&    2.33&    $1.87^{(min)}$&    2.10&    2.24&     $2.33^{(max)}$&    2.12\\ \hline
+physicalDamageDealtToMonsters&   $4661.69^{(min)}$& 7414.61& 9875.30& 6138.25& 9103.80& 6361.48& $12198.87^{(max)}$& 7899.13\\ \hline
+physicalDamageTaken&             1986.43& 2014.44& 2066.65& $1979.37^{(min)}$& 2026.98& 2029.57&  $2083.44^{(max)}$& 2023.80\\ \hline
+totalHeal&                        489.48&  603.20&  $694.18^{(max)}$&  $440.94^{(min)}$&  580.17&  685.86&   671.94&  587.95\\ \hline
+totalTimeCrowdControlDealt&        51.15&   58.48&   $62.06^{(max)}$&   $46.86^{(min)}$&   53.69&   64.16&    56.57&   55.78\\ \hline
+trueDamageDealtToChampions&        $85.38^{(min)}$&  100.79&  107.55&   90.51&  110.61&   95.45&   $116.25^{(max)}$&  100.94\\ \hline
+trueDamageTaken&                  $109.38^{(max)}$&  $103.26^{(min)}$&  105.52&  106.13&  101.85&  105.99&   105.82&  105.12\\ \hline
+wardsKilled&                        0.20&    0.23&    $0.27^{(max)}$&    $0.17^{(min)}$&    0.21&    $0.27^{(max)}$&     0.25&    0.23\\ \hline
+wardsPlaced&                        1.62&    1.76&    $1.85^{(max)}$&    $1.56^{(min)}$&    1.73&    1.83&     1.82&    1.73\\
+  \bottomrule
 \end{tabular}
-\end{center}
-\caption{Primeira tabela.}
-\label{tab:tabelaTeste}
+\end{table*}
+
+\begin{figure*}
+\includegraphics[width=1\textwidth,height=\textheight,keepaspectratio]{radars}
+\caption{Normalized centroids of performance features}
+\label{fig:radars}
+\end{figure*}
+
+\section{Nível Muito Baixo}
+O nível de desempenho muito baixo consiste do \textit{Cluster 1} e \textit{Cluster 4}. Esse nível é distinguido por uma taxa de vitória muito baixa $w_r = 10 \%$ e uma taxa de derrota muito alta $l_r = 90 \%$ (Figura ~\ref{fig:win-plot}, Figura ~\ref{fig:win-table}). Existem 10 características relevantes para o \textit{Cluster 1} e 7 características relevantes para o \textit{Cluster 4} (Figura ~\ref{fig:relevance}). Os mais relevantes ornedados por importância são: \textit{neutralMinionsKilledEnemyJungle}, \textit{deaths}, \textit{killingSprees}. A Tabela ~\ref{tab:clusters-very-low} resume as semelhanças e diferenças entre as pontuações das métricas de desempenho para os \textit{clusters} desse nível (Figura ~\ref{fig:radars}). As pontuações que mais se diferenciam entre os \textit{clusters} são: \textit{magicDamageDealtToMonsters} (moderado para o \textit{Cluster 1} e muito baixo para o \textit{Cluster 4}) e \textit{trueDamageTaken} (muito alto para o \textit{Cluster 1} e o moderado para o \textit{Cluster 4}).
+
+\begin{table}
+  \tiny
+  \caption{Performance scores classified by score level for Cluster 1 and Cluster 4.}
+  \label{tab:clusters-very-low}
+  \begin{tabular}{p{0.025\textwidth}p{0.127\textwidth}p{0.127\textwidth}p{0.127\textwidth}}
+    \toprule
+    Score level & Cluster 1 and Cluster 4 & Cluster 1 & Cluster 4 \\
+    \midrule
+Very low & killingSprees (2), largestCriticalStrike (3), minionsKilled (6), neutralMinionsKilledEnemyJungle (7), neutralMinionsKilledTeamJungle (8), physicalDamageTaken (10) & physicalDamageDealtToMonsters (9), trueDamageDealtToChampions (13) & magicDamageDealtToMonsters (4), totalHeal (11), totalTimeCrowdControlDealt (12), wardsKilled (15), wardsPlaced (16) \\
+    \hline
+Low & & totalHeal (11), totalTimeCrowdControlDealt (12), wardsKilled (15), wardsPlaced (16) & physicalDamageDealtToMonsters (9), trueDamageDealtToChampions (13) \\
+    \hline
+Middle & & magicDamageDealtToMonsters (4) & trueDamageTaken (14) \\
+    \hline
+High & & & magicDamageTaken (5) \\
+    \hline
+Very High & deaths (1) & magicDamageTaken (5), trueDamageTaken (14) & \\
+  \bottomrule
+\end{tabular}
 \end{table}
 
-\begin{equation}
-E = m \times c^2
-\label{eq1}
-\end{equation}
+\section{Nível Moderado}
+O nível de desempenho moderado consiste dos \textit{Cluster 2} e \textit{Cluster 5}. Esse nível é distinguido por uma taxa de vitória moderada $w_r = 55 \%$ e uma taxa de derrota baixa $l_r = 45 \%$ (Figura ~\ref{fig:win-plot}, Figura ~\ref{fig:win-table}). Existem 14 características relevantes para o \textit{Cluster 2} e 15 características relevantes para o \textit{Cluster 5} (Figura ~\ref{fig:relevance}). Os mais relevantes ordenados por importância são: \textit{deaths}, \textit{neutralMinionsKilledEnemyJungle}, \textit{killingSprees}, \textit{magicDamageTaken}. A Tabela ~\ref{tab:clusters-moderate} resume as semelhanças e diferenças entre as pontuações das métricas de desempenho para os \textit{clusters} desse nível (Figura ~\ref{fig:radars}). A pontuação que mais se diferencia entre os \textit{clusters} é: \textit{magicDamageDealtToMonsters} (moderado para o \textit{Cluster 2} e muito baixo para o \textit{Cluster 5}).
 
-\begin{lstlisting}[caption={Loop simples},label=cod1,numbers=none]
-for(int x=1; x<10; x++){
-  cout << x << "\n";
-}
-\end{lstlisting}
+\begin{table}
+  \tiny
+  \caption{Performance scores classified by score level for Cluster 2 and Cluster 5.}
+  \label{tab:clusters-moderate}
+  \begin{tabular}{p{0.025\textwidth}p{0.127\textwidth}p{0.127\textwidth}p{0.127\textwidth}}
+    \toprule
+    Score level & Cluster 2 and Cluster 5 & Cluster 2 & Cluster 5 \\
+    \midrule
+Very low & & & magicDamageDealtToMonsters (4), magicDamageTaken (5) and trueDamageTaken (14) \\
+    \hline
+Low & deaths (1) & magicDamageTaken (5), physicalDamageTaken and trueDamageTaken (14) & \\
+    \hline
+Middle & largestCriticalStrike  (3), minionsKilled (6), neutralMinionsKilledEnemyJungle (7), neutralMinionsKilledTeamJungle (8), physicalDamageDealtToMonsters (9), wardsKilled (15) & magicDamageDealtToMonsters (4) and trueDamageDealtToChampions (13) & physicalDamageTaken (10), totalHeal (11) and totalTimeCrowdControlDealt (12) \\
+    \hline
+High & killingSprees (2) and wardsPlaced (16) & totalHeal (11) and totalTimeCrowdControlDealt (12) & trueDamageDealtToChampions (13) \\
+    \hline
+Very High & & & \\
+  \bottomrule
+\end{tabular}
+\end{table}
 
-\section{Se\c{c}\~{a}o 2 do Capítulo 1}  
-\subsection{Subseção}
-\subsubsection{Subsubseção}
+\section{Nível Alto}
+O nível de desempenho alto consiste apenas do \textit{Cluster 6}. Esse nível é distinguido por uma taxa de vitória alta $w_r = 67 \%$ e uma taxa de derrota muito baixa $l_r = 33 \%$ (Figura ~\ref{fig:win-plot}, Figura ~\ref{fig:win-table}). Existem 12 características relevantes para o \textit{Cluster 6} (Figura ~\ref{fig:relevance}). Os mais relevantes ordenados por importância são: \textit{deaths}, \textit{neutralMinionsKilledEnemyJungle}, \textit{killingSprees}, \textit{magicDamageTaken}. A Tabela ~\ref{tab:clusters-high} resume as pontuações das métricas de desempenho do \textit{cluster} desse nível.
 
+\begin{table}
+  \tiny
+  \caption{Performance scores of Cluster 6 classified by score level.}
+  \label{tab:clusters-high}
+  \begin{tabular}{p{0.025\textwidth}p{0.381\textwidth}}
+    \toprule
+    Score level & Cluster 6 \\
+    \midrule
+Very low &  \\
+    \hline
+Low & deaths (1), largestCriticalStrike (3), physicalDamageDealtToMonsters (9), trueDamageDealtToChampions (13) \\
+    \hline
+Middle & magicDamageTaken (5), physicalDamageTaken, trueDamageTaken (14)  \\
+    \hline
+High & killingSprees (2), minionsKilled (6), neutralMinionsKilledEnemyJungle (7), neutralMinionsKilledTeamJungle (8) \\
+    \hline
+Very High & totalHeal (11), totalTimeCrowdControlDealt (12), wardsKilled (15), wardsPlaced (16) \\ 
+  \bottomrule
+\end{tabular}
+\end{table}
+
+\section{Nível Muito Alto}
+O nível de desempenho muito alto consiste do \textit{Cluster 3} e \textit{Cluster 7}. Esse nível é distinguido por uma taxa de vitória mutio alta $w_r = 85\% $ e uma taxa de derrota muito baixa $l_r = 15\% $ (Figura ~\ref{fig:win-plot}, Figura ~\ref{fig:win-table}). Existem 8 características relevantes para o \textit{Cluster 3} e 11 características relevantes para o \textit{Cluster 7} (Figura ~\ref{fig:relevance}). Os mais relevantes ordenados por importância são: \textit{deaths}, \textit{neutralMinionsKilledEnemyJungle}, \textit{killingSprees}. A Tabela ~\ref{tab:clusters-very-high} resume as semelhanças e diferenças entre as pontuações das métricas de desempenho para os \textit{clusters} desse nível (Figura ~\ref{fig:radars}). As pontuações mais diferenciadas entre os clusters são: \textit{magicDamageDealtToMonsters} (moderado para o \textit{Cluster 3} e muito baixo para o \textit{Cluster 7}) e \textit{totalTimeCrowdControlDealt} (muito alto para o \textit{Cluster 3} e o moderado para o \textit{Cluster 7}).
+
+\begin{table}
+  \tiny
+  \caption{Performance scores classified by score level for Cluster 2 and Cluster 5.}
+  \label{tab:clusters-very-high}
+  \begin{tabular}{p{0.025\textwidth}p{0.127\textwidth}p{0.127\textwidth}p{0.127\textwidth}}
+    \toprule
+    Score level & Cluster 3 and Cluster 7 & Cluster 3 & Cluster 7 \\
+    \midrule
+Very low & deaths (1) & & magicDamageDealtToMonsters (4), magicDamageTaken (5) \\
+    \hline
+Low & & magicDamageTaken (5) & \\
+    \hline
+Middle & trueDamageTaken (14) & magicDamageDealtToMonsters (4) & totalTimeCrowdControlDealt (12) \\
+    \hline
+High & & largestCriticalStrike  (3), physicalDamageDealtToMonsters (9), physicalDamageTaken (10), trueDamageDealtToChampions (13) & wardsKilled (15) \\
+    \hline
+Very High & killingSprees (2), minionsKilled (6), neutralMinionsKilledEnemyJungle (7), neutralMinionsKilledTeamJungle (8), totalHeal (11), wardsPlaced (16) & totalTimeCrowdControlDealt (12), wardsKilled (15) & largestCriticalStrike (3), physicalDamageDealtToMonsters (9), physicalDamageTaken, trueDamageDealtToChampions (13) \\
+  \bottomrule
+\end{tabular}
+\end{table}
+
+\chapter{Conclusão}
+Neste estudo, buscamos responder as seguintes questões de pesquisa: (i) é possível identificar padrões úteis no comportamento de desempenho das equipes? (ii) é possível definir métricas de desempenho de equipes baseando-se nesses padrões? (iii) é possível caracterizar perfis de comportamento de equipes bem-sucedidas e malsucedidas usando essas métricas?
+
+Portanto, propomos uma abordagem que passa por várias tarefas de engenharia de características e usa o método de agrupamento de dados \textit{K-means Clustering} para identificar, medir e analisar aspectos de diferentes perfis de equipe em termos de estatísticas de desempenho.
+
+Nossos resultados demonstram que as equipes das partidas coletadas compartilham diversas semelhanças e diferenças. Identificamos sete \textit{clusters} distintos de equipes que colocam em perspectiva tais semelhanças e diferenças de acordo com um conjunto de estatísticas sumarizadas, transformadas e normalizadas de desempenho, tais como, total de mortes por minuto, total de dano físico causado por minuto, total de cura efetuada por minuto, dentre outras. Calculamos também, para cada \textit{cluster}, a taxa de vitórias e a taxa de derrotas conforme a proporção de equipes vencedoras e derrotadas. Assim, rotulamos esses \textit{clusters} em quatro níveis em releção a taxa de vitórias da seguinte forma: muito baixo, moderado, alto e muito alto. Em relação à proporção de equipes nos \textit{clusters}, 28\% das equipes estão no nível muito baixo, 36\% no nível moderado, 11\% no nível alto e 25\% no nível muito alto. Quanto à relevância das características, as que parecem ter mais influência no comportamento dos \textit{clusters} são \textit{deaths}, \textit{killSprees} e \textit{neutralMinionsKilledEnemyJungle}.
+
+As descobertas do nosso estudo sugerem alguns elementos muito concretos que podem ser usados para enriquecer as estratégias de equipes iniciantes de LoL.
+
+\section{Trabalhos Futuros}
+Para o futuro, poderíamos ampliar nosso trabalho nas seguintes direções: investigar mais correlações de dados com a inclusão de estatísticas cumulativas dependentes da duração das partidas; construir modelos prediditivos para classificar o perfil de comportamento de equipes; e entender as semelhanças entre o comportamento de equipes do mundo real e \textit{online}.
