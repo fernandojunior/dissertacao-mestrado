@@ -13,6 +13,7 @@
 \usepackage{copin,mestre,epsfig}
 \usepackage{times}
 \usepackage[utf8x]{inputenc}
+\usepackage{epigraph}
 
 \usepackage{booktabs} % For formal tables
 \usepackage[inline]{enumitem}
@@ -65,7 +66,7 @@ showstringspaces=false
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \Titulo{Caracterização de Perfis de Comportamento de Equipes em League of Legends}
 \Autor{Fernando Felix do Nascimento Junior}
-\Data{01/06/2007}
+\Data{11/09/2017}
 \Area{Ciência da Computação}
 \Pesquisa{Mineração de Dados}
 \Orientadores{Leandro Balby Marinho  \\
@@ -78,6 +79,22 @@ showstringspaces=false
 
 \newpage
 \cleardoublepage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\input{dedicatoria.tex}
+\newpage
+\cleardoublepage
+
+\input{epigrafe.tex}
+\newpage
+\cleardoublepage
+
+\begin{agradecimentos}
+\input{agradecimentos.tex}
+\end{agradecimentos}
+
+\clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{resumo} 
@@ -95,12 +112,6 @@ showstringspaces=false
 \newpage
 \cleardoublepage
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{agradecimentos}
-\input{agradecimentos.tex}
-\end{agradecimentos}
-
-\clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Definicao do cabecalho: secao do lado esquerdo e numero da pagina do lado direito
@@ -114,11 +125,17 @@ showstringspaces=false
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \selectlanguage{portuges}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Configura estilo da epígrafe
+\setlength{\epigraphrule}{0pt}
+\setlength{\epigraphwidth}{.8\textwidth}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \Sumario
 \ListadeSimbolos
 \listoffigures
 \listoftables
-\lstlistoflistings %lista de codigos fonte - Para inserir a listagem de codigos fonte
+% \lstlistoflistings %lista de codigos fonte - Para inserir a listagem de codigos fonte
 \newpage
 \cleardoublepage
 
@@ -154,8 +171,8 @@ showstringspaces=false
 %% Apendice
 % Caso seja necessario algum apendice, descomente a proxima linha.
 
-\appendix
-\input{apendices}
+% \appendix
+% \input{apendices}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \end{document}
