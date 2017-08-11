@@ -4,7 +4,7 @@ A indústria de jogos digitais é um dos segmentos de entretenimento mais rentá
 
 Um segmento de jogo muito popular atualmente é o esporte eletrônico, mais conhecido como \textit{eSport} \cite{forbes1}. Conforme \cite{newzoo2}, o mercado de \textit{eSport} alcançou 493 milhões de dólares e uma audiência global de 191 milhões de entusiastas em 2016. O \textit{eSport} mais popular e mais rentável do mundo hoje é o League of Legends (LoL)  \cite{superdata1}, desenvolvido pela Riot Games, com cerca de 67 milhões de jogadores ativos e um pico diário de mais de 7,5 milhões de jogadores \textit{online} simultâneos \cite{riot1}.
 
-LoL é um jogo de arena de batalha \textit{online} para vários jogadores (\textit{Multiplayer Online Battle Arena} - MOBA), um subgênero de jogos digitais de estratégia em tempo real (\textit{Real-time Strategy} - RTS). Uma partida em um MOBA consiste em um cenário (mapa) em que duas equipes lutam entre si, a fim de destruir a base do oponente como o principal objetivo, sem limite de tempo. Um mapa simples contém três estradas principais (rotas) que conectam a base de cada equipe. Em geral, uma equipe tem cinco jogadores e cada um seleciona e controla um personagem, conhecidos como campeões ou heróis, com atributos e habilidades distintas. Além disso, as equipes também contam com a assistência de estruturas de defesa e unidades controladas por inteligência artificial (IA), conhecidos como \textit{minions} ou \textit{creeps}, para vencer a partida. Ao longo de uma partida, os personagens ganham ouro - que é usado para comprar itens que melhoraram seus atributos e habilidades - e pontos de experiência de várias maneiras, como matar unidades ou personagens e destruir estruturas da equipe inimiga \cite{league1}.
+LoL é um jogo de arena de batalha \textit{online} para vários jogadores (\textit{Multiplayer Online Battle Arena} - MOBA), um subgênero de jogos digitais de estratégia em tempo real (\textit{Real-time Strategy} - RTS). Uma partida em um MOBA consiste em um cenário (mapa) em que duas equipes lutam entre si, a fim de destruir a base do oponente como o principal objetivo, sem limite de tempo. Um mapa simples contém três estradas principais (rotas) que conectam a base de cada equipe. Em geral, uma equipe tem cinco jogadores e cada um seleciona e controla um personagem, conhecidos como campeões ou heróis, com atributos e habilidades distintas. Além disso, as equipes também contam com a assistência de estruturas de defesa e unidades controladas por Inteligência Artificial (IA), conhecidos como \textit{minions} ou \textit{creeps}, para vencer a partida. Ao longo de uma partida, os personagens ganham ouro - que é usado para comprar itens que melhoraram seus atributos e habilidades - e pontos de experiência de várias maneiras, como matar unidades ou personagens e destruir estruturas da equipe inimiga \cite{league1}.
 
 A grande diversidade e dinamicidade das ações dos personagens nas partidas \cite{drachen2014skill}, bem como seus desempenhos individuais (ou seja, ouro ganho, campeões derrotados, dano causado, cura recebida, etc.), tornam os MOBAs jogos muito competitivos. Em LoL, esta competitividade é ampliada devido à sua popularidade e torneios que fazem com que muitos jogadores se comportem como desportistas profissionais \cite{rioult2014mining}.
 
@@ -15,7 +15,7 @@ Uma das abordagens para a aplicação da mineração de dados é a utilização 
 No contexto de análise de comportamento de jogadores, onde tipicamente não se tem certeza como o comportamento pode variar, os algoritmos de aprendizado de máquina fornecem meios para descobrir as principais características nos dados e padrões relacionados ao comportamento em função dessas características \cite{el2016game}. Esses padrões podem ser utilizados para caracterizar os perfis das equipes, ou seja, equipes que possuem comportamento similar, bem como classificar o perfil de uma equipe.
 
 \section{Objetivos}
-Esta dissertação tem como objetivo apresentar e discutir os resultados de um processo de mineração de dados para identificar e caracterizar perfis de comportamento de equipes bem-sucedidas e malsucedidas no contexto do jogo League of Legends, baseando-se em métricas sumarizadas de desempenho dos jogadores nas partidas. Para atingir o objetivo, primeiro, coletamos partidas do \textit{site} oficial de histórico de partidas de LoL. Em seguida, modelamos um conjunto de dados de desempenho de equipes extraindo características a partir de estatísticas básicas de desempenho individual dos jogadores nas partidas. Depois, realizamos outras tarefas relacionadas a preparação de dados, tais como limpeza de dados, remoção de características com baixa variância, detecção de \textit{outliers}, transformação de dados, normalização de dados e análise de redundância de características. Para descobrir padrões de comportamento, aplicamos um método de agrupamento (K-means) nos dados desempenho de equipes para descobrir um número ótimo de grupos ou \textit{clusters} e, assim, agrupar equipes similares. Finalmente, caracterizamos cada grupo por meio de análise exploratória de dados e análise de relevância. Os resultados implicam que alguns grupos são mais propensos a ganhar do que outros e a influência dos fatores é distinta para cada um, o que nos permitiu definir perfis de equipe e métricas de desempenho.
+Esta dissertação tem como objetivo apresentar e discutir os resultados de um processo de mineração de dados para identificar e caracterizar perfis de comportamento de equipes bem-sucedidas e malsucedidas no contexto do jogo League of Legends, baseando-se em métricas sumarizadas de desempenho dos jogadores nas partidas. Para atingir o objetivo, primeiro, coletamos partidas do \textit{site} oficial de histórico de partidas de LoL. Em seguida, modelamos um conjunto de dados de desempenho de equipes extraindo características a partir de estatísticas básicas de desempenho individual dos jogadores nas partidas, como quantidade de ouro ganho, quantidade de monstros abatidos, dano físico total recebido, dentre outros. Depois, para transformar os dados em métricas úteis de desempenho, realizamos outras tarefas relacionadas a preparação de dados, tais como limpeza de dados, remoção de características com baixa variância, detecção de \textit{outliers}, transformação de dados, normalização de dados e análise de redundância de características. Para descobrir padrões de comportamento, aplicamos uma análise de agrupamento (\textit{K-means clustering}) nos dados desempenho de equipes para descobrir um número ótimo de grupos e, assim, agrupar equipes similares. Finalmente, caracterizamos cada grupo por meio de análise exploratória de dados e análise de relevância. Os resultados implicam que alguns grupos de equipes são mais propensos a ganhar do que outros e a influência das características é distinta para cada um, o que nos permitiu definir perfis de equipes bem-sucedidas e malsucedidas baseando-se nas métricas de desempenho das equipes.
 
 \subsection{Questões de Pesquisa}
 
@@ -36,6 +36,8 @@ Por fim, este trabalho também resultou na aceitação do artigo científico "\t
 Esta dissertação encontra-se dividida em 7 capítulos. O Capítulo 2 apresenta uma introdução e histórico sobre os MOBAs e uma fundamentação sobre mineração de dados. O Capítulo 3 apresenta os trabalhos relacionados, abordando os temas necessários ao desenvolvimento deste trabalho e a literatura sobre MOBA e aprendizado de máquina disponível. O Capítulo 4 apresenta os resultados da metodologia adotada para preparar os dados de desempenho das equipes que foram analisados. O Capítulo 5 apresenta os resultados do método de agrupamento de dados que foi usado para encontrar padrões. O Capítulo 6 apresenta a caracterização de perfis conforme os grupos ou padrões encontrados. O Capítulo 7 finaliza este trabalho com as conclusões e trabalhos futuros.
 
 \chapter{Fundamentação Teórica}
+
+Este capítulo aborda o histórico dos MOBAs e os principais conceitos relacionados a mineração de dados e jogos digitais.
 
 \section{MOBA}
 Os jogos MOBA tem suas origens nos jogos do gênero RTS, muito populares em meados dos anos 90 e início dos anos 2000. Suas características herdam traços que estão presentes em ambos os gêneros, sendo que os primeiros MOBAs foram criados utilizando as próprias ferramentas de criação de mapas personalizados RTS disponibilizados pelas desenvolvedoras. Para que se possa entender melhor as origens e características dos jogos MOBA, apresenta-se nesta seção um breve histórico de evolução do gênero.
@@ -118,7 +120,7 @@ O CRISP-DM consiste em seis fases destinadas a um processo cíclico (Figura ~\re
   \item 
 \textbf{Compreensão do negócio}: A compreensão do negócio ou pesquisa inclui a determinação de objetivos, a avaliação da situação atual, a definição de metas de mineração de dados e o desenvolvimento de um plano de projeto.
   \item
-\textbf{Compreensão dos dados}: Uma vez que os objetivos de negócios e o plano de projeto estão estabelecidos, a compreensão dos dados considera os requisitos dos dados. Esta fase pode incluir a coleta inicial de dados, descrição dos dados, exploração dos dados e verificação da qualidade dos dados. A exploração dos dados, como a visualização sumarizada de estatísticas (que inclui a exibição visual de características categóricas) pode ocorrer no final desta fase. Métodos como análise de \textit{cluster} também podem ser aplicados durante esta fase, com a objetivo de identificar padrões nos dados.
+\textbf{Compreensão dos dados}: Uma vez que os objetivos de negócios e o plano de projeto estão estabelecidos, a compreensão dos dados considera os requisitos dos dados. Esta fase pode incluir a coleta inicial de dados, descrição dos dados, exploração dos dados e verificação da qualidade dos dados. A exploração dos dados, como a visualização sumarizada de estatísticas (que inclui a exibição visual de características categóricas) pode ocorrer no final desta fase. Métodos como análise de agrupamento também podem ser aplicados durante esta fase, com a objetivo de identificar padrões nos dados.
   \item
 \textbf{Preparação dos dados}: Uma vez que os requisitos dos dados disponíveis estão identificados, eles precisam ser selecionados, limpos e estruturados na forma desejada. A limpeza de dados e a transformação de dados precisam ocorrer nessa fase. A exploração dos dados em maior profundidade pode ser aplicada durante essa fase, bem como outros métodos podem ser também utilizados, proporcionando novamente a oportunidade de identificar padrões baseados na compreensão do negócio ou pesquisa.
   \item
@@ -139,11 +141,11 @@ A fase de preparação de dados é um processo de vários estágios que compreen
 
 \begin{itemize}
   \item
-\textbf{Extração de características}: Dados brutos geralmente estão em uma forma que não é adequada para o processamento. Os exemplos incluem \textit{logs} brutos, documentos, dados semiestruturados e possivelmente outras formas de dados heterogêneos. Nesses casos, pode ser desejável obter características significativas a partir dos dados. Geralmente, as características com boa interpretação semântica são mais desejáveis porque simplificam a capacidade do analista de entender os resultados intermediários e geralmente têm melhor ligação aos objetivos da aplicação de mineração de dados. Em alguns casos onde os dados são obtidos de múltiplas fontes, os dados precisam ser integrados em uma única base de dados para serem processados. Além disso, alguns algoritmos podem funcionar apenas com um tipo de dados específico, sendo que os dados podem conter tipos heterogêneos. Nesses casos, a portabilidade dos tipos de dados se torna importante quando os atributos de um tipo são transformados em outro. Isso resulta em um conjunto de dados mais homogêneo que pode ser processado pelos algoritmos existentes.
+\textbf{Extração de Características}: Dados brutos geralmente estão em uma forma que não é adequada para o processamento. Os exemplos incluem \textit{logs} brutos, documentos, dados semiestruturados e possivelmente outras formas de dados heterogêneos. Nesses casos, pode ser desejável obter características significativas a partir dos dados. Geralmente, as características com boa interpretação semântica são mais desejáveis porque simplificam a capacidade do analista de entender os resultados intermediários e geralmente têm melhor ligação aos objetivos da aplicação de mineração de dados. Em alguns casos onde os dados são obtidos de múltiplas fontes, os dados precisam ser integrados em uma única base de dados para serem processados. Além disso, alguns algoritmos podem funcionar apenas com um tipo de dados específico, sendo que os dados podem conter tipos heterogêneos. Nesses casos, a portabilidade dos tipos de dados se torna importante quando os atributos de um tipo são transformados em outro. Isso resulta em um conjunto de dados mais homogêneo que pode ser processado pelos algoritmos existentes.
   \item
 \textbf{Limpeza de dados:} Na fase de limpeza de dados, os itens faltantes, errados e inconsistentes são removidas dos dados. Alguns itens faltantes também podem ser estimadas para serem inseridos nos dados.
   \item
-\textbf{Redução e transformação de dados}: Nessa fase, o tamanho dos dados é reduzido através da seleção de subconjuntos de dados, seleção de subconjuntos de características ou transformação de dados. Os ganhos obtidos nesta fase são duplos. Primeiro, quando o tamanho dos dados é reduzido, os algoritmos geralmente são mais eficientes. Em segundo lugar, se características irrelevantes ou itens irrelevantes são removidos, a qualidade do processo de mineração de dados é melhorada. O primeiro objetivo pode ser alcançado por técnicas genéricas de amostragem ou redução de dimensionalidade. Para alcançar o segundo objetivo, uma abordagem altamente específica do problema em questão deve ser usada para seleção de características. Por exemplo, uma abordagem de seleção de características que funciona bem para \textit{cluster} pode não funcionar bem para classificação.
+\textbf{Redução e transformação de dados}: Nessa fase, o tamanho dos dados é reduzido através da seleção de subconjuntos de dados, seleção de subconjuntos de características ou transformação de dados. Os ganhos obtidos nesta fase são duplos. Primeiro, quando o tamanho dos dados é reduzido, os algoritmos geralmente são mais eficientes. Em segundo lugar, se características irrelevantes ou itens irrelevantes são removidos, a qualidade do processo de mineração de dados é melhorada. O primeiro objetivo pode ser alcançado por técnicas genéricas de amostragem ou redução de dimensionalidade. Para alcançar o segundo objetivo, uma abordagem altamente específica do problema em questão deve ser usada para seleção de características. Por exemplo, uma abordagem de seleção de características que funciona bem para agrupamento pode não funcionar bem para classificação.
 \end{itemize}
 
 \subsection{Extração de Características}
@@ -172,7 +174,7 @@ O objetivo da redução de dados é representar os dados de forma mais compacta.
   \item 
 \textbf{Seleção de Características}: Somente um subconjunto de características dos dados é usado no processo analítico. Normalmente, esses subconjuntos são escolhidos de uma maneira específica de aplicação. Por exemplo, um método de seleção de características que funciona bem para análise de agrupamentos pode não funcionar bem para a classificação e vice-versa.
   \item 
-\textbf{Redução de dados pela rotação de eixo}: As correlações dos dados são aprimoradas para representar os dados em um número menor de dimensões. Um exemplo desse método de redução de dados inclui  a análise de componente principal (\textit{principal component analysis }- PCA).
+\textbf{Redução de dados pela rotação de eixo}: As correlações dos dados são aprimoradas para representar os dados em um número menor de dimensões. Um exemplo desse método de redução de dados inclui a análise de componente principal (\textit{Principal Component Analysis }- PCA).
   \item 
 \textbf{Redução de dados pela transformação de tipo}: Esta forma de redução de dados está intimamente relacionada à portabilidade de tipo de dados. Por exemplo, séries temporais são convertidas em dados multidimensionais de tamanho ou complexidade menores usando transformações de discretização. Da mesma forma, grafos podem ser convertidos também em representações multidimensionais.
 \end{itemize}
@@ -191,7 +193,7 @@ Na etapa de transformação de dados, os dados podem ser transformados ou consol
 \subsection{Principais Tarefas de Mineração de Dados}
 Em geral, tarefas de mineração de dados podem ser classificadas em duas categorias: mineração de dados descritiva e mineração de dados preditiva. O primeiro descreve um conjunto de dados de forma concisa e sumarizada e apresenta propriedades gerais interessantes dos dados; O segundo constrói um ou mais modelos para realizar inferências no conjunto de dados disponível e tenta prever o comportamento de novos conjuntos de dados.
 
-Portanto, o modelo descritivo encontra padrões ou relacionamentos em dados e explora as propriedades dos dados examinados. Agrupamento, sumarização e análise de associação são exemplos de modelos descritivos. O agrupamento é semelhante à classificação, exceto que os grupos não estão predefinidos, mas são definidos apenas pelos dados. É um método de aprendizado não supervisionado. Corresponde a partição ou segmentação dos dados em grupos ou \textit{clusters} distintos de tuplas similares. Os \textit{clusters} são definidos pelo estudo do comportamento dos dados pelos especialistas do domínio. O termo segmentação é usado em um contexto muito específico. A sumarização é a técnica de apresentar a informação resumida dos dados. A regra de associação encontra a associação entre os diferentes atributos. A mineração de regras de associação é um processo de dois passos: encontrar todos os conjuntos de itens frequentes, gerando regras de associação fortes a partir dos conjuntos de itens frequentes. A descoberta de sequência é um processo de encontrar os padrões de sequência nos dados. Esta sequência pode ser usada para entender uma tendência.
+Portanto, o modelo descritivo encontra padrões ou relacionamentos em dados e explora as propriedades dos dados examinados. Agrupamento, sumarização e análise de associação são exemplos de modelos descritivos. O agrupamento é semelhante à classificação, exceto que os grupos não estão predefinidos, mas são definidos apenas pelos dados. É um método de aprendizado não supervisionado. Corresponde a partição ou segmentação dos dados em grupos distintos de tuplas ou itens similares. Os grupos são caracterizados pelo estudo do comportamento dos dados por especialistas do domínio. O termo segmentação é usado em um contexto muito específico. A sumarização é a técnica de apresentar a informação resumida dos dados. A regra de associação encontra a associação entre os diferentes atributos. A mineração de regras de associação é um processo de dois passos: encontrar todos os conjuntos de itens frequentes, gerando regras de associação fortes a partir dos conjuntos de itens frequentes. A descoberta de sequência é um processo de encontrar os padrões de sequência nos dados. Esta sequência pode ser usada para entender uma tendência.
 
 O modelo preditivo faz previsões sobre valores de dados desconhecidos usando valores conhecidos. Classificação, previsão e regressão são exemplos de modelos preditivos. Muitas das aplicações de mineração de dados visam prever o estado futuro dos dados. Previsão é o processo de análise dos estados atuais e passados do atributo e previsão de seu futuro estado. A classificação é uma técnica de mapeamento dos dados de destino para grupos ou classes predefinidos, isso é um aprendizado supervisionado porque as classes são predefinidas antes dos dos dados de destino serem examinados. A regressão envolve o aprendizado de uma função que mapeia o item de dados para uma variável numérica de previsão de valor real.
 
@@ -209,9 +211,9 @@ Uma aplicação de mineração de dados pode realizar uma ou mais das seguintes 
   \item 
 \textbf{Previsão e regressão}: A previsão tem atraído uma atenção considerável tendo em conta as implicações potenciais da previsão bem-sucedida em um contexto de negócios. Existem dois principais tipos de previsões: pode-se tentar prever alguns valores de dados indisponíveis ou tendências pendentes, ou prever um rótulo de classe para alguns dados. O último está vinculado à classificação. Uma vez que um modelo de classificação é construído com base em um conjunto de treinamento, o rótulo de classe de um objeto pode ser previsto com base nos valores de atributos do objeto e nos valores de atributo das classes. Regressão é frequentemente referida à previsão de valores numéricos ou tendências de crescimento ou não em dados relacionados ao tempo. A principal idéia é usar um grande número de valores passados para considerar valores futuros prováveis.  
   \item 
-\textbf{Análise de agrupamentos}: Semelhante à classificação, a análise de agrupamentos é a organização de dados em classes. No entanto, ao contrário da classificação, os rótulos das classes são desconhecidos e depende do algoritmo de agrupamento para descobrir classes aceitáveis. É chamado também de classificação não supervisionada, porque a classificação não é definida por determinados rótulos de classe. Existem muitas abordagens de \textit{cluster} baseadas no princípio de maximizar a semelhança entre objetos em uma mesma classe (similaridade intraclasse) e minimizar a semelhança entre objetos de diferentes classes (similaridade interclasse).
+\textbf{Análise de agrupamentos}: Semelhante à classificação, a análise de agrupamentos é a organização de dados em classes. No entanto, ao contrário da classificação, os rótulos das classes são desconhecidos e depende do algoritmo de agrupamento para descobrir classes aceitáveis. É chamado também de classificação não supervisionada, porque a classificação não é definida por determinados rótulos de classe. Existem muitas abordagens de grupo baseadas no princípio de maximizar a semelhança entre objetos em uma mesma classe (similaridade intraclasse) e minimizar a semelhança entre objetos de diferentes classes (similaridade interclasse).
   \item 
-\textbf{Análise de \textit{Outliers}}: \textit{Outliers} são elementos de dados que não podem ser agrupados em uma determinada classe ou \textit{cluster}. Também conhecidas como exceções ou surpresas, muitas vezes é importante que sejam identificados. Enquanto os \textit{outliers} podem ser considerados ruídos e descartáveis em algumas aplicações, eles podem revelar conhecimentos importantes em outros domínios e, portanto, podem ser muito significativos e suas análises valiosas.
+\textbf{Análise de \textit{Outliers}}: \textit{Outliers} são elementos de dados que não podem ser agrupados em uma determinada classe ou grupo. Também conhecidos como exceções ou surpresas, muitas vezes é importante que sejam identificados. Enquanto os \textit{outliers} podem ser considerados ruídos e descartáveis em algumas aplicações, eles podem revelar conhecimentos importantes em outros domínios e, portanto, podem ser muito significativos e suas análises valiosas.
 
 \end{itemize}
 
@@ -229,9 +231,6 @@ Shim et al. \cite{shim2014decision} propõem um esquema de suporte à decisão d
 
 Pobiedina et al. \cite{pobiedina2013ranking} analisam padrões de comportamento social de trabalho em equipe usando dados de comunidades virtuais de Dota 2. Park e Kim \cite{park2014social} analisam a rede social de jogadores de LoL para encontrar conhecimento relevante que ajude, por exemplo, a entender como os jogadores formam equipes. Drachen et al. \cite{drachen2014skill} apresentam um método para investigar como o comportamento das equipes em Dota 2 varia dependendo do nível de habilidade dos jogadores, analisando seus movimentos e a distância entre eles ao longo da partida. Claypool et al. \cite{claypool2015surrender} analisam dados quantitativos e qualitativos de partidas de LoL, como duração da partida e contentamento do jogador, para investigar se partidas criadas automaticamente (\textit{matchmaking}) são equilibradas ou não. Neidhardt et al. \cite{neidhardt2015team} investigam os impactos de três categorias de fatores de equipe (habilidades dos jogadores, relações de colaboração e parcerias com jogadores em equipes anteriores) em relação ao desempenho das equipes e duração das partidas de Dota 2. Leavitt et al. \cite{leavitt2016ping} analisam jogadores em partidas de League of Legends para investigar o impacto do sistema de comunicação não-verbal (\textit{ping}) no desempenho das equipes. Buchan e Taylor \cite{buchan2016qualitative} exploram o jogo em equipe analisando as experiências subjetivas dos participantes (tais como comunicação, papel, estado psicológico e nível de habilidade de jogo) ao jogar MOBAs e, assim, criar um modelo conceitual baseado em processos de grupo tradicionais (papéis de equipe, desenvolvimento de grupo e percepções e comportamento durante o estado de desvinculação). Kim et al. \cite{kim2017makes} examinam quais fatores individuais e de grupo estão associados à inteligência colaborativa em equipes de LoL e se ela é preditiva para o desempenho dessas equipes, com base em conjuntos de dados que compreendem métricas no jogo, resultados laboratoriais e questionários de equipes.
 
-TODO: TABELA COMPARATIVA
-REFERENCE: https://arxiv.org/pdf/1509.05176.pdf
-
 Embora estes estudos desempenhem um papel essencial na literatura, nenhum deles se propôs a modelar perfis de equipe em LoL com base no comportamento de desempenho das equipes nas partidas, bem como, fornecer métricas de desempenho bem-sucedidas e malsucedidas de equipes que possam apoiar a tomada de decisão.
 
 \chapter{Preparação dos Dados}
@@ -242,7 +241,7 @@ A Riot Games, desenvolvedora do LoL, fornece uma Interface de Programação de A
 
 \begin{table}
   \scriptsize
-  \caption{Descriptions of players' performance statistics.}
+  \caption{Descrições das estatísticas básicas de desempenho dos jogadores nas partidas.}
   \label{tab:features-desc}
   \begin{tabular}{p{0.30\textwidth}p{0.65\textwidth}}
     \toprule
@@ -267,7 +266,7 @@ minionsKilled & Quantidade de \textit{minions} abatidos\\
 neutralMinionsKilledEnemyJungle & \textit{Minions} neutros abatidos na selva da equipe inimiga
 \\
 neutralMinionsKilledTeamJungle & \textit{Minions} neutros abatidos na selva da equipe\\
-pentaKills & Número de abastes quíntuplos seguidos\\
+pentaKills & Número de abates quíntuplos seguidos\\
 physicalDamageDealt* & physicalDamageDealtToChampions + physicalDamageDealtToMonsters\\
 physicalDamageDealtToChampions & Dano físico total causado a campeões\\
 physicalDamageTaken & Dano físico total recebido\\
@@ -303,9 +302,8 @@ Coletamos aleatoriamente da API 110.000 históricos de partidas a partir de feve
 
 \section{Extração de Características}
 
-TODO
-Consider a multidimensional database D with n records, and d attributes. Such a database D may be represented as an n × d matrix D, in which each row corresponds to one record and each column corresponds to a dimension. We generally refer to this matrix as the data matrix. This book will use the notation of a data matrix D, and a database D interchangeably.
-
+% TODO
+% Consider a multidimensional database D with n records, and d attributes. Such a database D may be represented as an n × d matrix D, in which each row corresponds to one record and each column corresponds to a dimension. We generally refer to this matrix as the data matrix. This book will use the notation of a data matrix D, and a database D interchangeably.
 
 Em seguida, extraímos características das partidas coletadas para modelar nosso conjunto de dados de desempenho de equipes. Seja $M=\{m_1,...,m_{110000}\}$ um conjunto de histórico de partidas, $T=\{t_1, ..., t_n | n=110000 * 2=220000\}$ um conjunto de equipes, $P=\{p_1, ..., p_{|P|}\}$ um conjunto dimensional $d=38$ de estatísticas sumarizadas do desempenho total dos jogadores nas partidas. Uma partida consiste de duas equipes distintas $m=\{t_a,t_b\}$ e uma equipe é composta pelo desempenho de 5 jogadores distintos $t=\{p_k |  p_k \in P^t; P^t \supset P; 1 \geq k \leq 5\}$. Selecionamos as estatísticas de desempenho dos jogadores nas partidas e somamos cada estatística $P_j \in P$ por equipe para formar cada característica (ou estatística) $X_j \in X_{220000, 38}$ do nosso conjunto de desempenho de equipes, de modo que $X = \{ x_{i} = \sum_{k=1}^{5} p_{k}^{i} | t_{i} \in T; p_{k}^{i} \in P \}$.
 
@@ -331,11 +329,11 @@ Para evitar conclusões falsas, realizamos a limpeza de dados para detectar e re
 \item Partidas que contêm jogadores que abandonam: Como as partidas de LoL são jogadas \textit{online}, os jogadores podem sair das partidas a qualquer momento. Alguns motivos incluem perda de conexão, desistência ou outro motivo desconhecido. Esses abandonos podem causar também um desequilíbrio nas partidas.
 \end{itemize}
 
-\section{Remoção de Fatores com Baixa Variância}
-Às vezes, os valores de algumas características têm variância zero ou próxima de zero, o que implica que essas características são também não informativas e podem causar ruído ao executar uma determinada tarefa de mineração de dados. Portanto, realizamos uma estatística descritiva no conjunto de dados para identificar e remover características de variância zero ou próxima de zero. Após a análise, removemos as seguintes características: \textit{doubleKills}, \textit{inhibitorKills}, \textit {largestMultiKill}, \textit{pentaKills}, \textit {quadraKills}, \textit {sightWardsBoughtInGame} e \textit{tripleKills}.
+\section{Remoção de Características com Baixa Variância}
+Às vezes, os valores de algumas características têm variância zero ou próxima de zero, o que implica que essas características são também não informativas e podem causar ruído ao executar uma determinada tarefa de mineração de dados. Portanto, realizamos uma estatística descritiva no conjunto de dados para identificar e remover características de variância zero ou próxima de zero. Após a análise, o conjunto de dados foi reduzido. As seguintes características foram removidas: \textit{doubleKills}, \textit{inhibitorKills}, \textit {largestMultiKill}, \textit{pentaKills}, \textit {quadraKills}, \textit {sightWardsBoughtInGame} e \textit{tripleKills}.
 
 \section{Detecção de Outliers}
-Utilizamos um Intervalo Interquartil ($fator = 1,5 $) para encontrar valores anômalos em cada característica no conjunto de dados. Equipes com alguma característica anômala foram removidas dos dados. Em seguida, realizamos uma análise para remover características com baixa variância novamente. Após a análise, as seguintes características foram removidas: \textit{totalUnitsHelead} e \textit{visionWardsBoughtInGame}.
+Utilizamos um Intervalo Interquartil de $fator = 1,5$ para encontrar valores anômalos em cada característica no conjunto de dados. Equipes com alguma característica anômala foram removidas dos dados. Em seguida, realizamos uma análise para remover características com baixa variância novamente. Após a análise, as seguintes características foram removidas: \textit{totalUnitsHelead} e \textit{visionWardsBoughtInGame}.
 
 \section{Transformação de Dados}
 O conjunto de dados $X$ é apenas um reflexo do desempenho das equipes durante a partida, ou seja, estatísticas sumarizadas. Como a duração de uma partida não tem limite de tempo, é necessário transformar os dados para tornar o desempenho das equipes comparáveis entre si, independentemente da duração das partidas. Assim, para lidar com o problema de capturar o desempenho das equipes em diferentes durações de partidas, calculamos a divisão de desempenho de cada equipe $x \in X$ pela duração $duration$ da partida $m$ em que a equipe participou:
@@ -344,14 +342,16 @@ O conjunto de dados $X$ é apenas um reflexo do desempenho das equipes durante a
   \frac{x}{m^{duration}}
 \end{displaymath}
 
+Dessa forma, como discutimos na seção 2.2.1, as características do nosso conjunto de dados deixam de ser simples estatísticas básicas para se tornarem métricas de desempenho. Por exemplo, as características agora passam a ser número de assistências em abates por minuto (\textit{assists}), número de mortes sofridas por minuto (\textit{deaths}), número de abates duplos seguidos efetuados por minuto (\textit{doubleKills}), e assim por diante.
+
 \section{Normalização de Dados}
-Realizamos uma análise de \textit{boxplot} no conjunto de dados transformados e descobrimos que o intervalo de valores varia amplamente entre as características. Portanto, aplicamos a normalização de de dados \cite{zaki2014data} nas características para que cada uma contribua proporcionalmente em uma mesma escala na realização de uma determinada tarefa de mineração de dados. Seja $X$ um conjunto de dados e $x_1, ..., x_n $ uma amostra aleatória retirada de $X$, aplicamos a normalização baseada nos valores \textit{mínimo} e \textit{máximo} para escalar a característica pelo intervalo $r$ da amostra de $X$:
+Realizamos uma análise de \textit{boxplot} no conjunto de dados transformados e descobrimos que o intervalo de valores varia amplamente entre as características. Portanto, aplicamos a normalização de de dados \cite{zaki2014data} nas características para que cada uma contribua proporcionalmente em uma mesma escala na realização da análise de redundância e agrupamento. Seja $X$ um conjunto de dados e $x_1, ..., x_n $ uma amostra aleatória retirada de $X$, aplicamos a normalização baseada nos valores \textit{mínimo} e \textit{máximo} para escalar a característica pelo intervalo $r$ da amostra de $X$:
 
 \begin{displaymath}
   x'=\frac{x_i - min(X)}{r}=\frac{x_i - min(X)}{max(X)-min(X)}
 \end{displaymath}
 
-Após a normalização, o conjunto de dados $X$ assume valores na faixa $[0, 1]$.
+Após a normalização, o conjunto de dados $X$ assumiu valores na faixa $[0, 1]$.
 
 \section{Análise de Redundância}
 
@@ -360,7 +360,7 @@ Para identificar e remover característica redundantes no conjunto de dados, rea
 \begin{figure*}
   \centering
   \includegraphics[width=1.0\textwidth]{correlations}%
-  \caption{Correlation plot for teams' dataset features.}
+  \caption{Gráfico de correlação para as características de desempenho das equipes.}
   \label{fig:correlations}
 \end{figure*}
 
@@ -374,7 +374,7 @@ Portanto, removemos as seguintes características: \textit{assists}; \textit{gol
 
 \chapter{Agrupamento de Dados}
 
-O problema de encontrar perfis de equipe é equivalente a identificar um conjunto de \textit{clusters} (grupos) de equipes com comportamento semelhante. Para abordar esse problema, usamos o método de mineração de dados \textit{K-means clustering} \cite{zaki2014data}. Dado um conjunto dimensional de observações \(x_1, ..., x_n \), o \textit{K-means clustering} visa particionar as $n$ observações em $k (\leq n)$ \textit{clusters} distintos, denotados por $ C = \{c_1, ... , c_k \} $, de modo a minimizar a Soma dos Quadrados do Erro Dentro dos \textit{Clusters} (SQED); ou seja, seu objetivo é encontrar o minimizador $C*$ da função da Soma dos Quadrados do Erro (SQE):
+O problema de encontrar perfis de equipe é equivalente ao problema de identificar um conjunto de grupos de equipes de comportamento semelhante. Para abordar esse problema, usamos o método de mineração de dados \textit{K-means clustering} \cite{zaki2014data}. Dado um conjunto dimensional de observações \(x_1, ..., x_n \), o \textit{K-means clustering} visa particionar as $n$ observações em $k (\leq n)$ grupos distintos, denotados por $ C = \{c_1, ... , c_k \} $, de modo a minimizar a Soma dos Quadrados do Erro Dentro dos Grupos (SQED); ou seja, seu objetivo é encontrar o minimizador $C*$ da função da Soma dos Quadrados do Erro (SQE):
 
 \begin{displaymath}
   SQE(C) = \sum_{i=1}^{k} \sum_{x_j \in c_i}{} || x_j - \mu _i ||^2
@@ -382,13 +382,13 @@ O problema de encontrar perfis de equipe é equivalente a identificar um conjunt
 
 Onde $\mu_j$ é a média das observações em $c_i$, e indica também o \textit{i}-ésimo centróide de $C$.
 
-Conforme Zaki et al. \cite{zaki2014data}, o \textit{K-means} usa uma abordagem iterativa gananciosa (\textit{iterative greedy}) para encontrar um \textit{cluster} que minimize a função objetivo $SSE$ e, como tal, pode convergir para um ótimo local em vez de um \textit{cluster} ótimo global.
+Conforme Zaki et al. \cite{zaki2014data}, o \textit{K-means} usa uma abordagem iterativa gananciosa (\textit{iterative greedy}) para encontrar um grupo que minimize a função objetivo $SSE$ e, como tal, pode convergir para um grupo ótimo local em vez de um grupo ótimo global.
 
-Em nosso conjunto de dados $X$ usamos o algoritmo de Lloyd \cite{ong2015player}, uma heurística que consiste em escolher aleatoriamente observações como centróides dos $k$ \textit{clusters} de  $C$ e atribuir iterativamente cada observação $x \in X$ ao centróide mais próximo e depois atualizar os centróides com a média de seus respectivos \textit{clusters}.
+Em nosso conjunto de dados $X$ usamos o algoritmo de Lloyd \cite{ong2015player}, uma heurística que consiste em escolher aleatoriamente observações como centróides para os $k$ grupos de $C$ e atribuir iterativamente cada observação $x \in X$ ao centróide mais próximo e depois atualizar os centróides com a média de seus respectivos grupos.
 
-Para encontrar o número ótimo $k$ de \textit{clusters} usamos um método que encontra o "\textit{joelho}" da curva de erro. Este método tenta descobrir um número apropriado de \textit{clusters} analisando a curva de um gráfico gerado a partir de um teste realizado para cada número possível de \textit{clusters} \cite{salvador2004determining}. No nosso caso, o teste foi baseado na função objetivo $SQE$.
+Para encontrar um número ótimo $k$ de grupos usamos um método que encontra o "\textit{joelho}"  da curva de erro. Este método tenta descobrir um número apropriado de grupos analisando a curva de um gráfico gerado a partir de um teste realizado para cada número possível de grupos \cite{salvador2004determining}. No nosso caso, o teste foi baseado na função objetivo $SQE$.
 
-A Figura ~\ref{fig:k-means-curve} ilustra o gráfico de SQE para cada número possível de \textit{clusters} $k = \{1, ..., 120\}$. Como podemos observar, o conjunto de dados $X$ pode ser particionado em $k=7$ \textit{clusters} distintos. Ao atribuir cada $x \in X$ em um \textit{cluster} $c \in C$, conseguimos diminuir a variabilidade dos dados em aproximadamente $78\%$, ou seja, obtivemos uma proporção entre a Soma dos Quadrados do Erro Entre os Clusters (SQEE) e a Soma dos Quadrados do Erro Total (SQET) de $SQEE/SQET = 78 \%$.
+A Figura ~\ref{fig:k-means-curve} ilustra o gráfico SQE para cada número possível de grupos $K = \{1, ..., 120\}$. Como podemos observar, o conjunto de dados $X$ pode ser particionado em $k=7$ grupos distintos. Ao atribuir cada $x \in X$ em um grupo $c \in C$, conseguimos diminuir a variabilidade dos dados em aproximadamente $78\%$, ou seja, obtivemos uma proporção entre a Soma dos Quadrados do Erro Entre os Grupos (SQEE) e a Soma dos Quadrados do Erro Total (SQET) de $SQEE/SQET = 78 \%$.
 
 \begin{figure*}
   \centering
@@ -399,51 +399,51 @@ A Figura ~\ref{fig:k-means-curve} ilustra o gráfico de SQE para cada número po
 
 \chapter{Caracterização de perfis}
 
-Neste capítulo, caracterizamos e definimos rótulos para os \textit{clusters} do conjunto de desempenho de equipes de modo a colocar em perspectiva suas principais características ou estatísticas de desempenho. A fim de compreender os \textit{clusters} encontrados, analisamos:
+Neste capítulo, caracterizamos e definimos rótulos para os grupos de conjunto de desempenho de equipes de modo a colocar em perspectiva suas principais características ou estatísticas de desempenho. A fim de compreender como os grupos encontrados se diferem entre si, analisamos:
 
 \begin{enumerate}[label=(\roman*)]
- \item Como os \textit{clusters} diferem entre si em termos de quantidade de equipes e taxa de vitória/derrota;
- \item Os centróides que sumarizam as características dos \textit{clusters};
- \item Em que medida as características têm influência ou relevância nos \textit{clusters}.
+ \item A quantidade de equipes e a taxa de equipes vencedoras/perdedoras;
+ \item Os centróides que sumarizam as características dos grupos;
+ \item Em que medida as características têm influência ou relevância nos grupos.
 \end{enumerate}
 
-A Figura ~\ref{fig:win-table} e a Figura ~\ref{fig:win-plot} ilustram como os \textit{clusters} diferem entre si em termos de quantidade de equipes e taxa de vitória/derrota.
+A Figura ~\ref{fig:win-table} e a Figura ~\ref{fig:win-plot} ilustram como os grupos diferem entre si em termos de quantidade de equipes e taxa de equipes vencedoras/derrotadas.
 
-A Figura ~\ref{fig:relevance} ilustra o mapa de calor de relevância das características com base no cálculo do ganho de informação para indicar como eles influenciam cada \textit{cluster}.
+A Figura ~\ref{fig:relevance} ilustra o mapa de calor das relevâncias das características com base no cálculo do ganho de informação aplicado ao conjunto de métricas desempenho de equipes sem normalização (realizado na seção 4.7) $M$ para indicar como eles influenciam cada grupo.
 
-A Tabela ~\ref{tab:centers} apresenta o conjunto transposto de centróides $t(A)$ que sumarizam as característica dos \textit{clusters} e denota como eles se diferem em termos de desempenho. Dado que $A$ é o conjunto de centróides dos \textit{clusters}, cada $a \in A$ indica os centróides das características de um \textit{cluster}, e cada $A_j \in A$ indica o vetor de centróides de uma determinada característica através dos \textit{clusters}.
+A Tabela ~\ref{tab:centers} apresenta o conjunto transposto dos centróides $t(A)$ que sumarizam as característica dos grupos de desempenho das equipes $M$ e denota como eles se diferem em termos de desempenho. Dado que $A$ é o conjunto ou matriz de centróides dos grupos, cada linha $a \in A$ indica os centróides das características de um grupo, e cada coluna $A_j \in A$ indica o vetor de centróides de uma determinada característica através dos grupos.
 
-A Figura ~\ref{fig:radars} ilustra os gráficos de radar dos \textit{clusters}, onde cada gráfico de radar representa as métricas de desempenho de um \textit{cluster}, cada eixo representa uma métrica de desempenho e o comprimento do eixo indica qual a pontuação do \textit{cluster} em uma métrica de desempenho específica. As métricas de desempenho $M$ usadas para modelar os gráficos de radar são baseadas nos centróides dos \textit{clusters} normalizados por característica $M_j = normalization(A_j)$, de modo que o comprimento de um eixo seja proporcional em todos os centróides dos \textit{clusters} e assuma um valor entre [0, 1].
+A Figura ~\ref{fig:radars} ilustra os gráficos de radar dos grupos, onde cada gráfico de radar representa as métricas de desempenho de um grupo, cada eixo representa uma métrica de desempenho e o comprimento do eixo indica qual a pontuação do grupo em uma métrica de desempenho específica. As métricas de desempenho usadas para modelar os gráficos de radar são baseadas nos centróides dos grupos normalizados por característica $M_j = normalization(A_j)$, de modo que o comprimento de um eixo seja proporcional em todos os centróides dos grupos e assuma um valor entre [0, 1].
 
-Ao observar os resultados, dividimos os \textit{clusters} em quatro níveis em termos de taxa de vitória: muito baixo, moderado, alto e muito alto. Nos parágrafos seguintes, elaboramos esses resultados ao caracterizar os \textit{clusters} de desempenho das equipes para cada nível de taxa de vitória.
+Ao observar os resultados, dividimos os grupos em quatro níveis em termos de taxa de equipes vencedoras: muito baixo, moderado, alto e muito alto. Nos parágrafos seguintes, elaboramos esses resultados ao caracterizar os grupos de desempenho das equipes para cada nível de taxa de equipes vencedoras.
 
 \begin{figure*}
   \centering
   \includegraphics[width=0.5\textwidth]{win-rate-table}%
-  \caption{Number of teams by winners and losers.}
+  \caption{Distribuição da quantidade de equipes vencedoras (\textit{winners}) e perdedoras (\textit{losers}).}
   \label{fig:win-table}
 \end{figure*}
 
 \begin{figure*}
   \centering
   \includegraphics[width=0.7\textwidth]{win-rate-plot}%
-  \caption{Win rate plot of clusters.}
+  \caption{Gráfico de barras das taxas de equipes vencedoras (\textit{win rate}) e perdedoras (\textit{not win rate}) dos grupos.}
   \label{fig:win-plot}
 \end{figure*}
 
 \begin{figure*}
 \includegraphics[width=1\textwidth,height=\textheight,keepaspectratio]{relevance}
-\caption{Relevance of features of teams' dataset based on information gain}
+\caption{Mapa de calor das relevâncias das métricas desempenho das equipes com base no ganho de informação.}
 \label{fig:relevance}
 \end{figure*}
 
 \begin{table*}
   \tiny
-  \caption{Centroids of the features (per minute) for each cluster}
+  \caption{Centróides das métricas de desempenho das equipes para cada grupo}
   \label{tab:centers}
   \begin{tabular}{lp{0.08\textwidth}p{0.07\textwidth}p{0.08\textwidth}p{0.08\textwidth}p{0.08\textwidth}p{0.08\textwidth}p{0.09\textwidth}p{0.05\textwidth}}
   \toprule
-Features (per min)&                   Cluster 1&      Cluster 2&      Cluster 3&      Cluster 4&      Cluster 5&      Cluster 6&        Cluster 7&     All\\
+Característica&                   Grupo 1&      Grupo 2&      Grupo 3&      Grupo 4&      Grupo 5&      Grupo 6&        Grupo 7&     Todos\\
   \midrule
 deaths&                             1.17&    0.85&    $0.73^{(min)}$&    $1.22^{(max)}$&    0.87&    0.79&     0.74&    0.92\\ \hline
 killingSprees&                      0.14&    0.22&    $0.26^{(max)}$&    $0.12^{(min)}$&    0.22&    0.23&     $0.26^{(max)}$&    0.21\\ \hline
@@ -467,20 +467,20 @@ wardsPlaced&                        1.62&    1.76&    $1.85^{(max)}$&    $1.56^{
 
 \begin{figure*}
 \includegraphics[width=1\textwidth,height=\textheight,keepaspectratio]{radars}
-\caption{Normalized centroids of performance features}
+\caption{Centróides dos grupos normalizados por métrica de desempenho das equipes.}
 \label{fig:radars}
 \end{figure*}
 
 \section{Nível Muito Baixo}
-O nível de desempenho muito baixo consiste do \textit{Cluster 1} e \textit{Cluster 4}. Esse nível é distinguido por uma taxa de vitória muito baixa $w_r = 10 \%$ e uma taxa de derrota muito alta $l_r = 90 \%$ (Figura ~\ref{fig:win-plot}, Figura ~\ref{fig:win-table}). Existem 10 características relevantes para o \textit{Cluster 1} e 7 características relevantes para o \textit{Cluster 4} (Figura ~\ref{fig:relevance}). Os mais relevantes ordenados por importância são: \textit{neutralMinionsKilledEnemyJungle}, \textit{deaths}, \textit{killingSprees}. A Tabela ~\ref{tab:clusters-very-low} resume as semelhanças e diferenças entre as pontuações das métricas de desempenho para os \textit{clusters} desse nível (Figura ~\ref{fig:radars}). As pontuações que mais se diferenciam entre os \textit{clusters} são: \textit{magicDamageDealtToMonsters} (moderado para o \textit{Cluster 1} e muito baixo para o \textit{Cluster 4}) e \textit{trueDamageTaken} (muito alto para o \textit{Cluster 1} e o moderado para o \textit{Cluster 4}).
+O nível de desempenho muito baixo consiste do \textit{Grupo 1} e \textit{Grupo 4}. Esse nível é distinguido por uma taxa de equipes vencedoras muito baixa $w_r = 10 \%$ e uma taxa de equipes perdedoras muito alta $l_r = 90 \%$ (Figura ~\ref{fig:win-plot}, Figura ~\ref{fig:win-table}). Existem 10 características relevantes para o \textit{Grupo 1} e 7 características relevantes para o \textit{Grupo 4} (Figura ~\ref{fig:relevance}). Os mais relevantes ordenados por importância são: \textit{neutralMinionsKilledEnemyJungle}, \textit{deaths}, \textit{killingSprees}. A Tabela ~\ref{tab:clusters-very-low} resume as semelhanças e diferenças entre as pontuações das métricas de desempenho para os grupos desse nível (Figura ~\ref{fig:radars}). As pontuações que mais se diferenciam entre os grupos são: \textit{magicDamageDealtToMonsters} (moderado para o \textit{Grupo 1} e muito baixo para o \textit{Grupo 4}) e \textit{trueDamageTaken} (muito alto para o \textit{Grupo 1} e o moderado para o \textit{Grupo 4}).
 
 \begin{table}
-  \tiny
-  \caption{Performance scores classified by score level for Cluster 1 and Cluster 4.}
+  \scriptsize
+  \caption{Nível das pontuações de desempenho para o Grupo 1 e Grupo 4.}
   \label{tab:clusters-very-low}
-  \begin{tabular}{p{0.025\textwidth}p{0.127\textwidth}p{0.127\textwidth}p{0.127\textwidth}}
+  \begin{tabular}{p{0.1\textwidth}p{0.265\textwidth}p{0.265\textwidth}p{0.265\textwidth}}
     \toprule
-    Score level & Cluster 1 and Cluster 4 & Cluster 1 & Cluster 4 \\
+    \textbf{Score level} & \textbf{Grupo 1 e Grupo 4} & \textbf{Grupo 1} & \textbf{Grupo 4} \\
     \midrule
 Very low & killingSprees (2), largestCriticalStrike (3), minionsKilled (6), neutralMinionsKilledEnemyJungle (7), neutralMinionsKilledTeamJungle (8), physicalDamageTaken (10) & physicalDamageDealtToMonsters (9), trueDamageDealtToChampions (13) & magicDamageDealtToMonsters (4), totalHeal (11), totalTimeCrowdControlDealt (12), wardsKilled (15), wardsPlaced (16) \\
     \hline
@@ -496,15 +496,15 @@ Very High & deaths (1) & magicDamageTaken (5), trueDamageTaken (14) & \\
 \end{table}
 
 \section{Nível Moderado}
-O nível de desempenho moderado consiste dos \textit{Cluster 2} e \textit{Cluster 5}. Esse nível é distinguido por uma taxa de vitória moderada $w_r = 55 \%$ e uma taxa de derrota baixa $l_r = 45 \%$ (Figura ~\ref{fig:win-plot}, Figura ~\ref{fig:win-table}). Existem 14 características relevantes para o \textit{Cluster 2} e 15 características relevantes para o \textit{Cluster 5} (Figura ~\ref{fig:relevance}). Os mais relevantes ordenados por importância são: \textit{deaths}, \textit{neutralMinionsKilledEnemyJungle}, \textit{killingSprees}, \textit{magicDamageTaken}. A Tabela ~\ref{tab:clusters-moderate} resume as semelhanças e diferenças entre as pontuações das métricas de desempenho para os \textit{clusters} desse nível (Figura ~\ref{fig:radars}). A pontuação que mais se diferencia entre os \textit{clusters} é: \textit{magicDamageDealtToMonsters} (moderado para o \textit{Cluster 2} e muito baixo para o \textit{Cluster 5}).
+O nível de desempenho moderado consiste dos \textit{Grupo 2} e \textit{Grupo 5}. Esse nível é distinguido por uma taxa de equipes vencedoras moderada $w_r = 55 \%$ e uma taxa de equipes perdedoras baixa $l_r = 45 \%$ (Figura ~\ref{fig:win-plot}, Figura ~\ref{fig:win-table}). Existem 14 características relevantes para o \textit{Grupo 2} e 15 características relevantes para o \textit{Grupo 5} (Figura ~\ref{fig:relevance}). Os mais relevantes ordenados por importância são: \textit{deaths}, \textit{neutralMinionsKilledEnemyJungle}, \textit{killingSprees}, \textit{magicDamageTaken}. A Tabela ~\ref{tab:clusters-moderate} resume as semelhanças e diferenças entre as pontuações das métricas de desempenho para os grupos desse nível (Figura ~\ref{fig:radars}). A pontuação que mais se diferencia entre os grupos é: \textit{magicDamageDealtToMonsters} (moderado para o \textit{Grupo 2} e muito baixo para o \textit{Grupo 5}).
 
 \begin{table}
-  \tiny
-  \caption{Performance scores classified by score level for Cluster 2 and Cluster 5.}
+  \scriptsize
+  \caption{Nível das pontuações de desempenho para o Grupo 2 e Grupo 5.}
   \label{tab:clusters-moderate}
-  \begin{tabular}{p{0.025\textwidth}p{0.127\textwidth}p{0.127\textwidth}p{0.127\textwidth}}
+  \begin{tabular}{p{0.1\textwidth}p{0.265\textwidth}p{0.265\textwidth}p{0.265\textwidth}}
     \toprule
-    Score level & Cluster 2 and Cluster 5 & Cluster 2 & Cluster 5 \\
+    \textbf{Score level} & \textbf{Grupo 2 e Grupo 5} & \textbf{Grupo 2} & \textbf{Grupo 5} \\
     \midrule
 Very low & & & magicDamageDealtToMonsters (4), magicDamageTaken (5) and trueDamageTaken (14) \\
     \hline
@@ -520,15 +520,15 @@ Very High & & & \\
 \end{table}
 
 \section{Nível Alto}
-O nível de desempenho alto consiste apenas do \textit{Cluster 6}. Esse nível é distinguido por uma taxa de vitória alta $w_r = 67 \%$ e uma taxa de derrota muito baixa $l_r = 33 \%$ (Figura ~\ref{fig:win-plot}, Figura ~\ref{fig:win-table}). Existem 12 características relevantes para o \textit{Cluster 6} (Figura ~\ref{fig:relevance}). Os mais relevantes ordenados por importância são: \textit{deaths}, \textit{neutralMinionsKilledEnemyJungle}, \textit{killingSprees}, \textit{magicDamageTaken}. A Tabela ~\ref{tab:clusters-high} resume as pontuações das métricas de desempenho do \textit{cluster} desse nível.
+O nível de desempenho alto consiste apenas do \textit{Grupo 6}. Esse nível é distinguido por uma taxa de equipes vencedoras alta $w_r = 67 \%$ e uma taxa de equipes perdedoras muito baixa $l_r = 33 \%$ (Figura ~\ref{fig:win-plot}, Figura ~\ref{fig:win-table}). Existem 12 características relevantes para o \textit{Grupo 6} (Figura ~\ref{fig:relevance}). Os mais relevantes ordenados por importância são: \textit{deaths}, \textit{neutralMinionsKilledEnemyJungle}, \textit{killingSprees}, \textit{magicDamageTaken}. A Tabela ~\ref{tab:clusters-high} resume as pontuações das métricas de desempenho do grupo desse nível.
 
 \begin{table}
-  \tiny
-  \caption{Performance scores of Cluster 6 classified by score level.}
+  \scriptsize
+  \caption{Nível das pontuações de desempenho para o Grupo 6.}
   \label{tab:clusters-high}
-  \begin{tabular}{p{0.025\textwidth}p{0.381\textwidth}}
+  \begin{tabular}{p{0.1\textwidth}p{0.85\textwidth}}
     \toprule
-    Score level & Cluster 6 \\
+    \textbf{Score level} & \textbf{Grupo 6} \\
     \midrule
 Very low &  \\
     \hline
@@ -544,15 +544,15 @@ Very High & totalHeal (11), totalTimeCrowdControlDealt (12), wardsKilled (15), w
 \end{table}
 
 \section{Nível Muito Alto}
-O nível de desempenho muito alto consiste do \textit{Cluster 3} e \textit{Cluster 7}. Esse nível é distinguido por uma taxa de vitória muito alta $w_r = 85\% $ e uma taxa de derrota muito baixa $l_r = 15\% $ (Figura ~\ref{fig:win-plot}, Figura ~\ref{fig:win-table}). Existem 8 características relevantes para o \textit{Cluster 3} e 11 características relevantes para o \textit{Cluster 7} (Figura ~\ref{fig:relevance}). Os mais relevantes ordenados por importância são: \textit{deaths}, \textit{neutralMinionsKilledEnemyJungle}, \textit{killingSprees}. A Tabela ~\ref{tab:clusters-very-high} resume as semelhanças e diferenças entre as pontuações das métricas de desempenho para os \textit{clusters} desse nível (Figura ~\ref{fig:radars}). As pontuações mais diferenciadas entre os clusters são: \textit{magicDamageDealtToMonsters} (moderado para o \textit{Cluster 3} e muito baixo para o \textit{Cluster 7}) e \textit{totalTimeCrowdControlDealt} (muito alto para o \textit{Cluster 3} e o moderado para o \textit{Cluster 7}).
+O nível de desempenho muito alto consiste do \textit{Grupo 3} e \textit{Grupo 7}. Esse nível é distinguido por uma taxa de equipes vencedoras muito alta $w_r = 85\% $ e uma taxa de equipes perdedoras muito baixa $l_r = 15\% $ (Figura ~\ref{fig:win-plot}, Figura ~\ref{fig:win-table}). Existem 8 características relevantes para o \textit{Grupo 3} e 11 características relevantes para o \textit{Grupo 7} (Figura ~\ref{fig:relevance}). Os mais relevantes ordenados por importância são: \textit{deaths}, \textit{neutralMinionsKilledEnemyJungle}, \textit{killingSprees}. A Tabela ~\ref{tab:clusters-very-high} resume as semelhanças e diferenças entre as pontuações das métricas de desempenho para os grupos desse nível (Figura ~\ref{fig:radars}). As pontuações mais diferenciadas entre os grupos são: \textit{magicDamageDealtToMonsters} (moderado para o \textit{Grupo 3} e muito baixo para o \textit{Grupo 7}) e \textit{totalTimeCrowdControlDealt} (muito alto para o \textit{Grupo 3} e o moderado para o \textit{Grupo 7}).
 
 \begin{table}
-  \tiny
-  \caption{Performance scores classified by score level for Cluster 2 and Cluster 5.}
+  \scriptsize
+  \caption{Nível das pontuações de desempenho para o Grupo 2 e Grupo 5.}
   \label{tab:clusters-very-high}
-  \begin{tabular}{p{0.025\textwidth}p{0.127\textwidth}p{0.127\textwidth}p{0.127\textwidth}}
+  \begin{tabular}{p{0.1\textwidth}p{0.265\textwidth}p{0.265\textwidth}p{0.265\textwidth}}
     \toprule
-    Score level & Cluster 3 and Cluster 7 & Cluster 3 & Cluster 7 \\
+    \textbf{Score level} & \textbf{Grupo 3 e Grupo 7} & \textbf{Grupo 3} & \textbf{Grupo 7} \\
     \midrule
 Very low & deaths (1) & & magicDamageDealtToMonsters (4), magicDamageTaken (5) \\
     \hline
@@ -572,9 +572,14 @@ Neste estudo, buscamos responder às seguintes questões de pesquisa: (i) é pos
 
 Portanto, propomos uma abordagem que passa por várias tarefas de engenharia de características e usa o método de agrupamento de dados \textit{K-means Clustering} para identificar, medir e analisar aspectos de diferentes perfis de equipe em termos de estatísticas de desempenho.
 
-Nossos resultados demonstram que as equipes das partidas coletadas compartilham diversas semelhanças e diferenças. Identificamos sete \textit{clusters} distintos de equipes que colocam em perspectiva tais semelhanças e diferenças de acordo com um conjunto de estatísticas sumarizadas, transformadas e normalizadas de desempenho, tais como, total de mortes por minuto, total de dano físico causado por minuto, total de cura efetuada por minuto, dentre outras. Calculamos também, para cada \textit{cluster}, a taxa de vitórias e a taxa de derrotas conforme a proporção de equipes vencedoras e derrotadas. Assim, rotulamos esses \textit{clusters} em quatro níveis em relação a taxa de vitórias da seguinte forma: muito baixo, moderado, alto e muito alto. Em relação à proporção de equipes nos \textit{clusters}, 28\% das equipes estão no nível muito baixo, 36\% no nível moderado, 11\% no nível alto e 25\% no nível muito alto. Quanto à relevância das características, as que parecem ter mais influência no comportamento dos \textit{clusters} são \textit{deaths}, \textit{killSprees} e \textit{neutralMinionsKilledEnemyJungle}.
+Nossos resultados demonstram que as equipes das partidas coletadas compartilham diversas semelhanças e diferenças. Identificamos 7 grupos distintos de equipes que colocam em perspectiva tais semelhanças e diferenças de acordo com um conjunto de estatísticas sumarizadas, transformadas e normalizadas de desempenho, tais como, total de mortes por minuto, total de dano físico causado por minuto, total de cura efetuada por minuto, dentre outras. Calculamos também, para cada grupo, a taxa de vitórias e a taxa de derrotas conforme a proporção de equipes vencedoras e derrotadas. Assim, categorizamos esses grupos em quatro níveis de taxa de equipes vencedoras da seguinte forma: muito baixo, moderado, alto e muito alto. Em relação à proporção da quantidade de equipes nos grupos, 28\% das equipes estão no nível muito baixo, 36\% no nível moderado, 11\% no nível alto e 25\% no nível muito alto. Quanto à relevância das características, as que parecem ter mais influência no comportamento dos grupos são \textit{deaths}, \textit{killSprees} e \textit{neutralMinionsKilledEnemyJungle}.
 
 As descobertas do nosso estudo sugerem alguns elementos muito concretos que podem ser usados para enriquecer as estratégias de equipes iniciantes de LoL.
 
 \section{Trabalhos Futuros}
 Para o futuro, poderíamos ampliar nosso trabalho nas seguintes direções: investigar mais correlações de dados com a inclusão de estatísticas cumulativas dependentes da duração das partidas; construir modelos preditivos para classificar o perfil de comportamento de equipes; e entender as semelhanças entre o comportamento de equipes do mundo real e \textit{online}.
+
+% TODO indicar referencias
+% TODO melhorar imagens
+% TODO capitulo para classificar depeneho de times em partidas
+% TODO tabela comparativa entre trabalhos relacionados  https://arxiv.org/pdf/1509.05176.pdf
