@@ -15,14 +15,14 @@ Uma das abordagens para a aplicação da mineração de dados é a utilização 
 No contexto de análise de comportamento de jogadores, onde tipicamente não se tem certeza de como o comportamento pode variar, os algoritmos de aprendizado de máquina fornecem meios para descobrir as principais características nos dados e padrões relacionados ao comportamento em função dessas características \cite{el2016game}. Esses padrões podem ser utilizados para caracterizar os perfis das equipes, ou seja, equipes que possuem comportamento similar, bem como classificar o perfil de uma equipe.
 
 \section{Objetivos}
-Esta dissertação tem como objetivo apresentar e discutir os resultados de um processo de mineração de dados para identificar e caracterizar perfis de comportamento de equipes bem-sucedidas e malsucedidas no contexto do jogo League of Legends, baseando-se nas métricas sumarizadas de desempenho dos jogadores nas partidas. Para atingir o objetivo, primeiro, coletamos partidas do \textit{site} oficial de histórico de partidas de LoL. Em seguida, modelamos um conjunto de dados de desempenho de equipes extraindo características a partir de estatísticas básicas de desempenho individual dos jogadores nas partidas, como quantidade de ouro ganho, quantidade de monstros abatidos, dano físico total recebido, dentre outros. Depois, para transformar os dados em métricas úteis de desempenho, realizamos outras tarefas relacionadas a preparação de dados, tais como limpeza de dados, remoção de características com baixa variância, detecção de \textit{outliers}, transformação de dados, normalização de dados e análise de redundância de características. Para descobrir padrões de comportamento, aplicamos uma análise de agrupamento (\textit{K-means clustering}) nos dados desempenho de equipes para descobrir um número ótimo de grupos e, assim, agrupar equipes similares. Finalmente, caracterizamos cada grupo por meio de uma análise exploratória dos dados. Os resultados implicam que alguns grupos de equipes são mais propensos a terem equipes vencedoras do que outros e a influência das características é distinta para cada um, o que nos permitiu definir perfis de equipes bem-sucedidas e malsucedidas baseando-se nas métricas de desempenho das equipes.
+Esta dissertação tem como objetivo apresentar e discutir os resultados de um processo de mineração de dados para identificar e caracterizar perfis de comportamento de equipes bem-sucedidas e malsucedidas no contexto do jogo League of Legends, baseando-se em métricas sumarizadas de desempenho dos jogadores nas partidas. Para atingir o objetivo, primeiro, coletamos partidas do \textit{site} oficial de histórico de partidas de LoL. Em seguida, modelamos um conjunto de dados de desempenho de equipes extraindo características a partir de estatísticas básicas de desempenho individual dos jogadores nas partidas, como quantidade de ouro ganho, quantidade de monstros abatidos, dano físico total recebido, dentre outros. Depois, para transformar os dados em métricas úteis de desempenho, realizamos outras tarefas relacionadas a preparação de dados, tais como limpeza de dados, remoção de características com baixa variância, detecção de \textit{outliers}, transformação de dados, normalização de dados e análise de redundância de características. Para descobrir padrões de comportamento, aplicamos uma análise de agrupamento (\textit{K-means clustering}) nos dados desempenho de equipes para descobrir um número ótimo de grupos e, assim, agrupar equipes similares. Finalmente, caracterizamos cada grupo por meio de uma análise exploratória dos dados. Os resultados implicam que alguns grupos de equipes são mais propensos a terem equipes vencedoras do que outros e a influência das características é distinta para cada um, o que nos permitiu definir perfis de equipes bem-sucedidas e malsucedidas baseando-se nas métricas de desempenho das equipes.
 
 \subsection{Questões de Pesquisa}
 
 \begin{enumerate}[label=(\roman*)]
-  \item É possível encontrar padrões úteis no comportamento das equipes com base no seus desempenhos nas partidas?
-  \item É possível computar métricas de desempenho de equipes com base nesses padrões?
-  \item É possível caracterizar perfis de comportamento de equipes bem-sucedidas e malsucedidas usando essas métricas?
+  \item É possível computar métricas de desempenho de equipes?
+  \item É possível encontrar padrões úteis no comportamento das equipes com base nessas métricas?
+  \item É possível caracterizar perfis de comportamento de equipes bem-sucedidas e malsucedidas usando esses padrões?
 \end{enumerate}
 
 \section{Contribuições}
@@ -237,7 +237,7 @@ Embora estes estudos desempenhem um papel essencial na literatura, nenhum deles 
 Para preparar o conjunto de dados de desempenho de equipes, foram realizadas as seguintes tarefas: coleta de dados; extração de características; limpeza de dados; remoção de características com baixa variância; detecção de \textit{outliers}; transformação de dados; normalização de dados; análise de redundância de características.
 
 \section{Coleta de Dados}
-A Riot Games, desenvolvedora do LoL, fornece uma Interface de Programação de Aplicação (\textit{Application Programming Interface} - API) baseada na Web para acessar os históricos das partidas em formato JSON \cite{riot1}. Um histórico de partida contém dados como modo de jogo \footnote{O modo clássico é o mais escolhido pelos jogadores e uma partida desse modo deve ter 10 participantes duelando uns aos outros em duas equipes diferentes.}, tipo de fila \footnote{Um jogador precisa entrar no sistema de filas para encontrar e participar de uma partida; existem vários tipos de filas em LoL}, duração da partida, time vencedor/perdedor e número de identificação única. Um histórico contém também dados de cada jogador que participa da partida, como escolha de personagem e estatísticas sumarizadas de desempenho do jogador em toda a partida. Essas estatísticas indicam, por exemplo, dano total causado/recebido, ouro total recebido/gasto, dano total causado/sofrido e cura total recebida na partida. A Tabela ~\ref{tab:features-desc} apresenta as descrições de todas as 37 estatísticas de desempenho fornecidas pela API.
+A Riot Games, desenvolvedora do LoL, fornece uma Interface de Programação de Aplicação (\textit{Application Programming Interface} - API) baseada na Web para acessar os históricos das partidas em formato JSON \cite{riot1}. Um histórico de partida contém dados como modo de jogo \footnote{O modo clássico é o mais escolhido pelos jogadores e uma partida desse modo deve ter 10 participantes duelando uns aos outros em duas equipes diferentes.}, tipo de fila \footnote{Um jogador precisa entrar no sistema de filas para encontrar e participar de uma partida; existem vários tipos de filas em LoL}, duração da partida, time vencedor e perdedor, e número de identificação única. Um histórico contém também dados de cada jogador que participa da partida, como escolha de personagem e estatísticas sumarizadas de desempenho do jogador em toda a partida. Essas estatísticas indicam, por exemplo, dano total causado e recebido, ouro total recebido e gasto, dano total causado e sofrido, e cura total recebida na partida. A Tabela ~\ref{tab:features-desc} apresenta as descrições de todas as 37 estatísticas númericas fornecidas pela API.
 
 \begin{table}
   \scriptsize
@@ -305,7 +305,7 @@ Coletamos aleatoriamente da API 110.000 históricos de partidas a partir de feve
 % TODO
 % Consider a multidimensional database D with n records, and d attributes. Such a database D may be represented as an n × d matrix D, in which each row corresponds to one record and each column corresponds to a dimension. We generally refer to this matrix as the data matrix. This book will use the notation of a data matrix D, and a database D interchangeably.
 
-Em seguida, extraímos características das partidas coletadas para modelar nosso conjunto de dados de desempenho de equipes. Seja $M=\{m_1,...,m_{110000}\}$ um conjunto de histórico de partidas, $T=\{t_1, ..., t_n | n=110000 * 2=220000\}$ um conjunto de equipes, $P=\{p_1, ..., p_{|P|}\}$ um conjunto dimensional $d=38$ de estatísticas sumarizadas do desempenho total dos jogadores nas partidas. Uma partida consiste de duas equipes distintas $m=\{t_a,t_b\}$ e uma equipe é composta pelo desempenho de 5 jogadores distintos $t=\{p_k |  p_k \in P^t; P^t \supset P; 1 \geq k \leq 5\}$. Selecionamos as estatísticas de desempenho dos jogadores nas partidas e somamos cada estatística $P_j \in P$ por equipe para formar cada característica (ou estatística) $X_j \in X_{220000, 38}$ do nosso conjunto de desempenho de equipes, de modo que $X = \{ x_{i} = \sum_{k=1}^{5} p_{k}^{i} | t_{i} \in T; p_{k}^{i} \in P \}$.
+Em seguida, extraímos características das partidas coletadas para modelar nosso conjunto de dados de desempenho de equipes. Seja $M=\{m_1,...,m_{110000}\}$ um conjunto de histórico de partidas, $T=\{t_1, ..., t_n | n=110000 * 2=220000\}$ um conjunto de equipes, $P=\{p_1, ..., p_{|P|}\}$ um conjunto dimensional $d=38$ de estatísticas básicas de desempenho dos jogadores nas partidas. Uma partida consiste de duas equipes distintas $m=\{t_a,t_b\}$ e uma equipe é composta pelo desempenho de 5 jogadores distintos $t=\{p_k |  p_k \in P^t; P^t \supset P; 1 \geq k \leq 5\}$. Selecionamos as estatísticas de desempenho dos jogadores nas partidas e somamos cada estatística $P_j \in P$ por equipe para formar cada característica (ou estatística) $X_j \in X_{220000, 38}$ do nosso conjunto de desempenho de equipes, de modo que $X = \{ x_{i} = \sum_{k=1}^{5} p_{k}^{i} | t_{i} \in T; p_{k}^{i} \in P \}$.
 
 Finalmente, para garantir a atomicidade no conjunto de dados $X$, decompomos algumas características, por exemplo, subtraimos \textit{physicalDamageDealt} de \textit{physicalDamageDealtToChampions} para computar \textit{physicalDamageDealtToMonsters} e subtraímos \textit{magicDamageDealt} de \textit{magicDamageDealtToChampions} para computar \textit{magicDamageDealtToMonsters}. Para evitar redundância nos dados, removemos também características compostas, por exemplo, características que são soma de outras:
 
@@ -398,7 +398,6 @@ A Figura ~\ref{fig:k-means-curve} ilustra o gráfico SQE para cada número poss�
 \end{figure*}
 
 \chapter{Caracterização de perfis}
-
 Neste capítulo, caracterizamos e definimos rótulos para os grupos de conjunto de desempenho de equipes de modo a colocar em perspectiva suas principais características ou estatísticas de desempenho. A fim de compreender como os grupos encontrados se diferem entre si, analisamos:
 
 \begin{enumerate}[label=(\roman*)]
@@ -409,11 +408,11 @@ Neste capítulo, caracterizamos e definimos rótulos para os grupos de conjunto 
 
 A Figura ~\ref{fig:win-table} e a Figura ~\ref{fig:win-plot} ilustram como os grupos diferem entre si em termos de quantidade de equipes e taxa de equipes vencedoras/derrotadas.
 
-A Figura ~\ref{fig:relevance} ilustra o mapa de calor das relevâncias das características com base no cálculo do ganho de informação aplicado ao conjunto de métricas desempenho de equipes sem normalização (realizado na seção 4.7) $M$ para indicar como eles influenciam cada grupo.
+A Figura ~\ref{fig:relevance} ilustra o mapa de calor da análise de relevância das características com base no cálculo do ganho de informação aplicado ao conjunto de métricas desempenho das equipes sem normalização (realizado na seção 4.7) $M$ para indicar como eles influenciam cada grupo.
 
-A Tabela ~\ref{tab:centers} apresenta o conjunto transposto dos centróides $t(A)$ que sumarizam as característica dos grupos de desempenho das equipes $M$ e denota como eles se diferem em termos de desempenho. Dado que $A$ é o conjunto ou matriz de centróides dos grupos, cada linha $a \in A$ indica os centróides das características de um grupo, e cada coluna $A_j \in A$ indica o vetor de centróides de uma determinada característica através dos grupos.
+Seja $A$ a matriz de centróides dos grupos das métricas de desempenho das equipes $M$, cada linha $a \in A$ indica os centróides das características de um grupo, e cada coluna $A_j \in A$ indica os centróides de uma determinada característica através dos grupos. A Tabela ~\ref{tab:centers} apresenta o conjunto transposto dos centróides $t(A)$ e denota como eles se diferem em termos de desempenho.
 
-A Figura ~\ref{fig:radars} ilustra os gráficos de radar dos grupos, onde cada gráfico de radar representa as métricas de desempenho de um grupo, cada eixo representa uma métrica de desempenho e o comprimento do eixo indica qual a pontuação do grupo em uma métrica de desempenho específica. As métricas de desempenho usadas para modelar os gráficos de radar são baseadas nos centróides dos grupos normalizados por característica $M_j = normalization(A_j)$, de modo que o comprimento de um eixo seja proporcional em todos os centróides dos grupos e assuma um valor entre [0, 1].
+A Figura ~\ref{fig:radars} ilustra os gráficos de radar dos grupos, onde cada gráfico de radar representa as métricas de desempenho de um grupo, cada eixo representa uma métrica de desempenho e o comprimento do eixo indica qual a pontuação do grupo em uma métrica de desempenho específica. As métricas de desempenho usadas para modelar os gráficos de radar são baseadas nos centróides dos grupos normalizados por característica $normalization(A_j)$, de modo que o comprimento de um eixo seja proporcional em todos os centróides dos grupos e assuma um valor entre [0, 1].
 
 Ao observar os resultados, dividimos os grupos em quatro níveis em termos de taxa de equipes vencedoras: muito baixo, moderado, alto e muito alto. Nos parágrafos seguintes, elaboramos esses resultados ao caracterizar os grupos de desempenho das equipes para cada nível de taxa de equipes vencedoras.
 
@@ -439,28 +438,28 @@ Ao observar os resultados, dividimos os grupos em quatro níveis em termos de ta
 
 \begin{table*}
   \tiny
-  \caption{Centróides das métricas de desempenho das equipes para cada grupo}
+  \caption{Centroides das características (métricas) para cada cluster. O mínimo e o máximo são indicados por linha}
   \label{tab:centers}
   \begin{tabular}{lp{0.08\textwidth}p{0.07\textwidth}p{0.08\textwidth}p{0.08\textwidth}p{0.08\textwidth}p{0.08\textwidth}p{0.09\textwidth}p{0.05\textwidth}}
   \toprule
 Característica&                   Grupo 1&      Grupo 2&      Grupo 3&      Grupo 4&      Grupo 5&      Grupo 6&        Grupo 7&     Todos\\
   \midrule
-deaths&                             1.17&    0.85&    $0.73^{(min)}$&    $1.22^{(max)}$&    0.87&    0.79&     0.74&    0.92\\ \hline
-killingSprees&                      0.14&    0.22&    $0.26^{(max)}$&    $0.12^{(min)}$&    0.22&    0.23&     $0.26^{(max)}$&    0.21\\ \hline
-largestCriticalStrike&             $22.85^{(min)}$&   31.63&   40.80&   26.11&   35.52&   30.65&    $46.64^{(max)}$&   33.10\\ \hline
-magicDamageDealtToMonsters&      4805.31& 5077.61& 5621.34& $2662.17^{(min)}$& 3043.93& $7716.26^{(max)}$&  3174.08& 4462.33\\ \hline
-magicDamageTaken&                1187.75& 1118.98& $1108.49^{(min)}$& 1157.09& $1095.07^{(max)}$& 1145.94&  1087.15& 1127.58\\ \hline
-minionsKilled&                     15.55&   17.73&   19.39&   $15.03^{(min)}$&   17.57&   18.69&    $19.45^{(max)}$&   17.52\\ \hline
-neutralMinionsKilledEnemyJungle&    0.20&    0.48&    0.77&    $0.18^{(min)}$&    0.49&    0.58&     $0.81^{(max)}$&    0.48\\ \hline
-neutralMinionsKilledTeamJungle&     1.93&    2.10&    2.33&    $1.87^{(min)}$&    2.10&    2.24&     $2.33^{(max)}$&    2.12\\ \hline
-physicalDamageDealtToMonsters&   $4661.69^{(min)}$& 7414.61& 9875.30& 6138.25& 9103.80& 6361.48& $12198.87^{(max)}$& 7899.13\\ \hline
-physicalDamageTaken&             1986.43& 2014.44& 2066.65& $1979.37^{(min)}$& 2026.98& 2029.57&  $2083.44^{(max)}$& 2023.80\\ \hline
-totalHeal&                        489.48&  603.20&  $694.18^{(max)}$&  $440.94^{(min)}$&  580.17&  685.86&   671.94&  587.95\\ \hline
-totalTimeCrowdControlDealt&        51.15&   58.48&   $62.06^{(max)}$&   $46.86^{(min)}$&   53.69&   64.16&    56.57&   55.78\\ \hline
-trueDamageDealtToChampions&        $85.38^{(min)}$&  100.79&  107.55&   90.51&  110.61&   95.45&   $116.25^{(max)}$&  100.94\\ \hline
-trueDamageTaken&                  $109.38^{(max)}$&  $103.26^{(min)}$&  105.52&  106.13&  101.85&  105.99&   105.82&  105.12\\ \hline
-wardsKilled&                        0.20&    0.23&    $0.27^{(max)}$&    $0.17^{(min)}$&    0.21&    $0.27^{(max)}$&     0.25&    0.23\\ \hline
-wardsPlaced&                        1.62&    1.76&    $1.85^{(max)}$&    $1.56^{(min)}$&    1.73&    1.83&     1.82&    1.73\\
+deaths&                             1.17&    0.85&    $0.73^{min}$&    $1.22^{max}$&    0.87&    0.79&     0.74&    0.92\\ \hline
+killingSprees&                      0.14&    0.22&    $0.26^{max}$&    $0.12^{min}$&    0.22&    0.23&     $0.26^{max}$&    0.21\\ \hline
+largestCriticalStrike&             $22.85^{min}$&   31.63&   40.80&   26.11&   35.52&   30.65&    $46.64^{max}$&   33.10\\ \hline
+magicDamageDealtToMonsters&      4805.31& 5077.61& 5621.34& $2662.17^{min}$& 3043.93& $7716.26^{max}$&  3174.08& 4462.33\\ \hline
+magicDamageTaken&                1187.75& 1118.98& $1108.49^{min}$& 1157.09& $1095.07^{max}$& 1145.94&  1087.15& 1127.58\\ \hline
+minionsKilled&                     15.55&   17.73&   19.39&   $15.03^{min}$&   17.57&   18.69&    $19.45^{max}$&   17.52\\ \hline
+neutralMinionsKilledEnemyJungle&    0.20&    0.48&    0.77&    $0.18^{min}$&    0.49&    0.58&     $0.81^{max}$&    0.48\\ \hline
+neutralMinionsKilledTeamJungle&     1.93&    2.10&    2.33&    $1.87^{min}$&    2.10&    2.24&     $2.33^{max}$&    2.12\\ \hline
+physicalDamageDealtToMonsters&   $4661.69^{min}$& 7414.61& 9875.30& 6138.25& 9103.80& 6361.48& $12198.87^{max}$& 7899.13\\ \hline
+physicalDamageTaken&             1986.43& 2014.44& 2066.65& $1979.37^{min}$& 2026.98& 2029.57&  $2083.44^{max}$& 2023.80\\ \hline
+totalHeal&                        489.48&  603.20&  $694.18^{max}$&  $440.94^{min}$&  580.17&  685.86&   671.94&  587.95\\ \hline
+totalTimeCrowdControlDealt&        51.15&   58.48&   $62.06^{max}$&   $46.86^{min}$&   53.69&   64.16&    56.57&   55.78\\ \hline
+trueDamageDealtToChampions&        $85.38^{min}$&  100.79&  107.55&   90.51&  110.61&   95.45&   $116.25^{max}$&  100.94\\ \hline
+trueDamageTaken&                  $109.38^{(max)}$&  $103.26^{min}$&  105.52&  106.13&  101.85&  105.99&   105.82&  105.12\\ \hline
+wardsKilled&                        0.20&    0.23&    $0.27^{max}$&    $0.17^{min}$&    0.21&    $0.27^{max}$&     0.25&    0.23\\ \hline
+wardsPlaced&                        1.62&    1.76&    $1.85^{max}$&    $1.56^{min}$&    1.73&    1.83&     1.82&    1.73\\
   \bottomrule
 \end{tabular}
 \end{table*}
@@ -568,16 +567,16 @@ Very High & killingSprees (2), minionsKilled (6), neutralMinionsKilledEnemyJungl
 \end{table}
 
 \chapter{Conclusão}
-Neste estudo, buscamos responder às seguintes questões de pesquisa: (i) é possível identificar padrões úteis no comportamento de desempenho das equipes? (ii) é possível definir métricas de desempenho de equipes baseando-se nesses padrões? (iii) é possível caracterizar perfis de comportamento de equipes bem-sucedidas e malsucedidas usando essas métricas?
+Neste estudo, buscamos responder às seguintes questões de pesquisa: (i) é possível calcular métricas de desempenho de equipes? (ii) é possível encontrar padrões úteis no comportamento das equipes baseando-se nessas métricas? (iii) é possível caracterizar perfis de comportamento de equipes bem-sucedidas e malsucedidas usando esses padrões?
 
-Portanto, propomos uma abordagem que passa por várias tarefas de engenharia de características e usa o método de agrupamento de dados \textit{K-means Clustering} para identificar, medir e analisar aspectos de diferentes perfis de equipe em termos de estatísticas de desempenho.
+Portanto, propomos uma abordagem que passa por várias tarefas de preparação de dados para computar métricas de desempenho de equipes a partir de partidas de LoL, usa o método de agrupamento de dados \textit{K-means Clustering} para encontrar grupos (padrões) nas métricas de desempenho e, por fim, analisa diferentes aspectos dos grupos de desempenho de equipes para caracterizar perfis de comportamento de sucesso e fracasso.
 
-Nossos resultados demonstram que as equipes das partidas coletadas compartilham diversas semelhanças e diferenças. Identificamos 7 grupos distintos de equipes que colocam em perspectiva tais semelhanças e diferenças de acordo com um conjunto de estatísticas sumarizadas, transformadas e normalizadas de desempenho, tais como, total de mortes por minuto, total de dano físico causado por minuto, total de cura efetuada por minuto, dentre outras. Calculamos também, para cada grupo, a taxa de vitórias e a taxa de derrotas conforme a proporção de equipes vencedoras e derrotadas. Assim, categorizamos esses grupos em quatro níveis de taxa de equipes vencedoras da seguinte forma: muito baixo, moderado, alto e muito alto. Em relação à proporção da quantidade de equipes nos grupos, 28\% das equipes estão no nível muito baixo, 36\% no nível moderado, 11\% no nível alto e 25\% no nível muito alto. Quanto à relevância das características, as que parecem ter mais influência no comportamento dos grupos são \textit{deaths}, \textit{killSprees} e \textit{neutralMinionsKilledEnemyJungle}.
+Nossos resultados demonstram que as equipes das partidas coletadas compartilham diversas semelhanças e diferenças. Identificamos 7 grupos distintos de desempenho de equipes que colocam em perspectiva tais semelhanças e diferenças de acordo com um conjunto de estatísticas sumarizadas e transformadas de estatísticas de desempenho de jogadores, tais como, total de mortes por minuto, total de dano físico causado por minuto, total de cura efetuada por minuto, dentre outras. Calculamos, também, para cada grupo, a taxa de vitórias e a taxa de derrotas conforme a proporção de equipes vencedoras e derrotadas. Assim, categorizamos esses grupos em quatro níveis de taxa de equipes vencedoras da seguinte forma: muito baixo, moderado, alto e muito alto. Em relação à proporção da quantidade de equipes nos grupos, 28\% das equipes estão no nível muito baixo, 36\% no nível moderado, 11\% no nível alto e 25\% no nível muito alto. Quanto à relevância das características, as que parecem ter mais influência no comportamento dos grupos são \textit{deaths}, \textit{killSprees} e \textit{neutralMinionsKilledEnemyJungle}.
 
 As descobertas do nosso estudo sugerem alguns elementos muito concretos que podem ser usados para enriquecer as estratégias de equipes iniciantes de LoL.
 
 \section{Trabalhos Futuros}
-Para o futuro, poderíamos ampliar nosso trabalho nas seguintes direções: investigar mais correlações de dados com a inclusão de estatísticas cumulativas dependentes da duração das partidas; construir modelos preditivos para classificar o perfil de comportamento de equipes; e entender as semelhanças entre o comportamento de equipes do mundo real e \textit{online}.
+Para o futuro, poderíamos ampliar nosso trabalho nas seguintes direções: investigar mais correlações de dados com a inclusão de estatísticas cumulativas dependentes da duração das partidas ou dados categóricos; construir modelos preditivos para classificar o perfil de comportamento de equipes; e entender as semelhanças entre o comportamento de equipes do mundo real e \textit{online}.
 
 % TODO indicar referencias
 % TODO melhorar imagens
