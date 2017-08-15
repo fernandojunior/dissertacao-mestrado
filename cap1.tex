@@ -20,8 +20,8 @@ Esta dissertação tem como objetivo apresentar e discutir os resultados de um p
 \subsection{Questões de Pesquisa}
 
 \begin{enumerate}[label=(\roman*)]
-  \item É possível computar métricas de desempenho de equipes?
-  \item É possível encontrar padrões úteis no comportamento das equipes com base nessas métricas?
+  \item É possível computar métricas de desempenho de equipes em LoL?
+  \item É possível encontrar padrões úteis de comportamento de equipes com base nessas métricas?
   \item É possível caracterizar perfis de comportamento de equipes bem-sucedidas e malsucedidas usando esses padrões?
 \end{enumerate}
 
@@ -567,13 +567,13 @@ Very High & killingSprees (2), minionsKilled (6), neutralMinionsKilledEnemyJungl
 \end{table}
 
 \chapter{Conclusão}
-Neste estudo, buscamos responder às seguintes questões de pesquisa: (i) é possível calcular métricas de desempenho de equipes? (ii) é possível encontrar padrões úteis no comportamento das equipes baseando-se nessas métricas? (iii) é possível caracterizar perfis de comportamento de equipes bem-sucedidas e malsucedidas usando esses padrões?
+Neste estudo, buscamos responder às seguintes questões de pesquisa: (i) é possível calcular métricas de desempenho de equipes? (ii) é possível encontrar padrões úteis de comportamento de equipes baseando-se nessas métricas? (iii) é possível caracterizar perfis de comportamento de equipes bem-sucedidas e malsucedidas usando esses padrões?
 
 Portanto, propomos uma abordagem que passa por várias tarefas de preparação de dados para computar métricas de desempenho de equipes a partir de partidas de LoL, usa o método de agrupamento de dados \textit{K-means Clustering} para encontrar grupos (padrões) nas métricas de desempenho e, por fim, analisa diferentes aspectos dos grupos de desempenho de equipes para caracterizar perfis de comportamento de sucesso e fracasso.
 
 Nossos resultados demonstram que as equipes das partidas coletadas compartilham diversas semelhanças e diferenças. Identificamos 7 grupos distintos de desempenho de equipes que colocam em perspectiva tais semelhanças e diferenças de acordo com um conjunto de estatísticas sumarizadas e transformadas de estatísticas de desempenho de jogadores, tais como, total de mortes por minuto, total de dano físico causado por minuto, total de cura efetuada por minuto, dentre outras. Calculamos, também, para cada grupo, a taxa de vitórias e a taxa de derrotas conforme a proporção de equipes vencedoras e derrotadas. Assim, categorizamos esses grupos em quatro níveis de taxa de equipes vencedoras da seguinte forma: muito baixo, moderado, alto e muito alto. Em relação à proporção da quantidade de equipes nos grupos, 28\% das equipes estão no nível muito baixo, 36\% no nível moderado, 11\% no nível alto e 25\% no nível muito alto. Quanto à relevância das características, as que parecem ter mais influência no comportamento dos grupos são \textit{deaths}, \textit{killSprees} e \textit{neutralMinionsKilledEnemyJungle}.
 
-As descobertas do nosso estudo sugerem alguns elementos muito concretos que podem ser usados para enriquecer as estratégias de equipes iniciantes de LoL.
+As descobertas do nosso estudo sugerem alguns elementos muito concretos que podem ser usados para enriquecer as estratégias de equipes inexperientes de LoL. Ao analisar o desempenho dos perfis de sucesso, uma equipe inexperiente poderia avaliar suas métricas de desempenho nas partidas para apoiar suas decisões conforme o perfil em que mais se adequa. Vamos supor que uma equipe não tenha evidenciado uma determinada métrica de desempenho em suas partidas por algum motivo, como \textit{totalHeal}, no entanto, ao analisar os perfis de sucesso, a equipe percebe que a pontuação \textit{totalHeal} dos perfis de sucesso tem um nível muito alto e que a pontuação dessa métrica em um nível alto pode ter alguma relevância para melhorar o desempenho da equipe nas partidas.
 
 \section{Trabalhos Futuros}
 Para o futuro, poderíamos ampliar nosso trabalho nas seguintes direções: investigar mais correlações de dados com a inclusão de estatísticas cumulativas dependentes da duração das partidas ou dados categóricos; construir modelos preditivos para classificar o perfil de comportamento de equipes; e entender as semelhanças entre o comportamento de equipes do mundo real e \textit{online}.
