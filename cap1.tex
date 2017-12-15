@@ -48,7 +48,7 @@ Podemos identificar ao menos três classes principais de \textit{\fj{stackholder
 Por fim, este trabalho também resultou na aceitação do artigo científico "\textit{Profiling Successful Team Behaviors in League of Legends}" no XXIII Simpósio Brasileiro de Sistemas Multimídia e Web (WebMedia 2017) \fj{}{, que possui classifica\c{c}\~ao \textit{qualis} B2}. Nesta disserta\c{c}\~{a}o, foram abordados os temas e experimentos aqui tratados, sendo este trabalho uma extensão mais aprofundada do artigo.
 
 \section{Estrutura da Dissertação}
-Esta dissertação encontra-se dividida em 7 capítulos. O Capítulo 2 apresenta uma introdução sobre o histórico dos MOBAs e uma fundamentação teórica sobre mineração de dados. O Capítulo 3 apresenta os trabalhos relacionados, abordando os temas necessários ao desenvolvimento deste trabalho sobre MOBAs e aprendizado de máquina de uma maneira geral. O Capítulo 4 apresenta os resultados da metodologia adotada para preparar os dados de desempenho das equipes que foram usados nas análises. O Capítulo 5 apresenta os resultados da análise de agrupamento que foi usado para encontrar padrões ou grupos nos dados. O Capítulo 6 apresenta a caracterização de perfis conforme os grupos ou padrões encontrados. O Capítulo 7 finaliza este trabalho com as conclusões e trabalhos futuros.
+Esta dissertação encontra-se dividida em 6 capítulos. O Capítulo 2 apresenta uma introdução sobre o histórico dos MOBAs e uma fundamentação teórica sobre mineração de dados. O Capítulo 3 apresenta os trabalhos relacionados, abordando os temas necessários ao desenvolvimento deste trabalho sobre MOBAs e aprendizado de máquina de uma maneira geral. O Capítulo 4 apresenta os resultados da metodologia adotada para preparar os dados de desempenho das equipes que foram usados nas análises. O Capítulo 5 apresenta os resultados da análise de agrupamento que foi usado para encontrar padrões ou grupos nos dados, bem como, a caracterização de perfis conforme os grupos ou padrões encontrados. O Capítulo 6 finaliza este trabalho com as conclusões e trabalhos futuros.
 
 \chapter{Fundamentação Teórica}
 
@@ -387,7 +387,17 @@ Em seguida, realizamos uma \fj{an\'alise para remover caracter\'isticas com baix
 \end{figure*}
 
 \section{Transformação de Dados}
-Para transformar os dados, realizamos as seguintes tarefas: normalização de dados e cálculo de métricas.
+Para transformar os dados, realizamos as seguintes tarefas: cálculo de métricas e normalização de dados.
+
+\subsection{Cálculo de métricas}
+
+O conjunto de dados $X$ é apenas um reflexo do desempenho das equipes durante toda a partida, ou seja, estatísticas sumarizadas de desempenho, como total de ouro ganho e total de dano sofrido. Como a duração de uma partida não tem um limite específico, ou seja, uma partida somente termina quando uma equipe vencer, é necessário transformar os dados para tornar o desempenho das equipes comparáveis entre si independentemente da duração das partidas. Assim, para lidar com o problema de capturar o desempenho das equipes em diferentes durações de partidas, dividimos o desempenho de cada equipe $x \in X$ pela duração $duration$ da partida $m$ em que a equipe participou:
+
+\begin{displaymath}
+  \frac{x}{m^{duration}}
+\end{displaymath}
+
+Dessa forma, como foi discutido na seção 2.2.1, as características do nosso conjunto de dados deixaram de ser simples estatísticas sumarizadas para se tornarem métricas de desempenho mais interpretativas. Por exemplo, as características agora passam a ser número de assistências em abates por minuto (\textit{assists}), número de mortes sofridas por minuto (\textit{deaths}), número de abates duplos seguidos efetuados por minuto (\textit{doubleKills}), e assim por diante.
 
 \subsection{Normalização de Dados}
 \fj{Realizamos uma an\'alise de boxplot no conjunto de dados transformados e descobrimos que}{Conforme a Figure ~\ref{fig:boxplots}, podemos perceber tamb\'em que} o intervalo d\fj{e}{os} valores variam amplamente entre as características. \fj{}{Essa variação entre as características se d\'a tamb\'em mesmo ap\'os os dados serem transformados na etapa anterior}. Portanto, aplicamos a normalização de de dados \fj{}{\textit{min-max}} \cite{zaki2014data} nas características \fj{}{no conjunto de desempenho $X$} para que cada uma contribua proporcionalmente em uma mesma escala \fj{}{e forneça uma maneira fácil de comparar valores} na realização da análise de redundância e agrupamento. \fj{Seja $X$ um conjunto de dados e $x_{j1}, \ldots, x_{jn} $ uma amostra aleat\'oria retirada de $X$}{Para cada caracter\'istica $X_{j} \in X$}, aplicamos a normalização baseada nos valores \textit{mínimo} e \textit{máximo} para escalar \fj{a caracter\'istica}{$X_{j}$} \fj{pelo}{no} intervalo $r$ \fj{da amostra de $X$}{}:
@@ -397,16 +407,6 @@ Para transformar os dados, realizamos as seguintes tarefas: normalização de da
 \end{displaymath}
 
 Após a normalização, \fj{o}{as caracter\'isticas do} conjunto de dados $X$ \fj{assumiu}{assumiram} valores na faixa $[0, 1]$.
-
-\subsection{Cálculo de métricas}
-
-O conjunto de dados $X$ é apenas um reflexo do desempenho das equipes durante a partida, ou seja, estatísticas sumarizadas. Como a duração de uma partida não tem limite de tempo, é necessário transformar os dados para tornar o desempenho das equipes comparáveis entre si, independentemente da duração das partidas. Assim, para lidar com o problema de capturar o desempenho das equipes em diferentes durações de partidas, calculamos a divisão de desempenho de cada equipe $x \in X$ pela duração $duration$ da partida $m$ em que a equipe participou:
-
-\begin{displaymath}
-  \frac{x}{m^{duration}}
-\end{displaymath}
-
-Dessa forma, como discutimos na seção 2.2.1, as características do nosso conjunto de dados deixam de ser simples estatísticas básicas para se tornarem métricas de desempenho. Por exemplo, as características agora passam a ser número de assistências em abates por minuto (\textit{assists}), número de mortes sofridas por minuto (\textit{deaths}), número de abates duplos seguidos efetuados por minuto (\textit{doubleKills}), e assim por diante.
 
 \section{Análise de Redundância}
 \fj{Para identificar e remover caracter\'istica redundantes no conjunto de dados, realizamos uma an\'alise de correla\'c{c}\~ao.}{De modo a evitar ru\'idos e aprimorar o tempo de agrupamento dos dados, bem como facilitar a análise dos dados pelos usu\'arios finais, removemos as caracter\'isticas mais redundantes do conjunto de dados por meio de uma an\'alise de correla\c{c}\~ao.} Com base no teste de correlação de Spearman \cite{xiao2015using}, consideramos que um par de características de alta ou altíssima correlação são redundantes. A Figura ~\ref{fig:correlations} ilustra o gráfico de correlação entre as $d=24$ características \fj{}{restantes} do conjunto de dados $X$ \fj{}{reduzido e transformado at\'e est\'a etapa}. De acordo com o gráfico, podemos observar que existem várias características redundantes.
@@ -426,7 +426,11 @@ Desse modo, \fj{}{dado que $X_{j} \in X$ \'e uma caracter\'istica de $X$}, para 
 
 \fj{Portanto}{Após essa análise}, removemos as seguintes características: \textit{assists}; \textit{goldEarned}; \textit{goldSpent}; \textit{kills}; \textit{largestKillingSpree}; \textit{magicDamageDealtToChampions}; \textit{physicalDamageDealtToChampions}; \textit{towerKills}.
 
-\chapter{Agrupamento de Dados}
+\chapter{Perfis de Comportamento}
+
+O problema de encontrar perfis de desempenho de equipes pode ser considerado equivalente ao problema de identificar grupos de desempenho de equipes de comportamento semelhante. Para abordar esse problema, usamos o método de mineração de dados \textit{K-means clustering} \cite{zaki2014data} para agrupar equipes semelhantes conforme os seus desempenhos nas partidas. Em seguida, caracterizamos \fj{e definimos r\'otulos para}{} os grupos de desempenho de equipes de modo a colocar em perspectiva suas principais características ou \fj{estat\'isticas}{m\'etricas} de desempenho \fj{}{e, assim, definir perfis de comportamento}.
+
+\section{Agrupamento de Equipes}
 O problema de encontrar perfis de desempenho de equipes pode ser considerado equivalente ao problema de identificar grupos de desempenho de equipes de comportamento semelhante. Para abordar esse problema, usamos o método de mineração de dados \textit{K-means clustering} \cite{zaki2014data}. Dado um conjunto dimensional de observações \(x_1, \ldots, x_n \), o \textit{K-means clustering} visa particionar as $n$ observações em $k (\leq n)$ grupos distintos, denotados por $ C = \{c_1, \ldots , c_k \} $, de modo a minimizar a Soma dos Quadrados do Erro Dentro dos Grupos (SQED); ou seja, seu objetivo é encontrar o minimizador $C*$ da função da Soma dos Quadrados do Erro (SQE):
 
 \begin{displaymath}
@@ -441,17 +445,17 @@ Em nosso conjunto de dados $X$ usamos o algoritmo de Lloyd \cite{ong2015player},
 
 Para encontrar um número ótimo $k$ de grupos usamos um método que encontra o \textit{elbow} da curva de erro. Este método tenta descobrir um número apropriado de grupos analisando a curva de um gráfico gerado a partir de um teste realizado para cada número possível de grupos \cite{kodinariya2013review}. No nosso caso, o teste foi baseado na função objetivo $SQE$.
 
-A Figura ~\ref{fig:k-means-curve} ilustra o gráfico SQE para cada número possível de grupos $K = \{1, \ldots, 120\}$. Como podemos observar, o conjunto de dados $X$ pode ser particionado em $k=7$ grupos distintos. Ao atribuir cada $x \in X$ em um grupo $c \in C$, conseguimos diminuir a variabilidade dos dados em aproximadamente $78\%$, ou seja, obtivemos uma proporção entre a Soma dos Quadrados do Erro Entre os Grupos (SQEE) e a Soma dos Quadrados do Erro Total (SQET) de $SQEE/SQET = 78 \%$.
+A Figura ~\ref{fig:k-means-curve} ilustra o gráfico SQE para cada número possível de grupos $K = \{1, \ldots, 120\}$. Como podemos observar, o conjunto de dados $X$ pode ser particionado em $k=7$ grupos distintos. Ao atribuir cada $x \in X$ em um grupo $c \in C$, conseguimos diminuir a variabilidade dos dados em aproximadamente $78\%$, ou seja, tivemos uma diminuição da Soma dos Quadrados do Erro Entre os Grupos (SQEE) em relação a Soma dos Quadrados do Erro Total (SQET) de $1 - (SQEE/SQET) = 78 \%$.
 
 \begin{figure*}
   \centering
-  \includegraphics[width=1.0\textwidth]{k-means-curve}%
-  \caption{Curva de erro do K-means: $SQEE(k)/SQET$   para cada $k \in {1:120}$}
+  \includegraphics[width=0.6\textwidth]{k-means-curve}%
+  \caption{Curva de erro K-means. O eixo $x$ indica o conjunto $K=\{1, \ldots, 120\}$ de números possíveis de grupos. O eixo $y$ indica os testes $SQEE(k)/SQET$ para $k \in K $}
   \label{fig:k-means-curve}
 \end{figure*}
 
-\chapter{Caracterização de perfis}
-Neste capítulo, caracterizamos \fj{e definimos r\'otulos para}{} os grupos de desempenho de equipes de modo a colocar em perspectiva suas principais características ou \fj{estat\'isticas}{m\'etricas} de desempenho \fj{}{e, assim, definir perfis de comportamento}. A fim de compreender como os grupos \fj{}{, ou seja, os perfis,} encontrados se diferem entre si, analisamos:
+\section{Caracterização de Perfis}
+A fim de compreender como os grupos ou perfis encontrados se diferem entre si, analisamos:
 
 \begin{enumerate}[label=(\roman*)]
  \item A quantidade de equipes e a \fj{taxa de equipes vencedoras/perdedoras}{propor\c{c}\~ao de equipes vencedoras (taxa de vit\'orias) e a propor\c{c}\~ao de equipes perdedoras (taxa de derrotas)};
@@ -459,15 +463,7 @@ Neste capítulo, caracterizamos \fj{e definimos r\'otulos para}{} os grupos de d
  \item Em que medida as características têm influência ou relevância nos \fj{grupos}{perfis}.
 \end{enumerate}
 
-A Figura ~\ref{fig:win-plot} ilustra como os \fj{grupos}{perfis} diferem entre si em termos de quantidade de equipes e taxa de \fj{equipes vencedoras/derrotadas}{vit\'oria/derrota}.
-
-A Figura ~\ref{fig:relevance} ilustra o mapa de calor da análise de relevância das características com base no cálculo do ganho de informação aplicado ao conjunto de métricas de desempenho das equipes sem normalização (realizado na seção 4.6) $M$ para indicar como eles influenciam cada \fj{grupo}{perfil}.
-
-Seja $A$ a matriz de centróides dos \fj{grupos}{perfis} das métricas de desempenho das equipes $M$, cada linha $a \in A$ indica os centróides das características de um \fj{grupo}{perfil}, e cada coluna $A_j \in A$ indica os centróides de uma determinada característica através dos \fj{grupos}{perfis}. A Tabela ~\ref{tab:centers} apresenta o conjunto transposto dos centróides $t(A)$ e denota como eles se diferem em termos de desempenho.
-
-A Figura ~\ref{fig:radars} ilustra os gráficos de radar dos \fj{grupos}{perfis}, onde cada gráfico de radar representa as métricas de desempenho de um \fj{grupo}{perfil}, cada eixo representa uma métrica de desempenho e o comprimento do eixo indica qual a pontuação do \fj{grupo}{perfil} em uma métrica de desempenho específica. As métricas de desempenho usadas para modelar os gráficos de radar são baseadas nos centróides dos \fj{grupos}{perfis} normalizados por característica $normalization(A_j)$, de modo que o comprimento de um eixo seja proporcional em todos os centróides dos \fj{grupos}{perfis} e assuma um valor entre [0, 1].
-
-Ao observar os resultados, categorizamos os sete \fj{grupos}{perfis} em quatro grandes níveis em termos de taxa de \fj{equipes vencedoras}{vit\'oria}: Fraco, Mais ou Menos, Bom e \textit{Top}. Nos parágrafos seguintes, elaboramos esses resultados ao caracterizar os \fj{grupos}{perfis} de desempenho das equipes para cada nível de taxa de equipes vencedoras.
+A Figura ~\ref{fig:win-plot} ilustra o gr\'afico de barras com a propor\c{c}\~ao de equipes vencedoras (taxa de vit\'orias) e a propor\c{c}\~ao de equipes perdedoras (taxa de derrotas) para cada perfil encontrado. Podemos observar pelo gr\'afico que existe uma diferença bem significativa de taxa de vit\'orias entre alguns perfis, no entanto, outros apresentam uma taxa de vit\'orias bem semelhante, como o Perfil 1 (11\%) e o Perfil 4 (6\%), o Perfil 2 (55\%) e o Perfil 5 (53\%), o Perfil 3 (86\%) e o Perfil 7 (84\%).
 
 \begin{figure*}
   \centering
@@ -478,36 +474,41 @@ Ao observar os resultados, categorizamos os sete \fj{grupos}{perfis} em quatro g
   \label{fig:win-plot}
 \end{figure*}
 
+A Figura ~\ref{fig:relevance} ilustra o mapa de calor do ganho de informação aplicado as métricas de desempenho das equipes $M$ (em unidades/minuto, calculadas na Seção 4.6.1 antes da normalização) para indicar como essas métricas são relevantes para cada \fj{grupo}{perfil}. Conforme a figura, podemos observar que, no geral, as características mais importantes são: \textit{deaths}, \textit{killingSprees} e \textit{neutralMinionsKilledEnemyJungle}. Assim como foi observado na análise das taxas de vitórias, alguns perfis também possuem características semelhantes considerando o ganho de informação.
+
 \begin{figure*}
 \includegraphics[width=1\textwidth,height=\textheight,keepaspectratio]{relevance}
-\caption{Mapa de calor das relevâncias das métricas desempenho das equipes com base no ganho de informação. \fj{}{Quanto mais forte for a cor de uma caracter\'istica, mais intensa \'e a relevância dessa caracter\'istica.}}
+\caption{Mapa de calor das relevâncias das métricas de desempenho (ou características) das equipes com base no cálculo do ganho de informação. O eixo $x$ representa os perfis. O eixo $y$ representa as caraterísticas. Quanto mais forte for a cor de uma característica, mais intensa \'e a relevância dessa caracter\'istica em rela\c{c}\~ao as outras caracter\'isticas para um determinado perfil.}
 \label{fig:relevance}
 \end{figure*}
 
+Seja $A$ a matriz de centróides das métricas de desempenho das equipes $M$ por perfil, onde cada linha $a \in A$ indica os centróides das métricas de um \fj{grupo}{perfil}, e cada coluna $A_j \in A$ indica os centróides das métricas entre os 7 perfis encontrados. A Tabela ~\ref{tab:centers} apresenta a matrix \textit{transposta} dos centróides $t(A)$ e a sumarização desses centróides entre os perfis de modo a  denotar como os perfis se diferem em termos de desempenho. Se multiplicarmos as métricas de desempenho $M$ pela duração média das partidas ($mean(M^{duration}) \approx 29$ minutos) podemos ter uma estimativa do desempenho total dos perfis no final de uma partida. Se compararmos as principais métricas de desempenho do pior perfil (Perfil 4) e do melhor perfil (Perfil 3) em relação a taxa de vitórias, podemos verificar que o melhor perfil tem um desempenho de \textit{deaths} ~40\% inferior, \textit{killingSprees} ~54\% superior e \textit{neutralMinionsKilledEnemyJungle} ~78\% superior. O nível elevado de $neutralMinionsKilledEnemyJungle$ pode indicar que o Perfil 3 possui um execelnte domínio do campo da equipe inimiga e dos \textit{minions} que existem por lá, fazendo com que as equipes desse perfil tenham uma quantidade maior de ouro as custas dos recursos da equipe inimiga, e, assim, comprem melhores itens de defesa e ataque para garantir uma quantidade menor de \textit{deaths} e maior de \textit{killingSprees} por minuto, respectivamente.
+
+
 \begin{table*}
   \tiny
-  \caption{Centroides das características (métricas) para cada \fj{cluster}{perfil}. O mínimo e o máximo são indicados por linha.}
+  \caption{Centroides das características (métricas de desempenho) para cada um dos 7 perfis encontrados. As últimas 5 colunas da tabelas sumarizam as métricas de desempenho entre os perfis: valor mínimo (Min), média (Mean), variância (Var), desvio padrão (Sd), valor máximo (Max).}
   \label{tab:centers}
-  \begin{tabular}{lp{0.08\textwidth}p{0.07\textwidth}p{0.08\textwidth}p{0.08\textwidth}p{0.08\textwidth}p{0.08\textwidth}p{0.09\textwidth}p{0.05\textwidth}}
+  \begin{tabular}{p{0.17\textwidth}p{0.045\textwidth}p{0.045\textwidth}p{0.045\textwidth}p{0.045\textwidth}p{0.045\textwidth}p{0.045\textwidth}p{0.045\textwidth}p{0.03\textwidth}p{0.03\textwidth}p{0.045\textwidth}p{0.03\textwidth}p{0.03\textwidth}}
   \toprule
-\textbf{Característica}&                   \textbf{\fj{Grupo}{Perfil} 1}&      \textbf{\fj{Grupo}{Perfil} 2}&      \textbf{\fj{Grupo}{Perfil} 3}&      \textbf{\fj{Grupo}{Perfil} 4}&      \textbf{\fj{Grupo}{Perfil} 5}&      \textbf{\fj{Grupo}{Perfil} 6}&        \textbf{\fj{Grupo}{Perfil} 7}&     \textbf{Todos}\\
+\textbf{Característica}&                   \textbf{\fj{Grupo}{Perfil} 1}&      \textbf{\fj{Grupo}{Perfil} 2}&      \textbf{\fj{Grupo}{Perfil} 3}&      \textbf{\fj{Grupo}{Perfil} 4}&      \textbf{\fj{Grupo}{Perfil} 5}&      \textbf{\fj{Grupo}{Perfil} 6}&        \textbf{\fj{Grupo}{Perfil} 7}&     \textbf{Min} &\textbf{Mean}& \textbf{Var}& \textbf{Sd}& \textbf{Max} \\
   \midrule
-deaths&                             1.17&    0.85&    $0.73^{min}$&    $1.22^{max}$&    0.87&    0.79&     0.74&    0.92\\ \hline
-killingSprees&                      0.14&    0.22&    $0.26^{max}$&    $0.12^{min}$&    0.22&    0.23&     $0.26^{max}$&    0.21\\ \hline
-largestCriticalStrike&             $22.85^{min}$&   31.63&   40.80&   26.11&   35.52&   30.65&    $46.64^{max}$&   33.10\\ \hline
-magicDamageDealtToMonsters&      4805.31& 5077.61& 5621.34& $2662.17^{min}$& 3043.93& $7716.26^{max}$&  3174.08& 4462.33\\ \hline
-magicDamageTaken&                1187.75& 1118.98& $1108.49^{min}$& 1157.09& $1095.07^{max}$& 1145.94&  1087.15& 1127.58\\ \hline
-minionsKilled&                     15.55&   17.73&   19.39&   $15.03^{min}$&   17.57&   18.69&    $19.45^{max}$&   17.52\\ \hline
-neutralMinionsKilledEnemyJungle&    0.20&    0.48&    0.77&    $0.18^{min}$&    0.49&    0.58&     $0.81^{max}$&    0.48\\ \hline
-neutralMinionsKilledTeamJungle&     1.93&    2.10&    2.33&    $1.87^{min}$&    2.10&    2.24&     $2.33^{max}$&    2.12\\ \hline
-physicalDamageDealtToMonsters&   $4661.69^{min}$& 7414.61& 9875.30& 6138.25& 9103.80& 6361.48& $12198.87^{max}$& 7899.13\\ \hline
-physicalDamageTaken&             1986.43& 2014.44& 2066.65& $1979.37^{min}$& 2026.98& 2029.57&  $2083.44^{max}$& 2023.80\\ \hline
-totalHeal&                        489.48&  603.20&  $694.18^{max}$&  $440.94^{min}$&  580.17&  685.86&   671.94&  587.95\\ \hline
-totalTimeCrowdControlDealt&        51.15&   58.48&   $62.06^{max}$&   $46.86^{min}$&   53.69&   64.16&    56.57&   55.78\\ \hline
-trueDamageDealtToChampions&        $85.38^{min}$&  100.79&  107.55&   90.51&  110.61&   95.45&   $116.25^{max}$&  100.94\\ \hline
-trueDamageTaken&                  $109.38^{(max)}$&  $103.26^{min}$&  105.52&  106.13&  101.85&  105.99&   105.82&  105.12\\ \hline
-wardsKilled&                        0.20&    0.23&    $0.27^{max}$&    $0.17^{min}$&    0.21&    $0.27^{max}$&     0.25&    0.23\\ \hline
-wardsPlaced&                        1.62&    1.76&    $1.85^{max}$&    $1.56^{min}$&    1.73&    1.83&     1.82&    1.73\\
+deaths&                             1.17&    0.85&    $0.73$&    $1.22$&    0.87&    0.79&     0.74&  0.73  &  0.91   &    0.04 &   0.20    & 1.22\\ \hline
+killingSprees&                      0.14&    0.22&    $0.26$&    $0.12$&    0.22&    0.23&     $0.26$& 0.12  &  0.21  &    0.00   & 0.06   &  0.26\\ \hline
+largestCriticalStrike&             $22.85$&   31.63&   40.80&   26.11&   35.52&   30.65&    $46.64$& 22.85 &  33.46   &   68.28  &  8.26   & 46.64 \\ \hline
+magicDamageDealtToMonsters&      4805.31& 5077.61& 5621.34& $2662.17$& 3043.93& $7716.26$&  3174.08& 2662.17& 4585.81& 3205475.58 &1790.38 & 7716.26 \\ \hline
+magicDamageTaken&                1187.75& 1118.98& $1108.49$& 1157.09& $1095.07$& 1145.94&  1087.15& 1087.15& 1128.64 &   1325.06 &  36.40 & 1187.75 \\ \hline
+minionsKilled&                     15.55&   17.73&   19.39&   $15.03$&   17.57&   18.69&    $19.45$&  15.03  & 17.63  &     3.11   & 1.76  &  19.45 \\ \hline
+neutralMinionsKilledEnemyJungle&    0.20&    0.48&    0.77&    $0.18$&    0.49&    0.58&     $0.81$&  0.18   & 0.50   &    0.06   & 0.25   &  0.81  \\ \hline
+neutralMinionsKilledTeamJungle&     1.93&    2.10&    2.33&    $1.87$&    2.10&    2.24&     $2.33$&  1.87  &  2.13  &     0.03   & 0.18   &  2.33  \\ \hline
+physicalDamageDealtToMonsters&   $4661.69$& 7414.61& 9875.30& 6138.25& 9103.80& 6361.48& $12198.87$& 4661.69& 7964.86& 6665807.44& 2581.82& 12198.87 \\ \hline
+physicalDamageTaken&             1986.43& 2014.44& 2066.65& $1979.37$& 2026.98& 2029.57&  $2083.44$& 1979.37 &2026.70 &   1472.64 &  38.38&  2083.44\\ \hline
+totalHeal&                        489.48&  603.20&  $694.18$&  $440.94$&  580.17&  685.86&   671.94& 440.94 & 595.11  &  9861.34  & 99.30 &  694.18\\ \hline
+totalTimeCrowdControlDealt&        51.15&   58.48&   $62.06$&   $46.86$&   53.69&   64.16&    56.57&  46.86 &  56.14 &     37.01  &  6.08 &   64.16\\ \hline
+trueDamageDealtToChampions&        $85.38$&  100.79&  107.55&   90.51&  110.61&   95.45&   $116.25$&  85.38 & 100.93   &  125.44  & 11.20 &  116.25\\ \hline
+trueDamageTaken&                  $109.38$&  $103.26$&  105.52&  106.13&  101.85&  105.99&   105.82&  101.85 & 105.42  &     5.68 &   2.38 &  109.38\\ \hline
+wardsKilled&                        0.20&    0.23&    $0.27$&    $0.17$&    0.21&    $0.27$&     0.25& 0.17 &   0.23   &    0.00  &  0.04  &   0.27\\ \hline
+wardsPlaced&                        1.62&    1.76&    $1.85$&    $1.56$&    1.73&    1.83&     1.82& 1.56   & 1.74      & 0.01  &  0.11   &  1.85 \\
   \bottomrule
 \end{tabular}
 \end{table*}
@@ -518,7 +519,12 @@ wardsPlaced&                        1.62&    1.76&    $1.85^{max}$&    $1.56^{mi
 \label{fig:radars}
 \end{figure*}
 
-\section{Nível Fraco}
+A Figura ~\ref{fig:radars} ilustra os gráficos de radar dos \fj{grupos}{perfis}, onde cada gráfico de radar representa as métricas de desempenho de um \fj{grupo}{perfil}, cada eixo representa uma métrica de desempenho e o comprimento do eixo indica qual a pontuação do \fj{grupo}{perfil} em uma métrica de desempenho específica. As métricas de desempenho usadas para modelar os gráficos de radar são baseadas nos centróides dos \fj{grupos}{perfis} normalizados por característica $normalization(A_j)$, de modo que o comprimento de um eixo seja proporcional em todos os centróides dos \fj{grupos}{perfis} e assuma um valor entre [0, 1].
+
+
+Ao observar os resultados, categorizamos os sete \fj{grupos}{perfis} em quatro grandes níveis em termos de taxa de \fj{equipes vencedoras}{vit\'oria}: Fraco, Mais ou Menos, Bom e \textit{Top}. Nos parágrafos seguintes, elaboramos esses resultados ao caracterizar os \fj{grupos}{perfis} de desempenho das equipes para cada categoria.
+
+\subsection{Nível Fraco}
 O \textit{Nível Fraco} consiste do Perfil 1 e do Perfil 4. Esse nível é distinguido por uma taxa de \fj{equipes vencedoras}{vit\'orias} muito baixa, isto \'e $w_r = 10 \%$ (Figura ~\ref{fig:win-plot}). Existem 10 características relevantes para o Perfil 1 e 7 características relevantes para o Perfil 4 (Figura ~\ref{fig:relevance}). Os mais relevantes ordenados por importância são: \textit{neutralMinionsKilledEnemyJungle}, \textit{deaths}, \textit{killingSprees}. A Tabela ~\ref{tab:clusters-very-low} resume as semelhanças e diferenças entre as pontuações das métricas de desempenho para os \fj{grupos}{perfis} desse nível (Figura ~\ref{fig:radars}). As pontuações que mais se diferenciam entre os \fj{grupos}{perfis} são: \textit{magicDamageDealtToMonsters} (moderado para o Perfi 1 e muito baixo para o \fj{Grupo}{Perfil} 4) e \textit{trueDamageTaken} (muito alto para o \fj{Grupo}{Perfil} 1 e o moderado para o \fj{Grupo}{Perfil} 4).
 
 \begin{table}
@@ -542,8 +548,9 @@ Very High & deaths (1) & magicDamageTaken (5), trueDamageTaken (14) & \\
 \end{tabular}
 \end{table}
 
-\section{Nível Mais ou Menos}
+\subsection{Nível Mais ou Menos}
 O \textit{Nível Mais ou Menos} consiste do \fj{Grupo}{Perfil} 2 e do \fj{Grupo}{Perfil} 5. Esse nível é distinguido por uma taxa de \fj{equipes vencedoras}{vit\'orias} moderada, isto \'e $w_r = 55 \%$ (Figura ~\ref{fig:win-plot}). Existem 14 características relevantes para o \fj{Grupo}{Perfil} 2 e 15 características relevantes para o \fj{Grupo}{Perfil} 5 (Figura ~\ref{fig:relevance}). Os mais relevantes ordenados por importância são: \textit{deaths}, \textit{neutralMinionsKilledEnemyJungle}, \textit{killingSprees}, \textit{magicDamageTaken}. A Tabela ~\ref{tab:clusters-moderate} resume as semelhanças e diferenças entre as pontuações das métricas de desempenho para os \fj{grupos}{perfis} desse nível (Figura ~\ref{fig:radars}). A pontuação que mais se diferencia entre os \fj{grupos}{perfis} é: \textit{magicDamageDealtToMonsters} (moderado para o \fj{Grupo}{Perfil} 2 e muito baixo para o \fj{Grupo}{Perfil} 5).
+
 
 \begin{table}
   \scriptsize
@@ -566,8 +573,10 @@ Very High & & & \\
 \end{tabular}
 \end{table}
 
-\section{Nível Bom}
+
+\subsection{Nível Bom}
 O \textit{Nível Bom} consiste apenas do \fj{Grupo}{Perfil} 6. Esse nível é distinguido por uma taxa de \fj{equipes vencedoras}{vit\'orias} alta, isto \'e $w_r = 67 \%$ (Figura ~\ref{fig:win-plot}). Existem 12 características relevantes para o \fj{Grupo}{Perfil} 6 (Figura ~\ref{fig:relevance}). Os mais relevantes ordenados por importância são: \textit{deaths}, \textit{neutralMinionsKilledEnemyJungle}, \textit{killingSprees}, \textit{magicDamageTaken}. A Tabela ~\ref{tab:clusters-high} resume as pontuações das métricas de desempenho do \fj{grupo}{perfil} desse nível.
+
 
 \begin{table}
   \scriptsize
@@ -590,7 +599,8 @@ Very High & totalHeal (11), totalTimeCrowdControlDealt (12), wardsKilled (15), w
 \end{tabular}
 \end{table}
 
-\section{Nível Top}
+
+\subsection{Nível Top}
 O \textit{Nível Top} consiste do \fj{Grupo}{Perfil} 3 e \fj{Grupo}{Perfil} 7. Esse nível é distinguido por uma taxa de \fj{equipes vencedoras}{vit\'orias} muito alta, isto \'e $w_r = 85\% $ (Figura ~\ref{fig:win-plot}). Existem 8 características relevantes para o \fj{Grupo}{Perfil} 3 e 11 características relevantes para o \fj{Grupo}{Perfil} 7 (Figura ~\ref{fig:relevance}). Os mais relevantes ordenados por importância são: \textit{deaths}, \textit{neutralMinionsKilledEnemyJungle}, \textit{killingSprees}. A Tabela ~\ref{tab:clusters-very-high} resume as semelhanças e diferenças entre as pontuações das métricas de desempenho para os \fj{grupos}{perfis} desse nível (Figura ~\ref{fig:radars}). As pontuações mais diferenciadas entre os \fj{grupos}{perfis} são: \textit{magicDamageDealtToMonsters} (moderado para o \fj{Grupo}{Perfil} 3 e muito baixo para o \fj{Grupo}{Perfil} 7) e \textit{totalTimeCrowdControlDealt} (muito alto para o \fj{Grupo}{Perfil} 3 e o moderado para o \fj{Grupo}{Perfil} 7).
 
 \begin{table}
@@ -614,6 +624,7 @@ Very High & killingSprees (2), minionsKilled (6), neutralMinionsKilledEnemyJungl
 \end{tabular}
 \end{table}
 
+
 \chapter{Conclusão}
 Neste estudo, buscamos responder às seguintes questões de pesquisa: (i) é possível encontrar padrões úteis de comportamento de equipes baseando-se nas métricas de desempenho dessas equipes? (ii) é possível caracterizar perfis de comportamento de equipes bem-sucedidas e malsucedidas usando esses padrões?
 
@@ -624,6 +635,7 @@ Nossos resultados demonstram que as equipes das partidas coletadas compartilham 
 \fj{}{Na categoria de \textit{N\'ivel Bom}, encontramos equipes que normalmente apresentam níveis altos de \textit{killSprees}, \textit{totalHeal} e \textit{wardsPlaced}. Com base nos dados, podemos conceber que essas equipes usam uma estratégia baseada em maximizar a quantidade de minions abatidos por minuto (\textit{minionsKilled}, \textit{neutralMinionsKilled}), obtendo vantagem sobre o ouro - que se converte em itens - e pontos de experiência e, assim, aumentando a probabilidade de \textit{kills} ao combater heróis inimigos. A categoria de \textit{N\'ivel Fraco} pode ser interpretado exatamente o oposto do \textit{N\'ivel Bom}; equipes encontradas nesta categoria apresentam um nível muito baixo de \textit{minionsKilled}, sendo incapaz de obter itens e tornam-se vulnerável ao ataque dos oponentes. Equipes do N\'ivel Mais ou Menos apresentam baixos níveis de \textit{magicDamageTaken} e \textit{trueDamageTaken}, o que ocasiona, assim, um n\'ivel muito baixo de \textit{deaths}; isso pode indicar que as equipes dessa categoria se concentram muito em estrat\'egias de defesa. Equipes do N\'ivel Bom apresentam um n\'ivel muito alto de \textit{magicDamageDeltToMonters}  e \textit{totalTimeCrowdControlDelt}, o que pode indicar que a principal estrat\'egia dessas equipes são ataques m\'agicos a distância ap\'os o uso de habilidades de controle em \'area sobre as equipes inimigas, o que garante um n\'ivel muito alto de \textit{killingSprees}; no entanto, essas equipes possuem um n\'ivel muito baixo de \textit{physicalDamageDealtToMonsters}, impedindo uma taxa maior de vit\'oria.}
 
 As descobertas do nosso estudo sugerem alguns elementos muito concretos que podem ser usados para enriquecer as estratégias de equipes inexperientes de LoL. Ao analisar o desempenho dos perfis de sucesso, uma equipe inexperiente poderia avaliar suas métricas de desempenho nas partidas para apoiar suas decisões conforme o perfil em que mais se adequa.
+
 
 \section{Trabalhos Futuros}
 Para o futuro, poderíamos ampliar nosso trabalho nas seguintes direções: investigar mais correlações de dados com a inclusão de estatísticas cumulativas dependentes da duração das partidas e dados categóricos; construir modelos preditivos para classificar o perfil de comportamento de equipes e prever o resultado das; e entender as semelhanças entre o comportamento de equipes do mundo real e \textit{online}.
