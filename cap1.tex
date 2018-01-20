@@ -259,7 +259,7 @@ Embora estes estudos desempenhem um papel essencial na literatura, nenhum deles 
 \fj{Para preparar o conjunto de dados de desempenho de equipes, realizamos as seguintes tarefas: coleta de dados}{Esta se\c{c}\~ao descreve a coleta de dados e também uma s\'erie de tarefas executadas para preparar o conjunto de dados de desempenho de equipes: } extração de características; limpeza de dados; remoção de características com baixa variância; \fj{detec\c{c}\~ao}{remo\c{c}\~ao} de \textit{outliers}; transformação de dados; normalização de dados; análise de redundância de características.
 
 \section{Coleta de Dados}
-A Riot Games, desenvolvedora do LoL, fornece uma Interface de Programação de Aplicação (\textit{Application Programming Interface} - API) baseada na Web para acessar os históricos das partidas em formato JSON \cite{riot1}. Um histórico de partida contém dados como modo de jogo \footnote{O modo clássico é o mais escolhido pelos jogadores e uma partida desse modo deve ter 10 participantes duelando uns aos outros em duas equipes diferentes.}, tipo de fila \footnote{Um jogador precisa entrar no sistema de filas para encontrar e participar de uma partida; existem vários tipos de filas em LoL}, duração da partida, time vencedor e perdedor, e número de identificação única. Um histórico contém também dados de cada jogador que participa da partida, como escolha de personagem e estatísticas sumarizadas de desempenho do jogador em toda a partida. Essas estatísticas indicam, por exemplo, dano total causado e recebido, ouro total recebido e gasto, dano total causado e sofrido, e cura total recebida na partida. A Tabela ~\ref{tab:features-desc} apresenta as descrições de todas as 37 estatísticas numéricas fornecidas pela API.
+A Riot Games, desenvolvedora do LoL, fornece uma Interface de Programação de Aplicação (\textit{Application Programming Interface} - API) baseada na Web para acessar os históricos das partidas em formato JSON \cite{riot1}. Um histórico de partida contém dados como modo de jogo \footnote{O modo clássico é o mais escolhido pelos jogadores e uma partida desse modo deve ter 10 participantes duelando uns aos outros em duas equipes diferentes.}, tipo de fila \footnote{Um jogador precisa entrar no sistema de filas para encontrar e participar de uma partida; existem vários tipos de filas em LoL}, duração da partida, time vencedor e perdedor, e número de identificação única. Um histórico contém também dados de cada jogador que participa da partida, como escolha de personagem e estatísticas sumarizadas de desempenho do jogador em toda a partida. Essas estatísticas indicam, por exemplo, dano total causado e recebido, ouro total recebido e gasto, dano total causado e sofrido, e cura total recebida na partida. A Tabela ~\ref{tab:features-desc} apresenta as descrições de todas as 38 estatísticas numéricas fornecidas pela API.
 
 \begin{table}
   \scriptsize
@@ -284,9 +284,8 @@ magicDamageDealt* & magicDamageDealtToChampions +  magicDamageDealtToMonsters\\
 magicDamageDealtToChampions & Dano mágico total causado a campeões\\
 magicDamageTaken & Dano mágico total recebido\\
 minionsKilled & Quantidade de \textit{minions} abatidos\\
- neutralMinionsKilled* & neutralMinionsKilledEnemyJungle + neutralMinionsKilledTeamJungle\\
-neutralMinionsKilledEnemyJungle & \textit{Minions} neutros abatidos na selva da equipe inimiga
-\\
+neutralMinionsKilled* & neutralMinionsKilledEnemyJungle + neutralMinionsKilledTeamJungle\\
+neutralMinionsKilledEnemyJungle & \textit{Minions} neutros abatidos na selva da equipe inimiga\\
 neutralMinionsKilledTeamJungle & \textit{Minions} neutros abatidos na selva da equipe\\
 pentaKills & Número de abates quíntuplos seguidos\\
 physicalDamageDealt* & physicalDamageDealtToChampions + physicalDamageDealtToMonsters\\
@@ -300,8 +299,9 @@ totalUnitsHealed & Total de unidades curadas\\
 towerKills & Número de torres destruidas pela equipe\\
 tripleKills & Número de abates triplos seguidos\\
 totalDamageDealt* & physicalDamageDealt + magicDamageDealt \\
+totalDamageTaken* & physicalDamageTaken + magicDamageTaken \\
 totalDamageDealtToChampions* & physicalDamageDealtToChampions + magicDamageDealtToChampions \\
- trueDamageDealt* & trueDamageDealtToChampions + trueDamageDealtToMonsters\\
+trueDamageDealt* & trueDamageDealtToChampions + trueDamageDealtToMonsters\\
 trueDamageDealtToChampions & Dano verdadeiro causado a campeões\\
 trueDamageTaken & Dano verdadeiro recebido\\
 visionWardsBoughtInGame & Quantidade de itens \textit{vision wards} comprados\\
@@ -323,8 +323,11 @@ wardsPlaced & Número de itens \textit{wards} usados\\
 \end{itemize}
 
 \section{Extração de Características}
+Em seguida, extraímos características das partidas coletadas para modelar nosso conjunto de dados de desempenho de equipes \fj{}{$X$}.
 
-Em seguida, extraímos características das partidas coletadas para modelar nosso conjunto de dados de desempenho de equipes \fj{}{$X$}. Seja $M$ um conjunto de histórico de partidas onde $|M|=110000$, $T$ um conjunto de equipes onde $|T|=|M| * 2=220000$, $P=\{p_1, \ldots, p_{|P|}\}$ um conjunto \fj{dimensional de}{de desempenho onde cada desempenho $p \in P$ desse conjunto é um vetor de $d=38$} estatísticas básicas de desempenho de um jogador em um partida\fj{}{, tais como \textit{kills}, \textit{mininonsKilled} e \textit{assists}} da Tabela ~\ref{tab:features-desc}. Uma partida consiste de duas equipes distintas $m=\{t_a,t_b\}$ e uma equipe é composta pelo desempenho de 5 jogadores distintos $t=\{p_k |  p_k \in P^t; P^t \supset P; 1 \geq k \leq 5\}$. Selecionamos as estatísticas de desempenho dos jogadores nas partidas e somamos cada estatística $P_j \in P$ por equipe para formar cada característica ou estatística $X_j \in X$ do nosso conjunto de desempenho de equipes \fj{}{$X_{220000, 37}$}, de modo que $X = \{ x_{i} = \sum_{k=1}^{5} p_{k}^{i} | t_{i} \in T; p_{k}^{i} \in P \}$.
+Seja $M$ um conjunto de históricos de partidas, $T$ um conjunto de equipes e $P$ um conjunto dimensional de desempenho de jogadores. Um histórico de partida $m \in M$ consite de duas equipes distintas $m = \{ t_a, t_b | t \in {T}; 1 \geq a, b \leq |T| \}$, cada equipe $t \in T$ consiste do desempenho de 5 jogadores distintos $t=\{p_k |  p_k \in P^t; 1 \geq k \leq 5; P^t \subset P\}$, e cada desempenho de jogador $p \in P$ é um vetor de estatísticas básicas de um jogador em uma partida, tais como \textit{kills}, \textit{mininonsKilled} e \textit{assists} apresentadas na Tabela ~\ref{tab:features-desc} (total de 38 estatísticas).
+
+Nós coletamos $|M|=110000$ históricos de partidas, o que corresponde a dados de $|T|= |M| * 2 = 220000$ equipes e $|P|=|T| * 5 = 1100000$ desempenho de jogadores. Para modelar o conjunto de desempenho de equipes $X$, selecionamos as $d=38$ estatísticas da Tabela ~\ref{tab:features-desc} como características para o conjunto de desempenho de jogadores $P$ e, então, sumarizamos o desempenho dos jogadores por equipe de modo que $ X=\{ \sum P^{t} | t \in T \} $ e $X$ seja uma matriz de dimensões $ 220000 \times 38 $.
 
 Finalmente, para garantir a atomicidade no conjunto de dados $X$, decompomos algumas características para obter novas características, como \textit{physicalDamageDealtToMonsters} (dano físico total causado a monstros) e \textit{magicDamageDealtToChampions} (dano m\'agico total causado a monstros) (Tabela ~\ref{tab:decomposed-features}).
 
@@ -336,7 +339,7 @@ Finalmente, para garantir a atomicidade no conjunto de dados $X$, decompomos alg
     \toprule
     Característica & Cálculo \\
     \midrule
-physicalDamageDealtToChampions & physicalDamageDealt - physicalDamageDealtToChampions\\
+physicalDamageDealtToMonsters & physicalDamageDealt - physicalDamageDealtToChampions\\
 magicDamageDealtToMonsters & magicDamageDealt - magicDamageDealtToChampions \\
   \bottomrule
 \end{tabular}
@@ -372,10 +375,62 @@ Para evitar conclusões falsas, realizamos a limpeza de dados para detectar e re
 \end{itemize}
 
 \section{Remoção de Características com Baixa Variância}
-Às vezes, os valores de algumas características têm variância zero ou próxima de zero, o que implica que essas características \fj{s\~ao tamb\'em n\~ao}{n\~ao s\~ao} informativas e podem causar ruído ao executar uma determinada tarefa de mineração de dados. Portanto, realizamos uma estatística descritiva no conjunto de dados para identificar e remover características de variância zero ou próxima de zero. Após a análise, o conjunto de dados foi reduzido. As seguintes características foram removidas: \textit{doubleKills}, \textit{inhibitorKills}, \textit {largestMultiKill}, \textit{pentaKills}, \textit {quadraKills}, \textit {sightWardsBoughtInGame} e \textit{tripleKills}.
+Às vezes, os valores de algumas características têm variância zero ou próxima de zero, o que implica que essas características têm nenhuma ou pouca informação e que, consequentemente, não têm significância suficiente para discriminar as observações de um conjunto de dados em várias condições \cite{qing2014feature}. Portanto, realizamos uma estatística descritiva no conjunto de desempenho de equipes para identificar e remover as características de variância zero ou próxima de zero de modo a selecionar as características que mais discriminam em releção à variância. Após a análise da variância e seleção das caracterísicas, a dimensionalidade do conjunto de desempenho ficou reduzido, fazendo com que o tempo do agrupamento dos dados fosse aprimorado e permitindo uma melhor percepçao da estrutura implícita relevante dos dados \cite{boutsidis2009unsupervised}. A Tabela ~\ref{tab:descriptive-statistics} indica com (*) as características removidas do conjunto de dados: \textit{doubleKills}, \textit{inhibitorKills}, \textit {largestMultiKill}, \textit{pentaKills}, \textit {quadraKills}, \textit {sightWardsBoughtInGame} e \textit{tripleKills}.
+
+% TODO try to put more information based on these references: 
+% https://pdfs.semanticscholar.org/7d57/df0e3e2c3ab54642405b32dad8343f9954c5.pdf
+% https://www.stat.berkeley.edu/~mmahoney/pubs/NIPS09.pdf
+% https://machinelearningmastery.com/feature-selection-to-improve-accuracy-and-decrease-training-time/
+% http://www.jmlr.org/papers/volume5/dy04a/dy04a.pdf
+
+
+\begin{table*}
+  \scriptsize
+  \caption{Estatística descritiva}
+  \label{tab:descriptive-statistics}
+  \begin{tabular}{p{0.26\textwidth}p{0.080\textwidth}p{0.080\textwidth}p{0.080\textwidth}p{0.080\textwidth}p{0.11\textwidth}p{0.10\textwidth}}
+  \toprule
+\textbf{Característica}&                   \textbf{Mínimo}&      \textbf{Máximo}&      \textbf{Médio}&      \textbf{Mediana}&      \textbf{Variância}&      \textbf{Desvio padrão} \\
+  \midrule
+assists&                             0&     166&     46.41&     45.0&         501.83&     22.40\\ \hline
+deaths&                              0&      96&     31.86&     32.0&         157.25&     12.54\\ \hline
+doubleKills*&                         0&      16&      3.09&      3.0&           4.95&      2.23\\ \hline
+goldEarned&                      21241&  167863&  61624.94&  61313.0&   285885117.17&  16908.14\\ \hline
+goldSpent&                       17525&  173490&  56279.00&  55783.0&   254935731.04&  15966.71\\ \hline
+inhibitorKills*&                      0&      14&      0.97&      0.0&           1.48&      1.22\\ \hline
+killingSprees&                       0&      27&      7.34&      7.0&          11.81&      3.44\\ \hline
+kills&                               0&      94&     31.71&     32.0&         157.08&     12.53\\ \hline
+largestCriticalStrike&               0&    6832&   1185.81&   1051.0&      538830.36&    734.05\\ \hline
+largestKillingSpree&                 0&      49&     14.11&     14.0&          38.85&      6.23\\ \hline
+largestMultiKill*&                    0&      15&      7.04&      7.0&           3.05&      1.75\\ \hline
+magicDamageDealtToChampions&      1454&  277258&  45374.46&  41341.0&   559898084.93&  23662.17\\ \hline
+magicDamageDealtToMonsters&       2664& 1636239& 185334.42& 165063.0& 11104812464.71& 105379.37\\ \hline
+magicDamageTaken&                 1455&  280380&  46026.27&  41934.0&   571260353.46&  23901.05\\ \hline
+minionsKilled&                     142&    1988&    620.06&    606.0&       29672.00&    172.26\\ \hline
+neutralMinionsKilledEnemyJungle&     0&     179&     20.20&     17.0&         272.66&     16.51\\ \hline
+neutralMinionsKilledTeamJungle&      0&     236&     74.58&     72.0&         759.39&     27.56\\ \hline
+pentaKills*&                          0&       3&      0.01&      0.0&           0.01&      0.11\\ \hline
+physicalDamageDealtToChampions&   2516&  209321&  46657.02&  43445.0&   478524140.52&  21875.19\\ \hline
+physicalDamageDealtToMonsters&   25356& 1622946& 307468.35& 286914.5& 19065412611.47& 138077.56\\ \hline
+physicalDamageTaken&             12963&  276723&  75158.66&  71446.5&   722512844.62&  26879.60\\ \hline
+quadraKills*&                         0&       5&      0.06&      0.0&           0.07&      0.26\\ \hline
+sightWardsBoughtInGame*&              0&       0&      0.00&      0.0&           0.00&      0.00\\ \hline
+totalHeal&                        1756&  178665&  25401.26&  22394.0&   203814822.76&  14276.37\\ \hline
+totalTimeCrowdControlDealt&         40&   44982&   2556.19&   1974.0&     5118253.86&   2262.36\\ \hline
+totalUnitsHealed&                    3&     149&     12.52&     10.0&          80.57&      8.98\\ \hline
+towerKills&                          0&      15&      4.73&      5.0&          10.25&      3.20\\ \hline
+tripleKills*&                         0&       7&      0.44&      0.0&           0.51&      0.72\\ \hline
+trueDamageDealtToChampions&          0&  706412&   4995.48&   3654.0&    38146615.15&   6176.29\\ \hline
+trueDamageTaken&                     0&  717334&   5141.91&   3822.0&    38482885.65&   6203.46\\ \hline
+visionWardsBoughtInGame&             0&      43&      4.21&      4.0&           9.08&      3.01\\ \hline
+wardsKilled&                         0&     173&     10.87&      8.0&         120.48&     10.98\\ \hline
+wardsPlaced&                         7&     621&     62.39&     60.0&         449.11&     21.19\\ \hline
+  \bottomrule
+\end{tabular}
+\end{table*}
 
 \section{\fj{Detec\c{c}\~ao}{Remo\c{c}\~ao} de \textit{Outliers}}
-\fj{}{A Figura ~\ref{fig:boxplots} ilustra os gráficos dos \textit{boxplots} das caracter\'isticas do conjunto de desempenho de equipes $X$. Como podemos observar, existem muitos valores discrepantes (outliers)}. \fj{Utilizamos um Intervalo Interquartil de $fator = 1,5$ para encontrar os \textit{outliers} de cada caracter\'istica no conjunto de dados.}{} \fj{Equipes}{Então, equipes} com algum\fj{a}{\textit{outlier} em suas} \fj{caracter\'istica}{caracter\'isticas} \fj{an\^omala}{} foram removidas dos dados \fj{}{com base em um Intervalo Interquartil de $fator = 3,5$ para que o comportamento dos dados não fosse afetado de forma brusca}. 
+\fj{}{A Figura ~\ref{fig:boxplots} ilustra os gráficos dos \textit{boxplots} das caracter\'isticas do conjunto de desempenho de equipes $X$. Como podemos observar, existem muitos valores discrepantes (\textit{outliers})}. \fj{Utilizamos um Intervalo Interquartil de $fator = 1,5$ para encontrar os \textit{outliers} de cada caracter\'istica no conjunto de dados.}{} \fj{Equipes}{Então, equipes} com algum \fj{a}{\textit{outlier} em suas} \fj{caracter\'istica}{caracter\'isticas} \fj{an\^omala}{} foram removidas dos dados \fj{}{com base em um Intervalo Interquartil de $fator = 3,5$ para que o comportamento dos dados não fosse afetado de forma brusca}. 
 
 Em seguida, realizamos uma \fj{an\'alise para remover caracter\'isticas com baixa vari\^ancia novamente}{estat\'istica descritiva dos dados novamente e percebemos que algumas caracter\'isticas estavam com vari\^ancia pr\'oxima de zero}. Após \fj{a}{essa} análise, as seguintes características \fj{}{com vari\^ancia pr\'oxima de zero} foram removidas: \textit{totalUnitsHelead} e \textit{visionWardsBoughtInGame}.
 
