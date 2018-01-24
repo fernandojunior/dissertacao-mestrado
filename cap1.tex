@@ -280,15 +280,15 @@ kills & Número de abates efetuados\\
 largestCriticalStrike & Maior ataque crítico\\
 largestKillingSpree & Matança com maior número de abates\\
 largestMultiKill & Maior abates múltiplos seguidos\\
-magicDamageDealt* & magicDamageDealtToChampions +  magicDamageDealtToMonsters\\
+magicDamageDealt & magicDamageDealtToChampions +  magicDamageDealtToMonsters\\
 magicDamageDealtToChampions & Dano mágico total causado a campeões\\
 magicDamageTaken & Dano mágico total recebido\\
 minionsKilled & Quantidade de \textit{minions} abatidos\\
-neutralMinionsKilled* & neutralMinionsKilledEnemyJungle + neutralMinionsKilledTeamJungle\\
+neutralMinionsKilled & neutralMinionsKilledEnemyJungle + neutralMinionsKilledTeamJungle\\
 neutralMinionsKilledEnemyJungle & \textit{Minions} neutros abatidos na selva da equipe inimiga\\
 neutralMinionsKilledTeamJungle & \textit{Minions} neutros abatidos na selva da equipe\\
 pentaKills & Número de abates quíntuplos seguidos\\
-physicalDamageDealt* & physicalDamageDealtToChampions + physicalDamageDealtToMonsters\\
+physicalDamageDealt & physicalDamageDealtToChampions + physicalDamageDealtToMonsters\\
 physicalDamageDealtToChampions & Dano físico total causado a campeões\\
 physicalDamageTaken & Dano físico total recebido\\
 quadraKills & Número de abates quádruplos seguidos\\
@@ -298,10 +298,10 @@ totalTimeCrowdControlDealt & Tempo total de controle da equipe inimiga\\
 totalUnitsHealed & Total de unidades curadas\\
 towerKills & Número de torres destruidas pela equipe\\
 tripleKills & Número de abates triplos seguidos\\
-totalDamageDealt* & physicalDamageDealt + magicDamageDealt \\
-totalDamageTaken* & physicalDamageTaken + magicDamageTaken \\
-totalDamageDealtToChampions* & physicalDamageDealtToChampions + magicDamageDealtToChampions \\
-trueDamageDealt* & trueDamageDealtToChampions + trueDamageDealtToMonsters\\
+totalDamageDealt & physicalDamageDealt + magicDamageDealt \\
+totalDamageTaken & physicalDamageTaken + magicDamageTaken \\
+totalDamageDealtToChampions & physicalDamageDealtToChampions + magicDamageDealtToChampions \\
+trueDamageDealt & trueDamageDealtToChampions + trueDamageDealtToMonsters\\
 trueDamageDealtToChampions & Dano verdadeiro causado a campeões\\
 trueDamageTaken & Dano verdadeiro recebido\\
 visionWardsBoughtInGame & Quantidade de itens \textit{vision wards} comprados\\
@@ -329,7 +329,7 @@ Seja $M$ um conjunto de históricos de partidas, $T$ um conjunto de equipes e $P
 
 Nós coletamos $|M|=110000$ históricos de partidas, o que corresponde a dados de $|T|= |M| * 2 = 220000$ equipes e $|P|=|T| * 5 = 1100000$ desempenho de jogadores. Para modelar o conjunto de desempenho de equipes $X$, selecionamos as $d=38$ estatísticas da Tabela ~\ref{tab:features-desc} como características para o conjunto de desempenho de jogadores $P$ e, então, sumarizamos o desempenho dos jogadores por equipe de modo que $ X=\{ \sum P^{t} | t \in T \} $ e $X$ seja uma matriz de dimensões $ 220000 \times 38 $.
 
-Finalmente, para garantir a atomicidade no conjunto de dados $X$, decompomos algumas características para obter novas características, como \textit{physicalDamageDealtToMonsters} (dano físico total causado a monstros) e \textit{magicDamageDealtToChampions} (dano m\'agico total causado a monstros) (Tabela ~\ref{tab:decomposed-features}).
+Finalmente, para garantir a atomicidade no conjunto de dados $X$, decompomos algumas características por subtração para obter novas características: \textit{physicalDamageDealtToMonsters} (dano físico total causado a monstros) e \textit{magicDamageDealtToChampions} (dano m\'agico total causado a monstros). A Tabela ~\ref{tab:decomposed-features} demonstra os cálculos realizados para obter essas características.
 
 \begin{table}
   \scriptsize
@@ -345,7 +345,7 @@ magicDamageDealtToMonsters & magicDamageDealt - magicDamageDealtToChampions \\
 \end{tabular}
 \end{table}
 
-Para evitar redundância nos dados, removemos também características compostas, ou seja, características que são resultantes de agregações de outras características, como \textit{totalDamageDealt}, \textit{totalDamageDealtToChampions}, \textit{totalDamageTaken}, \textit{neutralMinionsKilled}, \textit{trueDamageDealt}, \textit{physicalDamageDealt} e \textit{magicDamageDealt} (Tabela \ref{tab:compound-features}). A Tabela ~\ref{tab:features-desc} indica com (*) as características compostas removidas.
+Para evitar redundância nos dados, removemos também características compostas, ou seja, aquelas características que podem ser obtidas por meio da soma de outras características, tais como \textit{totalDamageDealt}, \textit{totalDamageDealtToChampions}, \textit{totalDamageTaken}, \textit{neutralMinionsKilled}, \textit{trueDamageDealt}, \textit{physicalDamageDealt} e \textit{magicDamageDealt}. A Tabela \ref{tab:compound-features} demonstra o cálculo de como se dá a composição de cada característica removida.
 
 \begin{table}
   \scriptsize
@@ -375,7 +375,7 @@ Para evitar conclusões falsas, realizamos a limpeza de dados para detectar e re
 \end{itemize}
 
 \section{Remoção de Características com Baixa Variância}
-Às vezes, os valores de algumas características têm variância zero ou próxima de zero, o que implica que essas características têm nenhuma ou pouca informação e que, consequentemente, não têm significância suficiente para discriminar as observações de um conjunto de dados em várias condições \cite{qing2014feature}. Portanto, realizamos uma estatística descritiva no conjunto de desempenho de equipes para identificar e remover as características de variância zero ou próxima de zero de modo a selecionar as características que mais discriminam em releção à variância. Após a análise da variância e seleção das caracterísicas, a dimensionalidade do conjunto de desempenho ficou reduzido, fazendo com que o tempo do agrupamento dos dados fosse aprimorado e permitindo uma melhor percepçao da estrutura implícita relevante dos dados \cite{boutsidis2009unsupervised}. A Tabela ~\ref{tab:descriptive-statistics} indica com (*) as características removidas do conjunto de dados: \textit{doubleKills}, \textit{inhibitorKills}, \textit {largestMultiKill}, \textit{pentaKills}, \textit {quadraKills}, \textit {sightWardsBoughtInGame} e \textit{tripleKills}.
+Às vezes, os valores de algumas características têm variância zero ou próxima de zero, o que implica que essas características têm nenhuma ou pouca informação e que, consequentemente, não têm significância suficiente para discriminar as observações de um conjunto de dados em várias condições \cite{qing2014feature}. Portanto, realizamos uma estatística descritiva no conjunto de desempenho de equipes para identificar e remover as características de variância zero ou próxima de zero de modo a selecionar as características que mais discriminam em releção à variância. Devido a análise da variância e seleção das caracterísicas, a dimensionalidade do conjunto de desempenho de equipes ficou reduzido, permitindo que o tempo do agrupamento das equipes (abordado na seção ~\ref{agrupamentoequipes}) fosse aprimorado e uma melhor percepçao da estrutura implícita relevante dos dados \cite{boutsidis2009unsupervised}. A Tabela ~\ref{tab:descriptive-statistics} indica com (*) as características removidas do conjunto de dados: \textit{doubleKills}, \textit{inhibitorKills}, \textit {largestMultiKill}, \textit{pentaKills}, \textit {quadraKills}, \textit {sightWardsBoughtInGame} e \textit{tripleKills}.
 
 % TODO try to put more information based on these references: 
 % https://pdfs.semanticscholar.org/7d57/df0e3e2c3ab54642405b32dad8343f9954c5.pdf
@@ -383,10 +383,9 @@ Para evitar conclusões falsas, realizamos a limpeza de dados para detectar e re
 % https://machinelearningmastery.com/feature-selection-to-improve-accuracy-and-decrease-training-time/
 % http://www.jmlr.org/papers/volume5/dy04a/dy04a.pdf
 
-
 \begin{table*}
   \scriptsize
-  \caption{Estatística descritiva}
+  \caption{Estatística descritiva das características do conjunto de desempenho de equipes.}
   \label{tab:descriptive-statistics}
   \begin{tabular}{p{0.26\textwidth}p{0.080\textwidth}p{0.080\textwidth}p{0.080\textwidth}p{0.080\textwidth}p{0.11\textwidth}p{0.10\textwidth}}
   \toprule
@@ -430,7 +429,7 @@ wardsPlaced&                         7&     621&     62.39&     60.0&         44
 \end{table*}
 
 \section{\fj{Detec\c{c}\~ao}{Remo\c{c}\~ao} de \textit{Outliers}}
-\fj{}{A Figura ~\ref{fig:boxplots} ilustra os gráficos dos \textit{boxplots} das caracter\'isticas do conjunto de desempenho de equipes $X$. Como podemos observar, existem muitos valores discrepantes (\textit{outliers})}. \fj{Utilizamos um Intervalo Interquartil de $fator = 1,5$ para encontrar os \textit{outliers} de cada caracter\'istica no conjunto de dados.}{} \fj{Equipes}{Então, equipes} com algum \fj{a}{\textit{outlier} em suas} \fj{caracter\'istica}{caracter\'isticas} \fj{an\^omala}{} foram removidas dos dados \fj{}{com base em um Intervalo Interquartil de $fator = 3,5$ para que o comportamento dos dados não fosse afetado de forma brusca}. 
+\fj{}{A Figura ~\ref{fig:boxplots} ilustra os gráficos dos \textit{boxplots} das caracter\'isticas do conjunto de desempenho de equipes. Como podemos observar, existem muitos valores discrepantes (\textit{outliers})}. \fj{Utilizamos um Intervalo Interquartil de $fator = 1,5$ para encontrar os \textit{outliers} de cada caracter\'istica no conjunto de dados.}{} \fj{Equipes}{Então, equipes} com algum \fj{a}{\textit{outlier} em suas} \fj{caracter\'istica}{caracter\'isticas} \fj{an\^omala}{} foram removidas dos dados \fj{}{com base em um Intervalo Interquartil de $fator = 3,5$ para que o comportamento dos dados não fosse afetado de forma brusca}. 
 
 Em seguida, realizamos uma \fj{an\'alise para remover caracter\'isticas com baixa vari\^ancia novamente}{estat\'istica descritiva dos dados novamente e percebemos que algumas caracter\'isticas estavam com vari\^ancia pr\'oxima de zero}. Após \fj{a}{essa} análise, as seguintes características \fj{}{com vari\^ancia pr\'oxima de zero} foram removidas: \textit{totalUnitsHelead} e \textit{visionWardsBoughtInGame}.
 
@@ -485,7 +484,7 @@ Desse modo, \fj{}{dado que $X_{j} \in X$ \'e uma caracter\'istica de $X$}, para 
 
 O problema de encontrar perfis de desempenho de equipes pode ser considerado equivalente ao problema de identificar grupos de desempenho de equipes de comportamento semelhante. Para abordar esse problema, usamos o método de mineração de dados \textit{K-means clustering} \cite{zaki2014data} para agrupar equipes semelhantes conforme os seus desempenhos nas partidas. Em seguida, caracterizamos \fj{e definimos r\'otulos para}{} os grupos de desempenho de equipes de modo a colocar em perspectiva suas principais características ou \fj{estat\'isticas}{m\'etricas} de desempenho \fj{}{e, assim, definir perfis de comportamento}.
 
-\section{Agrupamento de Equipes}
+\section{Agrupamento de Equipes} \label{agrupamentoequipes}
 O problema de encontrar perfis de desempenho de equipes pode ser considerado equivalente ao problema de identificar grupos de desempenho de equipes de comportamento semelhante. Para abordar esse problema, usamos o método de mineração de dados \textit{K-means clustering} \cite{zaki2014data}. Dado um conjunto dimensional de observações \(x_1, \ldots, x_n \), o \textit{K-means clustering} visa particionar as $n$ observações em $k (\leq n)$ grupos distintos, denotados por $ C = \{c_1, \ldots , c_k \} $, de modo a minimizar a Soma dos Quadrados do Erro Dentro dos Grupos (SQED); ou seja, seu objetivo é encontrar o minimizador $C*$ da função da Soma dos Quadrados do Erro (SQE):
 
 \begin{displaymath}
