@@ -429,13 +429,22 @@ wardsPlaced&                         7&     621&     62.39&     60.0&         44
 \end{table*}
 
 \section{\fj{Detec\c{c}\~ao}{Remo\c{c}\~ao} de \textit{Outliers}}
-\fj{}{A Figura ~\ref{fig:boxplots} ilustra os gráficos dos \textit{boxplots} das caracter\'isticas do conjunto de desempenho de equipes. Como podemos observar, existem muitos valores discrepantes (\textit{outliers})}. \fj{Utilizamos um Intervalo Interquartil de $fator = 1,5$ para encontrar os \textit{outliers} de cada caracter\'istica no conjunto de dados.}{} \fj{Equipes}{Então, equipes} com algum \fj{a}{\textit{outlier} em suas} \fj{caracter\'istica}{caracter\'isticas} \fj{an\^omala}{} foram removidas dos dados \fj{}{com base em um Intervalo Interquartil de $fator = 3,5$ para que o comportamento dos dados não fosse afetado de forma brusca}. 
+
+A fim de encontrar padrões, adotamos o \textit{K-means clustering} para agrupar equipes similares conforme o desempenho das equipes nas partidas que foram coletadas (mais sobre o agrupamento no Capítulo ~\ref{cap:perfiscomportamento}). No entanto, o \textit{K-means clustering} é muito sensível a dados discrepantes (\textit{outliers}) \cite{gan2017k}, pois como o nome sugere, seu algoritmo é baseado no cálculo das médias entre os grupos para encontrar o grupo mais adequado para cada observação do conjunto de dados. Portanto, antes que fizessemos o agrupamento dos dados, criamos gráficos \textit{boxplots} a partir das características dos dados para analisar se existiam ou não \textit{outliers} nos dados.
+
+% TODO Because the mean, as a statistic, is generally sensitive to outliers.
+% http://www.math.uconn.edu/~gan/ggpaper/gan2017kmor.pdf
+% http://www.math.uconn.edu/~gan/ggpaper/gan2017kmor.pdf
+% https://www.quora.com/How-are-k-means-clustering-algorithms-sensitive-to-outliers
+% https://www.researchgate.net/post/Which_is_the_best_method_for_removing_outliers_in_a_data_set
+
+A Figura ~\ref{fig:boxplots} ilustra os gráficos dos \textit{boxplots} das caracter\'isticas do conjunto de desempenho das equipes. Como podemos observar, existe uma quantidade muito considerável de \textit{outliers} nos dados. Desse modo, como não temos idéia da causa desse comportamento, decidimos remover apenas equipes consideradas \textit{outliers} extremos, isto é, removemos aquelas equipes com algum \textit{outlier} em suas caracter\'isticas com base em um Intervalo Interquartil do Boxplot $IQR = 3,5$.
 
 Em seguida, realizamos uma \fj{an\'alise para remover caracter\'isticas com baixa vari\^ancia novamente}{estat\'istica descritiva dos dados novamente e percebemos que algumas caracter\'isticas estavam com vari\^ancia pr\'oxima de zero}. Após \fj{a}{essa} análise, as seguintes características \fj{}{com vari\^ancia pr\'oxima de zero} foram removidas: \textit{totalUnitsHelead} e \textit{visionWardsBoughtInGame}.
 
 \begin{figure*}
   \centering
-  \includegraphics[width=1.0\textwidth]{boxplots}%
+  \includegraphics[angle=90,width=0.95\textwidth]{boxplots}%
   \caption{Gráfico de \textit{boxplot} para cada característica do conjunto de desempenho de equipes até o momento da etapa de \fj{detec\c{c}\~ao}{remo\c{c}\~ao} de \textit{outliers}.}
   \label{fig:boxplots}
 \end{figure*}
@@ -480,7 +489,7 @@ Desse modo, \fj{}{dado que $X_{j} \in X$ \'e uma caracter\'istica de $X$}, para 
 
 \fj{Portanto}{Após essa análise}, removemos as seguintes características: \textit{assists}; \textit{goldEarned}; \textit{goldSpent}; \textit{kills}; \textit{largestKillingSpree}; \textit{magicDamageDealtToChampions}; \textit{physicalDamageDealtToChampions}; \textit{towerKills}.
 
-\chapter{Perfis de Comportamento}
+\chapter{Perfis de Comportamento} \label{cap:perfiscomportamento}
 
 O problema de encontrar perfis de desempenho de equipes pode ser considerado equivalente ao problema de identificar grupos de desempenho de equipes de comportamento semelhante. Para abordar esse problema, usamos o método de mineração de dados \textit{K-means clustering} \cite{zaki2014data} para agrupar equipes semelhantes conforme os seus desempenhos nas partidas. Em seguida, caracterizamos \fj{e definimos r\'otulos para}{} os grupos de desempenho de equipes de modo a colocar em perspectiva suas principais características ou \fj{estat\'isticas}{m\'etricas} de desempenho \fj{}{e, assim, definir perfis de comportamento}.
 
