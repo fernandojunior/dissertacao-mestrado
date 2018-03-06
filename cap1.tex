@@ -533,7 +533,7 @@ O problema de encontrar perfis de desempenho de equipes pode ser considerado equ
 
 Onde $\mu_j$ é a média das observações em $c_i$, e indica também o \textit{i}-ésimo centróide de $C$.
 
-Conforme Zaki et al. \cite{zaki2014data}, o \textit{K-means} usa uma abordagem iterativa gananciosa (\textit{iterative greedy}) para encontrar um grupo que minimize a função objetivo $SSE$ e, como tal, pode convergir para um grupo ótimo local em vez de um grupo ótimo global.
+Conforme Zaki et al. \cite{zaki2014data}, o \textit{K-means} usa uma abordagem iterativa gananciosa (\textit{iterative greedy}) para encontrar um grupo que minimize a função objetivo $SQE$ e, como tal, pode convergir para um grupo ótimo local em vez de um grupo ótimo global.
 
 Em nosso conjunto de dados $X$ usamos o algoritmo de Lloyd \cite{ong2015player}, uma heurística que consiste em escolher aleatoriamente observações como centróides para os $k$ grupos de $C$ e atribuir iterativamente cada observação $x \in X$ ao centróide mais próximo e depois atualizar os centróides com a média de seus respectivos grupos.
 
