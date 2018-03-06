@@ -508,7 +508,7 @@ Após a normalização, \fj{o}{as caracter\'isticas do} conjunto de dados $X$ \f
 \begin{figure*}
   \centering
   \includegraphics[width=1.0\textwidth]{correlations}%
-  \caption{Gráfico de correlação para as características de desempenho das equipes. Cada c\'elula ou valor no gr\'afico representa a correla\c{c}\~ao de um par de caracter\'isticas do conjunto de dados $X$. A escala de cores indica a intensidade das correla\c{c}\~oes, quanto mais forte for uma cor, mais forte é a correla\c{c}\~ao das caracter\'isticas. As cores em tom azul indicam correla\c{c}\~oes positivas. As cores em tom vermelho indicam correla\c{c}\~oes negativas. No gráfico, as correlações com \textit{p-value > 0,05} são consideradas insignificantes. Neste caso, os valores do coeficiente de correlação são indicados com um "X". }
+  \caption{Gráfico da correlação das características de desempenho das equipes. Cada c\'elula ou valor no gr\'afico representa a correla\c{c}\~ao de um par de caracter\'isticas do conjunto de dados $X$. A escala de cores indica a intensidade das correla\c{c}\~oes, quanto mais forte for uma cor, mais forte é a correla\c{c}\~ao das caracter\'isticas. As cores em tom azul indicam correla\c{c}\~oes positivas. As cores em tom vermelho indicam correla\c{c}\~oes negativas. No gráfico, as correlações com \textit{p-value > 0,05} são consideradas insignificantes. Neste caso, os valores do coeficiente de correlação são indicados com um "X". }
   \label{fig:correlations}
 \end{figure*}
 
@@ -522,7 +522,7 @@ Desse modo, \fj{}{dado que $X_{j} \in X$ \'e uma caracter\'istica de $X$}, para 
 
 \chapter{Perfis de Comportamento} \label{cap:perfiscomportamento}
 
-O problema de encontrar perfis de desempenho de equipes pode ser considerado equivalente ao problema de identificar grupos de desempenho de equipes de comportamento semelhante. Para abordar esse problema, usamos o método de mineração de dados \textit{K-means clustering} \cite{zaki2014data} para agrupar equipes semelhantes conforme os seus desempenhos nas partidas. Em seguida, caracterizamos \fj{e definimos r\'otulos para}{} os grupos de desempenho de equipes de modo a colocar em perspectiva suas principais características ou \fj{estat\'isticas}{m\'etricas} de desempenho \fj{}{e, assim, definir perfis de comportamento}.
+O problema dsiderado equivalente ao problema de identificar grupos de desempenho de equipes de comportamento semelhante. Para abordar esse problema, usamos o método de mineração de dados \textit{K-means clustering} \cite{zaki2014data} para agrupar equipes semelhantes conforme os seus desempenhos nas partidas. Em seguida, caracterizamos \fj{e definimos r\'otulos para}{} os grupos de desempenho de equipes de modo a colocar em perspectiva suas principais características ou \fj{estat\'isticas}{m\'etricas} de desempenho \fj{}{e, assim, definir perfis de comportamento}.
 
 \section{Agrupamento de Equipes} \label{agrupamentoequipes}
 O problema de encontrar perfis de desempenho de equipes pode ser considerado equivalente ao problema de identificar grupos de desempenho de equipes de comportamento semelhante. Para abordar esse problema, usamos o método de mineração de dados \textit{K-means clustering} \cite{zaki2014data}. Dado um conjunto dimensional de observações $(x_{1}, \ldots, x_{n} )$, o \textit{K-means clustering} visa particionar as $n$ observações em $k (\leq n)$ grupos distintos, denotados por $ C = \{c_1, \ldots , c_k \} $, de modo a minimizar a Soma dos Quadrados do Erro Dentro dos Grupos (SQED); ou seja, seu objetivo é encontrar o minimizador $C*$ da função:
