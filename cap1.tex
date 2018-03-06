@@ -259,57 +259,7 @@ Embora estes estudos desempenhem um papel essencial na literatura, nenhum deles 
 \fj{Para preparar o conjunto de dados de desempenho de equipes, realizamos as seguintes tarefas: coleta de dados}{Esta se\c{c}\~ao descreve a coleta de dados e também uma s\'erie de tarefas executadas para preparar o conjunto de dados de desempenho de equipes: } extração de características; limpeza de dados; remoção de características com baixa variância; \fj{detec\c{c}\~ao}{remo\c{c}\~ao} de \textit{outliers}; transformação de dados; normalização de dados; análise de redundância de características.
 
 \section{Coleta de Dados}
-A Riot Games, desenvolvedora do LoL, fornece uma Interface de Programação de Aplicação (\textit{Application Programming Interface} - API) baseada na Web para acessar os históricos das partidas em formato JSON \cite{riot1}. Um histórico de partida contém dados como modo de jogo \footnote{O modo clássico é o mais escolhido pelos jogadores e uma partida desse modo deve ter 10 participantes duelando uns aos outros em duas equipes diferentes.}, tipo de fila \footnote{Um jogador precisa entrar no sistema de filas para encontrar e participar de uma partida; existem vários tipos de filas em LoL}, duração da partida, time vencedor e perdedor, e número de identificação única. Um histórico contém também dados de cada jogador que participa da partida, como escolha de personagem e estatísticas sumarizadas de desempenho do jogador em toda a partida. Essas estatísticas indicam, por exemplo, dano total causado e recebido, ouro total recebido e gasto, dano total causado e sofrido, e cura total recebida na partida. A Tabela ~\ref{tab:features-desc} apresenta as descrições de todas as 38 estatísticas numéricas fornecidas pela API.
-
-\begin{table}
-  \scriptsize
-  \caption{Descrições das estatísticas básicas de desempenho dos jogadores em partidas.}
-  \label{tab:features-desc}
-  \begin{tabular}{p{0.30\textwidth}p{0.65\textwidth}}
-    \toprule
-    Estatística & Descrição \\
-    \midrule
-assists & Número de assistências em abates\\
-deaths & Número de mortes sofridas \\
-doubleKills & Número de abates duplos seguidos efetuados\\
-goldEarned & Quantidade de ouro ganho\\
-goldSpent & Quantidade de ouro gasto\\
-inhibitorKills & Número de inibidores destruídos\\
-killingSprees & Número de matanças (abates $\geq 3$ seguidos) sem que o campeão morra \\
-kills & Número de abates efetuados\\
-largestCriticalStrike & Maior ataque crítico\\
-largestKillingSpree & Matança com maior número de abates\\
-largestMultiKill & Maior abates múltiplos seguidos\\
-magicDamageDealt & magicDamageDealtToChampions +  magicDamageDealtToMonsters\\
-magicDamageDealtToChampions & Dano mágico total causado a campeões\\
-magicDamageTaken & Dano mágico total recebido\\
-minionsKilled & Quantidade de \textit{minions} abatidos\\
-neutralMinionsKilled & neutralMinionsKilledEnemyJungle + neutralMinionsKilledTeamJungle\\
-neutralMinionsKilledEnemyJungle & \textit{Minions} neutros abatidos na selva da equipe inimiga\\
-neutralMinionsKilledTeamJungle & \textit{Minions} neutros abatidos na selva da equipe\\
-pentaKills & Número de abates quíntuplos seguidos\\
-physicalDamageDealt & physicalDamageDealtToChampions + physicalDamageDealtToMonsters\\
-physicalDamageDealtToChampions & Dano físico total causado a campeões\\
-physicalDamageTaken & Dano físico total recebido\\
-quadraKills & Número de abates quádruplos seguidos\\
-sightWardsBoughtInGame & Quantidade de itens \textit{sight wards} comprados\\
-totalHeal & Quantidade de cura total efetuada\\
-totalTimeCrowdControlDealt & Tempo total de controle da equipe inimiga\\
-totalUnitsHealed & Total de unidades curadas\\
-towerKills & Número de torres destruidas pela equipe\\
-tripleKills & Número de abates triplos seguidos\\
-totalDamageDealt & physicalDamageDealt + magicDamageDealt \\
-totalDamageTaken & physicalDamageTaken + magicDamageTaken \\
-totalDamageDealtToChampions & physicalDamageDealtToChampions + magicDamageDealtToChampions \\
-trueDamageDealt & trueDamageDealtToChampions + trueDamageDealtToMonsters\\
-trueDamageDealtToChampions & Dano verdadeiro causado a campeões\\
-trueDamageTaken & Dano verdadeiro recebido\\
-visionWardsBoughtInGame & Quantidade de itens \textit{vision wards} comprados\\
-wardsKilled & Número de itens \textit{wards} destruidos\\
-wardsPlaced & Número de itens \textit{wards} usados\\
-  \bottomrule
-\end{tabular}
-\end{table}
+A Riot Games, desenvolvedora do LoL, fornece uma Interface de Programação de Aplicação (\textit{Application Programming Interface} - API) baseada na Web para acessar os históricos das partidas em formato JSON \cite{riot1}. Um histórico de partida contém dados como modo de jogo \footnote{O modo clássico é o mais escolhido pelos jogadores e uma partida desse modo deve ter 10 participantes duelando uns aos outros em duas equipes diferentes.}, tipo de fila \footnote{Um jogador precisa entrar no sistema de filas para encontrar e participar de uma partida; existem vários tipos de filas em LoL}, duração da partida, time vencedor e perdedor, e número de identificação única. Um histórico contém também dados de cada jogador que participa da partida, como escolha de personagem e estatísticas sumarizadas de desempenho do jogador em toda a partida. Essas estatísticas indicam, por exemplo, dano total causado e recebido, ouro total recebido e gasto, dano total causado e sofrido, e cura total recebida na partida. A Seção ~\ref{sec:features-desc} apresenta as descrições de todas as 38 estatísticas numéricas fornecidas pela API.
 
 \fj{}{LoL tem um pico diário de mais de 7,5 milhões de jogadores \cite{riot1} no mundo todo. Portanto, devido a enorme quantidade de partidas que existem,} coletamos aleatoriamente apenas 110.000 históricos de partidas da API a partir de fevereiro de 2016 até dezembro de 2016\fj{}{, de modo que essas partidas fossem representativas}. Para cada mês, coletamos 10.000 históricos. Consideramos os seguintes filtros para a coleta: 
 
@@ -322,12 +272,93 @@ wardsPlaced & Número de itens \textit{wards} usados\\
   \item Versão da partida: v6.x.y
 \end{itemize}
 
+\subsection{Estatísticas Básicas} \label{sec:features-desc}
+
+Descrições das 38 estatísticas básicas de desempenho dos jogadores nas partidas:
+
+\textbf{goldEarned} - A quantidade de ouro que o campeão ganhou na partida. O ouro é a moeda de League of Legends. No início da partida, os campeões recebem o ouro inicial e podem ganhar mais ouro através de vários meios. Os campeões podem ganhar ouro passivamente, sem exigir ação direta do jogador, a cada 10 segundos. O ouro obtido através da ação direta do jogador é considerado um ganho de ouro ativo: pode ser obtido aumentado por itens, habilidades do campeão, matando \textit{minions} inimigos e monstros neutros; matando ou ajudando a matar campeões inimigos; destruindo estruturas de defesa da equipe inimiga; vendendo itens na loja.
+
+\textbf{goldSpent} - A Quantidade de ouro que o campeão gastou na partida. Ele é usado para comprar itens na loja que oferecem campeões com estatísticas e habilidades de bônus, o que, por sua vez, é uma das principais maneiras pelas quais os campeões aumentam seu poder ao longo de um jogo.
+
+\textbf{assists} - A quantidade de assistências que o campeão fez. Uma assistência é a ação de ajudar um campeão aliado a matar um campeão inimigo. Um campeão pode marcar uma assistência atacando (sem matar) o campeão inimigo nos últimos 10 segundos antes da morte dele ou contribuindo passivamente durante esse período de tempo. Quando o campeão inimigo é morto, o assassino recebe uma certa quantidade de ouro, enquanto 50\% desse montante é dividido entre todos da equipe que ajudaram.
+
+\textbf{deaths} - A morte ocorre quando um campeão tira danos suficientes para reduzir a saúde do oponente à zero. Quando um campeão morre, a tela do seu jogador fica cinza sombreado, uma janela com informações sobre a morte e um temporizador para que o campeão volte ao combate são exibidos. A morte dos cinco membros de uma equipe simultaneamente é referida como um \textit{ace}; é possível que ambas as equipes façam um \textit{ace} cada ao mesmo tempo e que nenhum campeão esteja presente no campo de combate.
+
+\textbf{kills} - A quantidade de campeões inimigos que o campeão matou. O ato de matar é o evento de diminuir a saúde de um campeão inimigo para zero, enquanto o inimigo não tem habilidades ou itens para evitar a morte.
+
+\textbf{doubleKills} - O ato de matar dois campeões dentro de 10 segundos.
+
+\textbf{tripleKills} - O ato de matar três campeões dentro de 10 segundos um do outro.
+
+\textbf{quadraKills} - O ato de matar quatro campeões dentro de 10 segundos um do outro.
+
+\textbf{pentaKills} - O ato de matar cinco campeões dentro de 10 segundos um do outro.
+
+\textbf{largestMultiKill} - A maior quantidade de \textit{kills} seguidos do campeão dentro de 10 segundos um do outro.
+
+\textbf{killingSprees} - A quantidade de \textit{killing sprees} realizadas pelo campeão. \textit{Killing sprees} são níveis especiais que se ganha quando uma certa quantidade de inimigos é morta, para alcançar os \textit{killing sprees} é necessário que o campeão não morra enquanto soma os seus \textit{kills}. Um campeão que esteja em \textit{killing spree} e é morto garante ao campeão que o matou ouro extra.
+
+\textbf{largestKillingSpree} - A maior quantidade de \textit{killing sprees} do campeão.
+
+\textbf{largestCriticalStrike} - O maior ataque critico que o campeão efetuou. Um ataque crítico é um ataque básico ou uma habilidade que causa duas vezes o seu dano normal.
+
+\textbf{physicalDamageDealt} - O dano físico total causado na partida. O dano físico é um dos tipos de dano na League of Legends. O dano físico é causado por todos os ataques básicos, por algumas habilidades de campeão e por alguns efeitos de itens. O dano físico total causado na partida corresponde a soma do dano físico total causado aos campeões inimigos e o dano físico total causado aos \textit{minions} inimigos e monstros neutros.
+
+\textbf{physicalDamageDealtToChampions} - O dano físico total causado aos campeões inimigos.
+
+\textit{physicalDamageTaken} - O dano físico total que o campeão recebeu durante a partida.
+
+\textbf{magicDamageDealt} - O dano mágico total causado. O dano mágico é um dos tipos de dano em \textit{League of Legends}. O dano mágico é causado por alguns itens e a maioria dos feitiços dos campeões, embora alguns feitiços causem dano físico (\textit{physicalDamageDealt}) ou dano verdadeiro (\textit{trueDamageTaken}). O dano mágico total causado corresponde a soma do dano mágico total causado aos campeões inimigos e o dano mágico total causado aos \textit{minions} inimigos monstros neutros.
+
+\textbf{magicDamageDealtToChampions} - O dano mágico total causado aos campeões inimigos.
+
+\textbf{magicDamageTaken} - O dano mágico total que o campeão recebeu durante a partida.
+
+\textbf{trueDamageDealt} - O dano total verdadeiro causado aos campeões inimigos e monstros. O dano verdadeiro é um dos tipos de dano na League of Legends. O dano verdadeiro ignora a resistência das armaduras e mágica, bem como outras formas de redução de danos. O dano verdadeiro corresponde a soma do dano verdadeiro total causado aos campeões inimigos e o dano verdadeiro total causado aos \textit{minions} inimigos e monstros neutros.
+
+\textbf{trueDamageDealtToChampions} - O dano verdadeiro total causado aos campeões inimigos.
+
+\textbf{trueDamageTaken} - Dano verdadeiro total sofrido de campeões e \textit{minions} da equipe inimiga e monstros neutros.
+
+\textbf{totalDamageDealt} - O dano total causado aos campeões inimigos e monstros. Corresponde a soma do dano físico total (\textit{physicalDamageDealt}) e o dano mágico total (\textit{magicDamageDealt}) causado aos campeões inimigos e monstros.
+
+\textbf{totalDamageDealtToChampions} - Dano total causado aos campeões inimigos. Corresponde a soma do dano físico total (\textit{physicalDamageDealtToChampions}) e o dano mágico total (\textit{magicDamageDealtToChampions}) causado aos campeões inimigos.
+
+\textbf{totalDamageTaken} - O dano total sofrido dos campeões inimigos e monstros. Corresponde a soma do dano físico total (\textit{physicalDamageDealt}) e o dano mágico total (\textit{magicDamageDealt}) sofrido dos campeões inimigos e monstros.
+
+\textit{minionsKilled} - O total de \textit{minions} da equipe inimiga que foram matados na partida.
+
+\textbf{neutralMinionsKilled} - O total de monstros neutros que foram matados na partida. Corresponde a soma do total de monstros neutros matados na selva do inimigo (\textit{neutralMinionsKilledEnemyJungle}) e do total de monstros neutros matados na selva da equipe aliada (\textit{neutralMinionsKilledTeamJungle}).
+
+\textbf{neutralMinionsKilledEnemyJungle} - O total de monstros neutros matados na selva do inimigo.
+
+\textbf{neutralMinionsKilledTeamJungle} - Total de monstros neutros matados na selva da equipe aliada.
+
+\textbf{sightWardsBoughtInGame} - A quantidade de sentinelas de visão que o campeão comprou na partida. A visão é uma propriedade de unidades, estruturas e certos feitiços, itens e habilidades de invocação em League of Legends que indica que uma equipe possui visão de uma área no mapa. Uma sentinela de visão é um item que os campeões podem comprar e implantar para permitir que uma equipe possua visão de uma área alvo no mapa temporariamente.
+
+\textbf{visionWardsBoughtInGame} - Quantidade de sentinelas detectoras que o campeão comprou durante a partida. Ao contrário do item sentinela de visão, o item sentinela detectora permite que o campeão e sua equipe veja campeões inimigos e objetos invisíveis no mapa.
+
+\textbf{wardsKilled} - A quantidade de sentinelas inimigas que foram destruidas na partida.
+
+\textbf{wardsPlaced} - A quantidade de sentinelas de visão e detectoras que foram implantadas no mapa.
+
+\textbf{totalHeal} - A quantidade de cura total efetuada aos campeões e \textit{minions} aliados. Curar é um feitiço que instantaneamente restaura certa nível de saúde do campeão e aliados próximos, além de conceder um bônus de velocidade de movimento temporário.
+
+\textbf{totalUnitsHealed} - A quantidade de vezes que o campeão curou a saúde dos \textit{minions} e campeões aliados.
+
+\textbf{totalTimeCrowdControlDealt} - O tempo total em que o campeão controlou ou bloqueou as ações da equipe inimiga na partida. O \textit{crowd control} é um termo geral usado em League of Legends para descrever habilidades ou feitiços que removem ou diminuem o controle que um ou mais campeões inimigos tem sobre aspectos de si mesmo - aspectos como ser capaz de lançar feitiços ou iniciar comandos de movimento.
+
+\textbf{towerKills} - A quantidade de torres inimigas que o campeão destruiu. Uma torre é uma estrutura fortificada que bloqueia as ondas de \textit{minion} e o caminho dos campeões da equipe inimiga para a base. Eles causam danos aos inimigos e proporcionam visão e controle geral do campo de batalha para a equipe aliada. Os campeões devem destruir torres inimigas para empurrar seu ataque no território dos inimigos. As torres causam grandes danos às unidades inimigas, mas apenas visam uma unidade por vez.
+
+\textbf{inhibitorKills} - A quantidade de inibidores que o campeão destruiu na partida. Os inibidores são estruturas que bloqueiam a geração de \textit{minions} inimigos em suas respectivas rotas. Uma vez que o inibidor da equipe inimiga é destruído, a base aliada começará a gerar \textit{minions} mais fortes (super \textit{minions}) em vez de \textit{minions} comuns.
+
+
 \section{Extração de Características}
 Em seguida, extraímos características das partidas coletadas para modelar nosso conjunto de dados de desempenho de equipes \fj{}{$X$}.
 
-Seja $M$ um conjunto de históricos de partidas, $T$ um conjunto de equipes e $P$ um conjunto dimensional de desempenho de jogadores. Um histórico de partida $m \in M$ consite de duas equipes distintas $m = \{ t_a, t_b | t \in {T}; 1 \geq a, b \leq |T| \}$, cada equipe $t \in T$ consiste do desempenho de 5 jogadores distintos $t=\{p_k |  p_k \in P^t; 1 \geq k \leq 5; P^t \subset P\}$, e cada desempenho de jogador $p \in P$ é um vetor de estatísticas básicas de um jogador em uma partida, tais como \textit{kills}, \textit{mininonsKilled} e \textit{assists} apresentadas na Tabela ~\ref{tab:features-desc} (total de 38 estatísticas).
+Seja $M$ um conjunto de históricos de partidas, $T$ um conjunto de equipes e $P$ um conjunto dimensional de desempenho de jogadores. Um histórico de partida $m \in M$ consite de duas equipes distintas $m = \{ t_a, t_b | t \in {T}; 1 \geq a, b \leq |T| \}$, cada equipe $t \in T$ consiste do desempenho de 5 jogadores distintos $t=\{p_k |  p_k \in P^t; 1 \geq k \leq 5; P^t \subset P\}$, e cada desempenho de jogador $p \in P$ é um vetor de estatísticas básicas de um jogador em uma partida, tais como \textit{kills}, \textit{mininonsKilled} e \textit{assists} apresentadas na Seção ~\ref{sec:features-desc} (total de 38 estatísticas).
 
-Nós coletamos $|M|=110000$ históricos de partidas, o que corresponde a dados de $|T|= |M| * 2 = 220000$ equipes e $|P|=|T| * 5 = 1100000$ desempenho de jogadores. Para modelar o conjunto de desempenho de equipes $X$, selecionamos as $d=38$ estatísticas da Tabela ~\ref{tab:features-desc} como características para o conjunto de desempenho de jogadores $P$ e, então, sumarizamos o desempenho dos jogadores por equipe de modo que $ X=\{ \sum P^{t} | t \in T \} $ e $X$ seja uma matriz de dimensões $ 220000 \times 38 $.
+Nós coletamos $|M|=110000$ históricos de partidas, o que corresponde a dados de $|T|= |M| * 2 = 220000$ equipes e $|P|=|T| * 5 = 1100000$ desempenho de jogadores. Para modelar o conjunto de desempenho de equipes $X$, selecionamos as $d=38$ estatísticas da Seção ~\ref{sec:features-desc} como características para o conjunto de desempenho de jogadores $P$ e, então, sumarizamos o desempenho dos jogadores por equipe de modo que $ X=\{ \sum P^{t} | t \in T \} $ e $X$ seja uma matriz de dimensões $ 220000 \times 38 $.
 
 Finalmente, para garantir a atomicidade no conjunto de dados $X$, decompomos algumas características por subtração para obter novas características: \textit{physicalDamageDealtToMonsters} (dano físico total causado a monstros) e \textit{magicDamageDealtToChampions} (dano m\'agico total causado a monstros). A Tabela ~\ref{tab:decomposed-features} demonstra os cálculos realizados para obter essas características.
 
@@ -375,7 +406,7 @@ Para evitar conclusões falsas, realizamos a limpeza de dados para detectar e re
 \end{itemize}
 
 \section{Remoção de Características com Baixa Variância}
-Às vezes, os valores de algumas características têm variância zero ou próxima de zero, o que implica que essas características têm nenhuma ou pouca informação e que, consequentemente, não têm significância suficiente para discriminar as observações de um conjunto de dados em várias condições \cite{qing2014feature}. Portanto, realizamos uma estatística descritiva no conjunto de desempenho de equipes para identificar e remover as características de variância zero ou próxima de zero de modo a selecionar as características que mais discriminam em releção à variância. Devido a análise da variância e seleção das caracterísicas, a dimensionalidade do conjunto de desempenho de equipes ficou reduzido, permitindo que o tempo do agrupamento das equipes (abordado na seção ~\ref{agrupamentoequipes}) fosse aprimorado e uma melhor percepçao da estrutura implícita relevante dos dados \cite{boutsidis2009unsupervised}. A Tabela ~\ref{tab:descriptive-statistics} indica com (*) as características removidas do conjunto de dados: \textit{doubleKills}, \textit{inhibitorKills}, \textit {largestMultiKill}, \textit{pentaKills}, \textit {quadraKills}, \textit {sightWardsBoughtInGame} e \textit{tripleKills}.
+Às vezes, os valores de algumas características têm variância zero ou próxima de zero, o que implica que essas características têm nenhuma ou pouca informação e que, consequentemente, não têm significância suficiente para discriminar as observações de um conjunto de dados em várias condições \cite{qing2014feature}. Portanto, realizamos uma estatística descritiva no conjunto de desempenho de equipes (Tabela ~\ref{tab:descriptive-statistics}) para identificar e remover as características de variância zero ou próxima de zero de modo a selecionar as características que mais discriminam em relação à variância. Devido a análise da variância e seleção das características, a dimensionalidade do conjunto de desempenho de equipes ficou reduzido, permitindo que o tempo do agrupamento das equipes (abordado na seção ~\ref{agrupamentoequipes}) fosse aprimorado e uma melhor percepçao da estrutura implícita relevante dos dados \cite{boutsidis2009unsupervised}. A Tabela ~\ref{tab:descriptive-statistics} indica com (*) as características removidas do conjunto de dados: \textit{doubleKills}, \textit{inhibitorKills}, \textit {largestMultiKill}, \textit{pentaKills}, \textit {quadraKills}, \textit {sightWardsBoughtInGame} e \textit{tripleKills}.
 
 % TODO try to put more information based on these references: 
 % https://pdfs.semanticscholar.org/7d57/df0e3e2c3ab54642405b32dad8343f9954c5.pdf
@@ -494,10 +525,10 @@ Desse modo, \fj{}{dado que $X_{j} \in X$ \'e uma caracter\'istica de $X$}, para 
 O problema de encontrar perfis de desempenho de equipes pode ser considerado equivalente ao problema de identificar grupos de desempenho de equipes de comportamento semelhante. Para abordar esse problema, usamos o método de mineração de dados \textit{K-means clustering} \cite{zaki2014data} para agrupar equipes semelhantes conforme os seus desempenhos nas partidas. Em seguida, caracterizamos \fj{e definimos r\'otulos para}{} os grupos de desempenho de equipes de modo a colocar em perspectiva suas principais características ou \fj{estat\'isticas}{m\'etricas} de desempenho \fj{}{e, assim, definir perfis de comportamento}.
 
 \section{Agrupamento de Equipes} \label{agrupamentoequipes}
-O problema de encontrar perfis de desempenho de equipes pode ser considerado equivalente ao problema de identificar grupos de desempenho de equipes de comportamento semelhante. Para abordar esse problema, usamos o método de mineração de dados \textit{K-means clustering} \cite{zaki2014data}. Dado um conjunto dimensional de observações \(x_1, \ldots, x_n \), o \textit{K-means clustering} visa particionar as $n$ observações em $k (\leq n)$ grupos distintos, denotados por $ C = \{c_1, \ldots , c_k \} $, de modo a minimizar a Soma dos Quadrados do Erro Dentro dos Grupos (SQED); ou seja, seu objetivo é encontrar o minimizador $C*$ da função da Soma dos Quadrados do Erro (SQE):
+O problema de encontrar perfis de desempenho de equipes pode ser considerado equivalente ao problema de identificar grupos de desempenho de equipes de comportamento semelhante. Para abordar esse problema, usamos o método de mineração de dados \textit{K-means clustering} \cite{zaki2014data}. Dado um conjunto dimensional de observações $(x_{1}, \ldots, x_{n} )$, o \textit{K-means clustering} visa particionar as $n$ observações em $k (\leq n)$ grupos distintos, denotados por $ C = \{c_1, \ldots , c_k \} $, de modo a minimizar a Soma dos Quadrados do Erro Dentro dos Grupos (SQED); ou seja, seu objetivo é encontrar o minimizador $C*$ da função:
 
 \begin{displaymath}
-  SQE(C) = \sum_{i=1}^{k} \sum_{x_j \in c_i}{} || x_j - \mu _i ||^2
+  \arg\min_{C} \sum_{i=1}^{k} \sum_{x_j \in c_i}{} || x_j - \mu _i ||^2; \arg\min_{C} \{SQE(C)\} = \arg\min_{C} \{SQED\}
 \end{displaymath}
 
 Onde $\mu_j$ é a média das observações em $c_i$, e indica também o \textit{i}-ésimo centróide de $C$.
@@ -506,13 +537,23 @@ Conforme Zaki et al. \cite{zaki2014data}, o \textit{K-means} usa uma abordagem i
 
 Em nosso conjunto de dados $X$ usamos o algoritmo de Lloyd \cite{ong2015player}, uma heurística que consiste em escolher aleatoriamente observações como centróides para os $k$ grupos de $C$ e atribuir iterativamente cada observação $x \in X$ ao centróide mais próximo e depois atualizar os centróides com a média de seus respectivos grupos.
 
-Para encontrar um número ótimo $k$ de grupos usamos um método que encontra o \textit{elbow} da curva de erro. Este método tenta descobrir um número apropriado de grupos analisando a curva de um gráfico gerado a partir de um teste realizado para cada número possível de grupos \cite{kodinariya2013review}. No nosso caso, o teste foi baseado na função objetivo $SQE$.
+Para encontrar um número ótimo $k$ de grupos usamos um método que encontra o \textit{elbow} ou "joelho" da curva de erro. Este método tenta descobrir um número apropriado de grupos analisando a curva de um gráfico gerado a partir de um teste realizado para cada número possível de grupos \cite{kodinariya2013review}. No nosso caso, o teste foi baseado na função objetivo $SQED$.
 
-A Figura ~\ref{fig:k-means-curve} ilustra o gráfico SQE para cada número possível de grupos $K = \{1, \ldots, 120\}$. Como podemos observar, o conjunto de dados $X$ pode ser particionado em $k=7$ grupos distintos. Ao atribuir cada $x \in X$ em um grupo $c \in C$, conseguimos diminuir a variabilidade dos dados em aproximadamente $78\%$, ou seja, tivemos uma diminuição da Soma dos Quadrados do Erro Entre os Grupos (SQEE) em relação a Soma dos Quadrados do Erro Total (SQET) de $1 - (SQEE/SQET) = 78 \%$.
+% A Figura ~\ref{fig:k-means-curve} ilustra o gráfico SQE para cada número possível de grupos $K = \{1, \ldots, 120\}$. Como podemos observar, o conjunto de dados $X$ pode ser particionado em $k=7$ grupos distintos. Ao atribuir cada $x \in X$ em um grupo $c \in C$, conseguimos diminuir a variabilidade dos dados em aproximadamente $78\%$, ou seja, tivemos uma diminuição da Soma dos Quadrados do Erro Entre os Grupos (SQEE) em relação a Soma dos Quadrados do Erro Total (SQET) de $1 - (SQEE/SQET) = 78 \%$.
+
+A Figura ~\ref{fig:k-means-curve} ilustra o gráfico SQED para cada número $k \in K$ possível de grupos, onde $K = \{1, \ldots, 120\}$. Como podemos observar, o "joelho" do gráfico não deixa explícito o número ótimo $k$ de grupos, de modo que o número adequado para agrupar o conjunto pode estar entre $k \geq 7$ e $k \leq 10$ grupos distintos.
+
+Então, para escolher o número ótimo de $k$, analisamos o quanto a variabilidade dos dados diminuiu ao agrupar o desempenho das equipes em relação ao conjunto total dos dados $X$ calculando a proporção da Soma dos Quadrados do Erro Entre os Grupos $SQEE$ e a Soma dos Quadrados do Erro Total $SQE(X)$ para cada $k \in K$ da seguinte forma:
+
+\begin{displaymath}
+  SQEE(k) = SQE(X) - SQED(k); PSQE(k) = SQEE(k)/SQE(X)
+\end{displaymath}
+
+O resultado das proporções para $K=\{1, \ldots, 12\}$ foi de $PSQE(K) = \{0.0, 0.413, 0.579, 0.657, 0.716, 0.746, 0.777, 0.796, 0.813, 0.827, 0.836, 0.847\}$. Analisando as proporções, escolhemos $k=7$ como sendo o número ótimo de grupos dentre os valores de $k$ presentes no "joelho" do gráfico, pois (i) diminui consideravelmente a variabilidade dos dados em $~78\%$, (ii) as proporções PSQE presentes no "joelho" são bem aproximadas, (iii) a variabilidade não diminui tão drasticamente à medida que $k$ é incrementado ao agrupar os dados em $k > 7$ grupos, (iv) $k=7$ é o menor valor presente no "joelho", o que diminui a complexidade da interpretação dos grupos.
 
 \begin{figure*}
   \centering
-  \includegraphics[width=0.6\textwidth]{k-means-curve}%
+  \includegraphics[width=1\textwidth]{k-means-curve}%
   \caption{Curva de erro K-means. O eixo $x$ indica o conjunto $K=\{1, \ldots, 120\}$ de números possíveis de grupos. O eixo $y$ indica os testes $SQEE(k)/SQET$ para $k \in K $}
   \label{fig:k-means-curve}
 \end{figure*}
