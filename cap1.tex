@@ -537,7 +537,7 @@ Conforme Zaki et al. \cite{zaki2014data}, o \textit{K-means} usa uma abordagem i
 
 Em nosso conjunto de dados $X$ usamos o algoritmo de Lloyd \cite{ong2015player}, uma heurística que consiste em escolher aleatoriamente observações como centróides para os $k$ grupos de $C$ e atribuir iterativamente cada observação $x \in X$ ao centróide mais próximo e depois atualizar os centróides com a média de seus respectivos grupos.
 
-Para encontrar um número ótimo $k$ de grupos usamos um método que encontra o \textit{elbow} ou "joelho" da curva de erro. Este método tenta descobrir um número apropriado de grupos analisando a curva de um gráfico gerado a partir de um teste realizado para cada número possível de grupos \cite{kodinariya2013review}. No nosso caso, o teste foi baseado na função objetivo $SQED$.
+Para encontrar um número ótimo $k$ de grupos usamos um método que encontra o "cotovelo" ou "joelho" da curva de erro. Este método tenta descobrir um número apropriado de grupos analisando a curva de um gráfico gerado a partir de um teste realizado para cada número possível de grupos \cite{kodinariya2013review}. No nosso caso, o teste foi baseado na função objetivo $SQED$.
 
 % A Figura ~\ref{fig:k-means-curve} ilustra o gráfico SQE para cada número possível de grupos $K = \{1, \ldots, 120\}$. Como podemos observar, o conjunto de dados $X$ pode ser particionado em $k=7$ grupos distintos. Ao atribuir cada $x \in X$ em um grupo $c \in C$, conseguimos diminuir a variabilidade dos dados em aproximadamente $78\%$, ou seja, tivemos uma diminuição da Soma dos Quadrados do Erro Entre os Grupos (SQEE) em relação a Soma dos Quadrados do Erro Total (SQET) de $1 - (SQEE/SQET) = 78 \%$.
 
