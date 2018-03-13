@@ -488,7 +488,7 @@ Para transformar os dados, realizamos as seguintes tarefas: cálculo de métrica
 O conjunto de dados $X$ é apenas um reflexo do desempenho das equipes durante toda a partida, ou seja, estatísticas sumarizadas de desempenho, como total de ouro ganho e total de dano sofrido. Como a duração de uma partida não tem um limite específico, ou seja, uma partida somente termina quando uma equipe vencer, é necessário transformar os dados para tornar o desempenho das equipes comparáveis entre si independentemente da duração das partidas. Assim, para lidar com o problema de capturar o desempenho das equipes em diferentes durações de partidas, dividimos o desempenho de cada equipe $x \in X$ pela duração $duration$ da partida $m$ em que a equipe participou:
 
 \begin{displaymath}
-  \frac{x}{m^{duration}}
+  \frac{x}{m_{duration}}
 \end{displaymath}
 
 Dessa forma, como foi discutido na seção 2.2.1, as características do nosso conjunto de dados deixaram de ser simples estatísticas sumarizadas para se tornarem métricas de desempenho mais interpretativas. Por exemplo, as características agora passam a ser número de assistências em abates por minuto (\textit{assists}), número de mortes sofridas por minuto (\textit{deaths}), número de abates duplos seguidos efetuados por minuto (\textit{doubleKills}), e assim por diante.
@@ -553,7 +553,7 @@ O resultado das proporções para $K=\{1, \ldots, 12\}$ foi de $PSQE(K) = \{0.0,
 
 \begin{figure*}
   \centering
-  \includegraphics[width=1\textwidth]{k-means-curve}%
+  \includegraphics[width=1\textwidth]{k-means}%
   \caption{Curva de erro K-means. O eixo $x$ indica o conjunto $K=\{1, \ldots, 120\}$ de números possíveis de grupos. O eixo $y$ indica os testes $SQEE(k)/SQET$ para $k \in K $}
   \label{fig:k-means-curve}
 \end{figure*}
@@ -581,12 +581,14 @@ A Figura ~\ref{fig:win-plot} ilustra o gr\'afico de barras com a propor\c{c}\~ao
 A Figura ~\ref{fig:relevance} ilustra o mapa de calor do ganho de informação aplicado as métricas de desempenho das equipes $M$ (em unidades/minuto, calculadas na Seção 4.6.1 antes da normalização) para indicar como essas métricas são relevantes para cada \fj{grupo}{perfil}. Conforme a figura, podemos observar que, no geral, as características mais importantes são: \textit{deaths}, \textit{killingSprees} e \textit{neutralMinionsKilledEnemyJungle}. Assim como foi observado na análise das taxas de vitórias, alguns perfis também possuem características semelhantes considerando o ganho de informação.
 
 \begin{figure*}
-\includegraphics[width=1\textwidth,height=\textheight,keepaspectratio]{relevance}
-\caption{Mapa de calor das relevâncias das métricas de desempenho (ou características) das equipes com base no cálculo do ganho de informação. O eixo $x$ representa os perfis. O eixo $y$ representa as caraterísticas. Quanto mais forte for a cor de uma característica, mais intensa \'e a relevância dessa caracter\'istica em rela\c{c}\~ao as outras caracter\'isticas para um determinado perfil.}
+  \centering
+% \includegraphics[angle=90,width=0.95\textwidth]{boxplots}%
+  \includegraphics[angle=90,width=0.60\textwidth,height=\textheight,keepaspectratio]{relevance}
+  \caption{Mapa de calor das relevâncias das métricas de desempenho (ou características) das equipes com base no cálculo do ganho de informação. O eixo $x$ representa os perfis. O eixo $y$ representa as caraterísticas. Quanto mais forte for a cor de uma característica, mais intensa \'e a relevância dessa caracter\'istica em rela\c{c}\~ao as outras caracter\'isticas para um determinado perfil.}
 \label{fig:relevance}
 \end{figure*}
 
-Seja $A$ a matriz de centróides das métricas de desempenho das equipes $M$ por perfil, onde cada linha $a \in A$ indica os centróides das métricas de um \fj{grupo}{perfil}, e cada coluna $A_j \in A$ indica os centróides das métricas entre os 7 perfis encontrados. A Tabela ~\ref{tab:centers} apresenta a matrix \textit{transposta} dos centróides $t(A)$ e a sumarização desses centróides entre os perfis de modo a  denotar como os perfis se diferem em termos de desempenho. Se multiplicarmos as métricas de desempenho $M$ pela duração média das partidas ($mean(M^{duration}) \approx 29$ minutos) podemos ter uma estimativa do desempenho total dos perfis no final de uma partida. Se compararmos as principais métricas de desempenho do pior perfil (Perfil 4) e do melhor perfil (Perfil 3) em relação a taxa de vitórias, podemos verificar que o melhor perfil tem um desempenho de \textit{deaths} ~40\% inferior, \textit{killingSprees} ~54\% superior e \textit{neutralMinionsKilledEnemyJungle} ~78\% superior. O nível elevado de $neutralMinionsKilledEnemyJungle$ pode indicar que o Perfil 3 possui um execelnte domínio do campo da equipe inimiga e dos \textit{minions} que existem por lá, fazendo com que as equipes desse perfil tenham uma quantidade maior de ouro as custas dos recursos da equipe inimiga, e, assim, comprem melhores itens de defesa e ataque para garantir uma quantidade menor de \textit{deaths} e maior de \textit{killingSprees} por minuto, respectivamente.
+Seja $A$ a matriz de centróides das métricas de desempenho das equipes $M$ por perfil, onde cada linha $a \in A$ indica os centróides das métricas de um \fj{grupo}{perfil}, e cada coluna $A_j \in A$ indica os centróides das métricas entre os 7 perfis encontrados. A Tabela ~\ref{tab:centers} apresenta a matrix \textit{transposta} dos centróides $t(A)$ e a sumarização desses centróides entre os perfis de modo a  denotar como os perfis se diferem em termos de desempenho. Se multiplicarmos as métricas de desempenho $M$ pela duração média das partidas ($mean(M_{duration}) \approx 29$ minutos) podemos ter uma estimativa do desempenho total dos perfis no final de uma partida. Se compararmos as principais métricas de desempenho do pior perfil (Perfil 4) e do melhor perfil (Perfil 3) em relação a taxa de vitórias, podemos verificar que o melhor perfil tem um desempenho de \textit{deaths} ~40\% inferior, \textit{killingSprees} ~54\% superior e \textit{neutralMinionsKilledEnemyJungle} ~78\% superior. O nível elevado de $neutralMinionsKilledEnemyJungle$ pode indicar que o Perfil 3 possui um execelnte domínio do campo da equipe inimiga e dos \textit{minions} que existem por lá, fazendo com que as equipes desse perfil tenham uma quantidade maior de ouro as custas dos recursos da equipe inimiga, e, assim, comprem melhores itens de defesa e ataque para garantir uma quantidade menor de \textit{deaths} e maior de \textit{killingSprees} por minuto, respectivamente.
 
 
 \begin{table*}
