@@ -22,6 +22,8 @@
 \usepackage[inline]{enumitem}
 \usepackage{caption}
 \captionsetup{labelfont=bf}
+
+\usepackage{pdfpages} %Adicionar páginas em pdf
 %-------------------------- Para usar acentuacaoo em sistemas ISO8859-1 ------------------------------------
 % Se estiver usando o Microsoft Windows ou linux com essa codificacao, descomente essa linhas abaixo
 % e comente as linhas referentes ao UTF8
@@ -89,16 +91,19 @@ showstringspaces=false
 \newpage
 \cleardoublepage
 
-
 \PaginadeRosto
 
 \newpage
 \cleardoublepage
 
+% ------ Ficha catalográfica ------ %
+\includepdf[offset=-13mm 0mm]{ficha_catalografica.pdf}
+% --------------------------------- %
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\mbox{}
-\thispagestyle{empty}
-\newpage
+% \mbox{}
+% \thispagestyle{empty}
+% \newpage
 
 % \input{dedicatoria.tex}
 % \newpage
